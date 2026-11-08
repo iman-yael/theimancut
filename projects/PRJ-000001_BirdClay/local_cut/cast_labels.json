@@ -1,0 +1,8 @@
+[
+  {"performer": "Jaalen Best", "character": "Cassius Clay", "edit_in": 1.35, "duration": 2.6, "confirmed": false,
+   "evidence": "Cast listings + announcer names Cassius Clay; episode credits not checked (source is a promo)"},
+  {"performer": "Omari Hardwick", "character": "Cassius Clay Sr.", "edit_in": 4.30, "duration": 2.4, "confirmed": false,
+   "evidence": "Context only (father figure at home) — needs your confirmation"},
+  {"performer": "Dana Gourrier", "character": "Odessa “Bird” Clay", "edit_in": 22.40, "duration": 2.8, "confirmed": false,
+   "evidence": "Context only (mother figure at home) — blocker B1"}
+]

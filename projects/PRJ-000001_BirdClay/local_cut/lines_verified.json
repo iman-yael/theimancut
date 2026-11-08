@@ -1,0 +1,5 @@
+[
+  {"src_in": 229.02, "src_out": 234.00, "text": "The winner, by unanimous decision…", "status": "verified: small + medium Whisper agree; word confidence 0.72–0.99"},
+  {"src_in": 236.70, "src_out": 238.88, "text": "Cassius Clay.", "status": "verified: both models agree on the name (small misheard 'play'); name matches the scene"},
+  {"src_in": 265.32, "src_out": 266.84, "text": "Congratulations, congratulations.", "status": "UNCERTAIN: both models agree, but confidence is low (0.39) — please confirm by ear"}
+]

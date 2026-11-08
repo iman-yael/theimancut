@@ -1,0 +1,32 @@
+{
+  "name": "The Iman Cut production preset",
+  "version": "0.1-DRAFT",
+  "status": "not approved — lock as 1.0 after pilot sign-off",
+  "watermark": {
+    "text": "THE IMAN CUT",
+    "asset": "watermark/iman-cut-watermark-trimmed-PROPOSED.png",
+    "asset_status": "pending approval (master file choice + trim)",
+    "position": "top-right",
+    "16x9": { "width_px": 190, "margin_right_px": 77, "margin_top_px": 43 },
+    "9x16": { "width_px": 230, "margin_right_px": 64, "margin_top_px": 250 },
+    "light_scene_treatment": "none (drop shadow proposed, unapproved)",
+    "override_rule": "move only to avoid faces, essential action, or interface overlays"
+  },
+  "vertical_layout": "framed (full 16:9 picture centered on #0D0B09) — pending decision vs 1.3x zoom-crop",
+  "typography": {
+    "headline": "New York (system serif)",
+    "labels": "Arial Bold",
+    "cream": "#F6EBD3",
+    "background": "#0D0B09",
+    "status": "draft"
+  },
+  "captions": { "status": "not styled yet — waiting on transcript" },
+  "audio": { "loudness_lufs": -14, "true_peak_db": -1.5, "narration_over_dialogue": false },
+  "export": {
+    "video": "H.264 yuv420p, CRF 20, 30 fps, faststart",
+    "audio": "AAC 192 kbps 48 kHz stereo",
+    "variants": ["publish", "textless-branded", "textless-unbranded"],
+    "naming": "IMAN-CUT_<slug>_<9x16|16x9>_<variant>_v<version>.mp4"
+  },
+  "cover": { "size": "1080x1920", "safe_area": "central 1080x1080 for text, face and logo", "logo_position": "centered" }
+}

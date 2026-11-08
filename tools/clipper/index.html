@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iman Cut Clipper</title>
+<style>
+  :root { --bg:#0d0b09; --panel:#17130f; --line:#2b241c; --cream:#f6ebd3; --dim:#a99c84; --red:#c8102e; --ok:#7fb069; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--cream); font:15px/1.45 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; }
+  header { padding:22px 24px 10px; display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--line); }
+  header h1 { margin:0; font:600 26px/1 "New York", Georgia, serif; letter-spacing:.04em; }
+  header h1 span { color:var(--red); }
+  header p { margin:0; color:var(--dim); }
+  main { display:grid; grid-template-columns: 380px 1fr; gap:0; min-height:calc(100vh - 64px); }
+  aside { border-right:1px solid var(--line); padding:18px; display:flex; flex-direction:column; gap:18px; }
+  section h2 { font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin:0 0 8px; }
+  .drop { border:1.5px dashed var(--line); border-radius:10px; padding:16px; text-align:center; color:var(--dim); cursor:pointer; }
+  .drop.on { border-color:var(--cream); color:var(--cream); }
+  input[type=search], input[type=number] { width:100%; background:var(--panel); border:1px solid var(--line); color:var(--cream); border-radius:8px; padding:8px 10px; font:inherit; }
+  .list { max-height:280px; overflow:auto; border:1px solid var(--line); border-radius:10px; }
+  .item { padding:9px 11px; border-bottom:1px solid var(--line); cursor:pointer; }
+  .item:last-child { border-bottom:0; }
+  .item:hover { background:var(--panel); }
+  .item.sel { background:#2a2016; outline:1px solid var(--cream); }
+  .item b { display:block; font-weight:500; word-break:break-all; }
+  .item small { color:var(--dim); }
+  .opts { display:grid; grid-template-columns:1fr 1fr; gap:8px 12px; }
+  .opts label { display:flex; gap:8px; align-items:center; color:var(--dim); font-size:14px; }
+  .opts .full { grid-column:1/-1; }
+  button { background:var(--cream); color:#0d0b09; border:0; border-radius:8px; padding:10px 14px; font:600 15px/1 inherit; cursor:pointer; }
+  button:disabled { opacity:.4; cursor:default; }
+  button.ghost { background:transparent; color:var(--dim); border:1px solid var(--line); font-weight:500; padding:6px 10px; font-size:13px; }
+  .jobs .item { display:flex; justify-content:space-between; gap:8px; align-items:center; }
+  .pill { font-size:12px; padding:2px 8px; border-radius:99px; border:1px solid var(--line); color:var(--dim); white-space:nowrap; }
+  .pill.done { color:var(--ok); border-color:var(--ok); }
+  .pill.error { color:#ff8a8a; border-color:#ff8a8a; }
+  #view { padding:22px 26px; }
+  .empty { color:var(--dim); margin-top:15vh; text-align:center; }
+  .bar { height:6px; background:var(--panel); border-radius:6px; overflow:hidden; margin:8px 0 4px; }
+  .bar i { display:block; height:100%; background:var(--cream); transition:width .4s; }
+  .meta { color:var(--dim); font-size:13px; }
+  .toolbar { display:flex; gap:8px; align-items:center; margin:14px 0 18px; flex-wrap:wrap; }
+  .seg button { background:transparent; color:var(--dim); border:1px solid var(--line); padding:6px 12px; font-weight:500; font-size:13px; }
+  .seg button.on { background:var(--cream); color:#0d0b09; border-color:var(--cream); }
+  .grid { display:grid; gap:18px; }
+  .grid.v { grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); }
+  .grid.h { grid-template-columns:repeat(auto-fill, minmax(380px, 1fr)); }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+  .card video, .card .ph { width:100%; display:block; background:#000; }
+  .grid.v video, .grid.v .ph { aspect-ratio:9/16; object-fit:cover; }
+  .grid.h video, .grid.h .ph { aspect-ratio:16/9; object-fit:contain; }
+  .ph { display:flex; align-items:center; justify-content:center; color:var(--dim); font-size:13px; background-size:cover; background-position:center; }
+  .card .body { padding:10px 12px 12px; display:flex; flex-direction:column; gap:6px; }
+  .card .row { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .card h3 { margin:0; font:600 15px/1.2 "New York", Georgia, serif; }
+  .card p { margin:0; color:var(--dim); font-size:13px; max-height:5.8em; overflow:auto; }
+  .card a { color:var(--cream); font-size:13px; }
+  .err { color:#ff8a8a; white-space:pre-wrap; font-size:13px; }
+  @media (max-width: 860px) { main { grid-template-columns:1fr; } aside { border-right:0; border-bottom:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header><h1>THE <span>IMAN</span> CUT</h1><p>Clipper — turn a long video into draft clips</p></header>
+<main>
+  <aside>
+    <section>
+      <h2>1 · Choose a long video</h2>
+      <div class="drop" id="drop">Drop a video here or <u>browse</u><input type="file" id="file" accept="video/*" hidden></div>
+      <div class="meta" id="upmsg" style="margin-top:6px"></div>
+      <input type="search" id="path" placeholder="…or paste a file path, e.g. ~/Desktop/long video.mov" style="margin-top:10px">
+      <input type="search" id="q" placeholder="…or search Desktop, Movies, Documents, Downloads" style="margin-top:8px">
+      <div class="meta" id="blocked" style="margin-top:6px"></div>
+      <div class="list" id="videos" style="margin-top:8px"></div>
+    </section>
+    <section>
+      <h2>2 · Options</h2>
+      <div class="opts">
+        <label>Min clip (s) <input type="number" id="min" value="20" min="5" max="120"></label>
+        <label>Max clip (s) <input type="number" id="max" value="60" min="10" max="180"></label>
+        <label><input type="checkbox" id="vert" checked> Vertical 9:16</label>
+        <label><input type="checkbox" id="land" checked> Landscape</label>
+        <label class="full"><input type="checkbox" id="crop"> Crop vertical to fill (off = whole picture, blurred background)</label>
+        <label class="full"><input type="checkbox" id="wm"> THE IMAN CUT watermark on vertical (IG/TikTok)</label>
+        <label class="full"><input type="checkbox" id="tr"> Transcribe dialogue (slower; machine draft)</label>
+        <label class="full"><input type="checkbox" id="hq"> High quality encode (slower)</label>
+      </div>
+      <button id="go" style="margin-top:12px;width:100%" disabled>Make clips</button>
+    </section>
+    <section>
+      <h2>Runs</h2>
+      <div class="list jobs" id="jobs"></div>
+    </section>
+  </aside>
+  <div id="view"><div class="empty">Pick a video and press <b>Make clips</b>.<br>Every clip it makes shows up here.</div></div>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+let videos = [], picked = null, current = null, layout = 'vertical', timer = null;
+const fmtT = s => { s = Math.max(0, s); const m = Math.floor(s / 60); return `${m}:${(s % 60).toFixed(1).padStart(4, '0')}`; };
+const fmtB = b => b > 1e9 ? (b / 1e9).toFixed(1) + ' GB' : (b / 1e6).toFixed(0) + ' MB';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function loadVideos() {
+  const r = await (await fetch('/api/videos')).json();
+  videos = r.videos;
+  $('#blocked').innerHTML = r.blocked.length ? `⚠︎ macOS hasn't given the Clipper access to <b>${r.blocked.join(', ')}</b>. Start it by double-clicking <b>Start Clipper.command</b> and allow access, or upload/paste a path.` : '';
+  renderVideos();
+}
+$('#path').oninput = e => { const v = e.target.value.trim(); if (v) { picked = v; $('#go').disabled = false; renderVideos(); } };
+function renderVideos() {
+  const q = $('#q').value.toLowerCase();
+  $('#videos').innerHTML = videos.filter(v => (v.name + v.folder).toLowerCase().includes(q)).map(v =>
+    `<div class="item ${picked === v.path ? 'sel' : ''}" data-p="${esc(v.path)}"><b>${esc(v.name)}</b><small>${esc(v.folder)} · ${fmtB(v.size)} · ${new Date(v.modified * 1000).toLocaleString()}</small></div>`).join('') || '<div class="item"><small>No videos found</small></div>';
+  document.querySelectorAll('#videos .item[data-p]').forEach(el => el.onclick = () => { picked = el.dataset.p; $('#go').disabled = false; renderVideos(); });
+}
+$('#q').oninput = renderVideos;
+
+const drop = $('#drop');
+drop.onclick = () => $('#file').click();
+drop.ondragover = e => { e.preventDefault(); drop.classList.add('on'); };
+drop.ondragleave = () => drop.classList.remove('on');
+drop.ondrop = e => { e.preventDefault(); drop.classList.remove('on'); if (e.dataTransfer.files[0]) upload(e.dataTransfer.files[0]); };
+$('#file').onchange = e => e.target.files[0] && upload(e.target.files[0]);
+function upload(f) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/upload'); xhr.setRequestHeader('X-Filename', encodeURIComponent(f.name));
+  xhr.upload.onprogress = e => $('#upmsg').textContent = `Uploading ${f.name}… ${Math.round(100 * e.loaded / e.total)}%`;
+  xhr.onload = () => { const r = JSON.parse(xhr.responseText);
+    if (r.error) { $('#upmsg').textContent = r.error; return; }
+    $('#upmsg').textContent = `Uploaded ${f.name}`; picked = r.path; $('#go').disabled = false; loadVideos(); };
+  xhr.send(f);
+}
+
+$('#go').onclick = async () => {
+  $('#go').disabled = true;
+  const options = { min_len: +$('#min').value, max_len: +$('#max').value, vertical: $('#vert').checked, landscape: $('#land').checked,
+                    watermark: $('#wm').checked, transcribe: $('#tr').checked, quality: $('#hq').checked ? 'high' : 'draft',
+                    vertical_mode: $('#crop').checked ? 'crop' : 'fit' };
+  const r = await (await fetch('/api/jobs', { method:'POST', body: JSON.stringify({ path: picked, options }) })).json();
+  $('#go').disabled = false;
+  if (r.error) return alert(r.error);
+  await loadJobs(); openJob(r.id);
+};
+
+async function loadJobs() {
+  const jobs = await (await fetch('/api/jobs')).json();
+  $('#jobs').innerHTML = jobs.map(j => `<div class="item ${current === j.id ? 'sel' : ''}" data-id="${j.id}"><div><b>${esc(j.name)}</b><small>${new Date(j.created * 1000).toLocaleString()} · ${j.clips.length} clips</small></div><span class="pill ${j.status}">${j.status === 'running' ? Math.round(j.progress * 100) + '%' : j.status}</span></div>`).join('') || '<div class="item"><small>No runs yet</small></div>';
+  document.querySelectorAll('#jobs .item[data-id]').forEach(el => el.onclick = () => openJob(el.dataset.id));
+}
+
+async function openJob(id) { current = id; clearTimeout(timer); await refresh(); loadJobs(); }
+async function refresh() {
+  const j = await (await fetch('/api/jobs/' + current)).json();
+  const lays = ['vertical', 'landscape'].filter(l => j.options[l]);
+  if (!lays.includes(layout)) layout = lays[0] || 'vertical';
+  const info = j.info ? `${j.info.width}×${j.info.height} · ${fmtT(j.info.duration)} · ${j.info.unique_fps} real fps → ${j.info.out_fps}` : '';
+  const vertNote = !j.info ? '' : (j.options.vertical_mode === 'crop'
+    ? ` · vertical uses a ${Math.round(j.info.active.h * 9 / 16)}×${j.info.active.h} slice per shot, upscaled to 1080×1920`
+    : ` · vertical shows the whole picture on a blurred background (no crop)`);
+  $('#view').innerHTML = `
+    <h2 style="margin:0;font:600 22px/1.2 'New York',Georgia,serif">${esc(j.name)}</h2>
+    <div class="meta">${info}${j.options.vertical ? vertNote : ''}</div>
+    ${j.status !== 'done' ? `<div class="bar"><i style="width:${Math.round(j.progress * 100)}%"></i></div><div class="meta">${esc(j.step)}</div>` : ''}
+    ${j.error ? `<div class="err">${esc(j.error)}</div>` : ''}
+    <div class="toolbar">
+      <div class="seg">${lays.map(l => `<button data-l="${l}" class="${l === layout ? 'on' : ''}">${l === 'vertical' ? '9:16 vertical' : '16:9 landscape'}</button>`).join('')}</div>
+      <span class="meta">${j.clips.length} clips${j.options.transcribe ? ' · transcript is a machine draft — check before captioning' : ''}</span>
+      <span style="flex:1"></span>
+      <button class="ghost" id="del">Delete this run</button>
+    </div>
+    <div class="grid ${layout === 'vertical' ? 'v' : 'h'}">${j.clips.map(c => card(j, c)).join('')}</div>`;
+  document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { layout = b.dataset.l; refresh(); });
+  $('#del').onclick = async () => { if (!confirm('Delete this run and all its clips? This cannot be undone.')) return;
+    await fetch('/api/jobs/' + current, { method:'DELETE' }); current = null; $('#view').innerHTML = '<div class="empty">Run deleted.</div>'; loadJobs(); };
+  if (j.status === 'running') timer = setTimeout(() => { refresh(); loadJobs(); }, 2500);
+}
+function card(j, c) {
+  const f = c.files[layout];
+  const media = f ? `<video src="/media/${j.id}/${f}" controls preload="metadata" playsinline poster="/media/${j.id}/${c.thumb}"></video>`
+                  : `<div class="ph" style="${c.thumb ? `background-image:url(/media/${j.id}/${c.thumb})` : ''}">${c.status === 'rendering' ? 'Rendering…' : 'Queued'}</div>`;
+  return `<div class="card">${media}<div class="body">
+    <div class="row"><h3>Clip ${c.n}</h3><span class="pill">${c.duration.toFixed(1)} s</span></div>
+    <div class="meta">Source ${fmtT(c.start)} – ${fmtT(c.end)} · ${c.shots} shots</div>
+    ${c.text ? `<p>“${esc(c.text)}”</p>` : ''}
+    ${f ? `<a href="/media/${j.id}/${f}?dl=1">Download ${layout === 'vertical' ? '9:16' : '16:9'} MP4</a>` : ''}
+  </div></div>`;
+}
+loadVideos(); loadJobs();
+</script>
+</body>
+</html>
