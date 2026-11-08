@@ -1,0 +1,608 @@
+# Intake report ING-000002
+
+| Added | Matched | Updated | Conflicting | Unresolved | Affected outputs |
+|---|---|---|---|---|---|
+| 385 | 25 | 162 | 2 | 19 | 0 |
+
+## Conflicting
+- row 141: 'Restaurant Patron' (Samantha Adams) vs CHR-000116 (Andre Reiter)
+- row 142: 'Louisville Sponsoring Group Member' (Kyle James Butler) vs CHR-000125 (Jim Chad)
+
+## Unresolved
+- {"kind": "ambiguous_match", "row": "27", "credit": "Young Cassius", "actor": "Elias Leacock", "issue": "young portrayal matches several characters", "candidates": ["CHR-000002", "CHR-000001"]}
+- {"kind": "multi_name_credit", "row": "42", "credit": "Radio Announcer / Arena Fight Announcer", "actor": "Larry Davis", "issue": "aliases of one character, or separate roles?", "candidates": ["CHR-000041"]}
+- {"kind": "multi_name_credit", "row": "43", "credit": "Banged Up Boxer / Elijah", "actor": "Tony Ofori", "issue": "aliases of one character, or separate roles?", "candidates": ["CHR-000042"]}
+- {"kind": "multi_name_credit", "row": "44", "credit": "Frail Kid / Olive", "actor": "Ariel Ollivierre", "issue": "aliases of one character, or separate roles?", "candidates": ["CHR-000043"]}
+- {"kind": "unresolved_reference", "row": "49", "actor": "Tahmoh Penikett", "issue": "credit lists no character name", "candidates": []}
+- {"kind": "ambiguous_match", "row": "73", "credit": "Young Sonny", "actor": "Jed Strathum Kirunda", "issue": "young portrayal could match several credited names", "batch_rows": ["90"], "candidates": ["CHR-000005"]}
+- {"kind": "ambiguous_match", "row": "75", "credit": "Howard", "actor": "Jason Burke", "issue": "name is a less specific form of another credited name", "batch_rows": ["107", "119", "70", "74"], "candidates": ["CHR-000070", "CHR-000067"]}
+- {"kind": "ambiguous_match", "row": "89", "credit": "Morris", "actor": "Myles-Anthony Douglas", "issue": "name is a less specific form of another credited name", "batch_rows": ["98"], "candidates": []}
+- {"kind": "ambiguous_match", "row": "97", "credit": "Frank", "actor": "Matthew Paul Gonzales", "issue": "name is a less specific form of another credited name", "batch_rows": ["66"], "candidates": ["CHR-000063"]}
+- {"kind": "ambiguous_match", "row": "99", "credit": "William", "actor": "Jesse Buck", "issue": "name is a less specific form of another credited name", "batch_rows": ["45", "8"], "candidates": ["CHR-000010", "CHR-000044"]}
+- {"kind": "ambiguous_match", "row": "115", "credit": "Fight Announcer", "actor": "David Kaye", "issue": "name is a less specific form of another credited name", "batch_rows": ["120", "42", "81"], "candidates": ["CHR-000041", "CHR-000076"]}
+- {"kind": "multi_name_credit", "row": "125", "credit": "Ringside Boxing Reporter / Restaurant Patron / ...", "actor": "Andre Reiter", "issue": "aliases of one character, or separate roles? (list truncated with '...')", "candidates": ["CHR-000116"]}
+- {"kind": "ambiguous_match", "row": "128", "credit": "1960s Upscale Patron", "actor": "Scott Kasics", "issue": "name is a less specific form of another credited name", "batch_rows": ["138"], "candidates": []}
+- {"kind": "multi_name_credit", "row": "136", "credit": "Patterson / Liston Referee", "actor": "Dylan Roberts", "issue": "aliases of one character, or separate roles?", "candidates": ["CHR-000126"]}
+- {"kind": "conflict", "row": "141", "credit": "Restaurant Patron", "actor": "Samantha Adams", "issue": "CHR-000116 already credited to Andre Reiter; likely a distinct role with the same generic name", "candidates": ["CHR-000116"]}
+- {"kind": "conflict", "row": "142", "credit": "Louisville Sponsoring Group Member", "actor": "Kyle James Butler", "issue": "CHR-000125 already credited to Jim Chad; likely a distinct role with the same generic name", "candidates": ["CHR-000125"]}
+- {"kind": "ambiguous_match", "row": "143", "credit": "Ocean Drive Patron", "actor": "Caroline Renee Elliott", "issue": "name is a less specific form of another credited name", "batch_rows": ["138"], "candidates": ["CHR-000128"]}
+- {"kind": "ambiguous_match", "row": "144", "credit": "Reporter", "actor": "Jerin Forgie", "issue": "name is a less specific form of another credited name", "batch_rows": ["100", "103", "110", "112", "117", "125", "129", "139"], "candidates": ["CHR-000116", "CHR-000092", "CHR-000095", "CHR-000104", "CHR-000119", "CHR-000108", "CHR-000129", "CHR-000102"]}
+- {"kind": "ambiguous_match", "row": "145", "credit": "Young Announcer", "actor": "Kenton Blythe", "issue": "young portrayal could match several credited names", "batch_rows": ["115"], "candidates": ["CHR-000041", "CHR-000111", "CHR-000076"]}
+
+## Updated
+- PER-000001 + IMDb ID nm13955802
+- POR-000001 credited_episode_count
+- PER-000002 + IMDb ID nm1165044
+- POR-000002 credited_episode_count
+- PER-000003 + IMDb ID nm4158239
+- POR-000003 credited_episode_count
+- PER-000004 + IMDb ID nm9902411
+- POR-000004 credited_episode_count
+- PER-000007 + IMDb ID nm0000610
+- POR-000007 credited_episode_count
+- PER-000013 + IMDb ID nm0445681
+- PER-000005 + IMDb ID nm1514763
+- POR-000005 credited_episode_count
+- PER-000010 + IMDb ID nm0006820
+- POR-000010 credited_episode_count
+- PER-000006 + IMDb ID nm1801624
+- POR-000006 credited_episode_count
+- PER-000014 + IMDb ID nm4504897
+- PER-000008 + IMDb ID nm1013003
+- POR-000008 credited_episode_count
+- PER-000015 + IMDb ID nm1372572
+- PER-000009 + IMDb ID nm0934008
+- POR-000009 credited_episode_count
+- PER-000016 + IMDb ID nm0336923
+- PER-000017 + IMDb ID nm6475012
+- PER-000011 + IMDb ID nm0004991
+- POR-000011 credited_episode_count
+- PER-000012 + IMDb ID nm5452659
+- POR-000012 credited_episode_count
+- PER-000018 + IMDb ID nm8871347
+- PER-000019 + IMDb ID nm8846471
+- PER-000020 + IMDb ID nm3436127
+- PER-000021 + IMDb ID nm2228605
+- PER-000022 + IMDb ID nm1209157
+- PER-000023 + IMDb ID nm1066970
+- PER-000024 + IMDb ID nm15595701
+- PER-000025 + IMDb ID nm0634349
+- PER-000026 + IMDb ID nm0717398
+- PER-000027 + IMDb ID nm12083304
+- PER-000028 + IMDb ID nm0131117
+- PER-000029 + IMDb ID nm2819041
+- PER-000030 + IMDb ID nm9288519
+- PER-000031 + IMDb ID nm0099909
+- PER-000032 + IMDb ID nm4562011
+- PER-000033 + IMDb ID nm0680838
+- PER-000034 + IMDb ID nm4918802
+- PER-000035 + IMDb ID nm7181843
+- PER-000036 + IMDb ID nm13467572
+- PER-000037 + IMDb ID nm1141621
+- PER-000038 + IMDb ID nm4354276
+- PER-000039 + IMDb ID nm10499289
+- PER-000040 + IMDb ID nm1952213
+- PER-000041 + IMDb ID nm12716650
+- PER-000042 + IMDb ID nm1423863
+- PER-000043 + IMDb ID nm8024408
+- PER-000044 + IMDb ID nm15476072
+- PER-000045 + IMDb ID nm0693436
+- PER-000046 + IMDb ID nm12802639
+- PER-000047 + IMDb ID nm4724599
+- PER-000048 + IMDb ID nm0072419
+- PER-000049 + IMDb ID nm0671886
+- PER-000050 + IMDb ID nm1468295
+- PER-000051 + IMDb ID nm1072565
+- PER-000052 + IMDb ID nm0385997
+- PER-000053 + IMDb ID nm0473034
+- PER-000054 + IMDb ID nm2837911
+- PER-000055 + IMDb ID nm0128211
+- PER-000056 + IMDb ID nm1933406
+- PER-000057 + IMDb ID nm1484233
+- PER-000058 + IMDb ID nm0410171
+- PER-000059 + IMDb ID nm12778005
+- PER-000060 + IMDb ID nm4618718
+- PER-000061 + IMDb ID nm6305858
+- PER-000062 + IMDb ID nm0260899
+- PER-000063 + IMDb ID nm5008316
+- PER-000064 + IMDb ID nm11505721
+- PER-000065 + IMDb ID nm19079097
+- PER-000066 + IMDb ID nm0621176
+- PER-000067 + IMDb ID nm0552709
+- PER-000068 + IMDb ID nm0042468
+- PER-000069 + IMDb ID nm1542635
+- PER-000070 + IMDb ID nm0211479
+- PER-000071 + IMDb ID nm10622034
+- PER-000072 + IMDb ID nm1053537
+- PER-000073 + IMDb ID nm19078820
+- PER-000074 + IMDb ID nm1625868
+- PER-000075 + IMDb ID nm0121720
+- PER-000076 + IMDb ID nm8651172
+- PER-000077 + IMDb ID nm13798062
+- PER-000078 + IMDb ID nm7095211
+- PER-000079 + IMDb ID nm3940713
+- PER-000080 + IMDb ID nm3320257
+- PER-000081 + IMDb ID nm0550106
+- PER-000082 + IMDb ID nm0732710
+- PER-000083 + IMDb ID nm0299082
+- PER-000084 + IMDb ID nm1913375
+- PER-000085 + IMDb ID nm7651515
+- PER-000086 + IMDb ID nm2995574
+- PER-000087 + IMDb ID nm8126110
+- PER-000088 + IMDb ID nm12569428
+- PER-000089 + IMDb ID nm15329974
+- PER-000090 + IMDb ID nm4496273
+- PER-000091 + IMDb ID nm0668702
+- PER-000092 + IMDb ID nm0551312
+- PER-000093 + IMDb ID nm0932548
+- PER-000094 + IMDb ID nm0713327
+- PER-000095 + IMDb ID nm13495221
+- PER-000096 + IMDb ID nm1117532
+- PER-000097 + IMDb ID nm3547796
+- PER-000098 + IMDb ID nm0136802
+- PER-000099 + IMDb ID nm0118368
+- PER-000100 + IMDb ID nm4439012
+- PER-000101 + IMDb ID nm2950396
+- PER-000102 + IMDb ID nm0449050
+- PER-000103 + IMDb ID nm2605843
+- PER-000104 + IMDb ID nm15572439
+- PER-000105 + IMDb ID nm0665791
+- PER-000106 + IMDb ID nm0320027
+- PER-000107 + IMDb ID nm0638467
+- PER-000108 + IMDb ID nm0603417
+- PER-000109 + IMDb ID nm13000183
+- PER-000110 + IMDb ID nm2775153
+- PER-000111 + IMDb ID nm6150032
+- PER-000112 + IMDb ID nm11961047
+- PER-000113 + IMDb ID nm13321489
+- PER-000114 + IMDb ID nm19078736
+- PER-000115 + IMDb ID nm0443286
+- PER-000116 + IMDb ID nm14997569
+- PER-000117 + IMDb ID nm2566404
+- PER-000118 + IMDb ID nm0042336
+- PER-000119 + IMDb ID nm15263388
+- PER-000120 + IMDb ID nm6019149
+- PER-000121 + IMDb ID nm0132441
+- PER-000122 + IMDb ID nm1885484
+- PER-000123 + IMDb ID nm14108192
+- PER-000124 + IMDb ID nm14094075
+- PER-000125 + IMDb ID nm13752023
+- PER-000126 + IMDb ID nm3042278
+- PER-000127 + IMDb ID nm6899035
+- PER-000128 + IMDb ID nm16475847
+- PER-000129 + IMDb ID nm0410222
+- PER-000130 + IMDb ID nm1445056
+- PER-000131 + IMDb ID nm4544822
+- PER-000132 + IMDb ID nm9956342
+- PER-000133 + IMDb ID nm0859394
+- PER-000134 + IMDb ID nm5442794
+- PER-000135 + IMDb ID nm1024093
+- PER-000136 + IMDb ID nm0731048
+- PER-000137 + IMDb ID nm3148636
+- PER-000138 + IMDb ID nm11255498
+- PER-000139 + IMDb ID nm5632417
+- PER-000140 + IMDb ID nm14717063
+- PER-000141 + IMDb ID nm17838704
+- PER-000142 + IMDb ID nm9139559
+- PER-000143 + IMDb ID nm16831103
+- PER-000144 + IMDb ID nm3308117
+- PER-000145 + IMDb ID nm5531290
+- PER-000146 + IMDb ID nm8335787
+- PER-000147 + IMDb ID nm17267621
+- PER-000148 + IMDb ID nm7970652
+- PER-000149 + IMDb ID nm12703640
+- PER-000150 + IMDb ID nm10202771
+
+## Added
+- PER-000013 person Joel Keller
+- CHR-000013 character 'Chris Dundee'
+- POR-000013 Joel Keller as 'Chris Dundee'
+- PER-000014 person Dave Davis
+- CHR-000014 character 'Marvin Geller'
+- POR-000014 Dave Davis as 'Marvin Geller'
+- PER-000015 person Kelly AuCoin
+- CHR-000015 character 'Joe Martin'
+- POR-000015 Kelly AuCoin as 'Joe Martin'
+- PER-000016 person Rothaford Gray
+- CHR-000016 character 'Roger Tate'
+- POR-000016 Rothaford Gray as 'Roger Tate'
+- PER-000017 person Brandon McKnight
+- CHR-000017 character 'Floyd Patterson'
+- POR-000017 Brandon McKnight as 'Floyd Patterson'
+- PER-000018 person Mauro Castillo
+- CHR-000018 character 'Luis Sarria'
+- POR-000018 Mauro Castillo as 'Luis Sarria'
+- PER-000019 person Aimé Donna Kelly
+- CHR-000019 character 'Alberta Jones'
+- POR-000019 Aimé Donna Kelly as 'Alberta Jones'
+- PER-000020 person Brandon Victor Dixon
+- CHR-000020 character 'Captain Sam'
+- POR-000020 Brandon Victor Dixon as 'Captain Sam'
+- PER-000021 person Kaya Coleman
+- CHR-000021 character 'Honey'
+- POR-000021 Kaya Coleman as 'Honey'
+- PER-000022 person Adrian Alvarado
+- CHR-000022 character 'Dr. Ferdie Pacheco'
+- POR-000022 Adrian Alvarado as 'Dr. Ferdie Pacheco'
+- PER-000023 person Rico E. Anderson
+- CHR-000023 character 'Willie Reddish'
+- POR-000023 Rico E. Anderson as 'Willie Reddish'
+- PER-000024 person Nova McKay
+- CHR-000024 character 'Attallah Shabazz'
+- POR-000024 Nova McKay as 'Attallah Shabazz'
+- PER-000025 person Robert Nolan
+- CHR-000025 character 'Dean / Dean (Gym Assistant)'
+- POR-000025 Robert Nolan as 'Dean / Dean (Gym Assistant)'
+- PER-000026 person Ric Reid
+- CHR-000026 character 'Mayor Bruce Hoblitzel'
+- POR-000026 Ric Reid as 'Mayor Bruce Hoblitzel'
+- PER-000027 person Elias Leacock
+- PER-000028 person Mark Camacho
+- CHR-000027 character 'Cus D'Amato'
+- POR-000027 Mark Camacho as 'Cus D'Amato'
+- PER-000029 person Cesili Williams
+- CHR-000028 character 'Betty Shabazz'
+- POR-000028 Cesili Williams as 'Betty Shabazz'
+- PER-000030 person Ashley Rios
+- CHR-000029 character 'Pearl Tate'
+- POR-000029 Ashley Rios as 'Pearl Tate'
+- PER-000031 person John Bourgeois
+- CHR-000030 character 'Bill MacDonald'
+- POR-000030 John Bourgeois as 'Bill MacDonald'
+- PER-000032 person Bridget Ori
+- CHR-000031 character 'Helen Dundee'
+- POR-000031 Bridget Ori as 'Helen Dundee'
+- PER-000033 person Tiffany Phillips
+- CHR-000032 character 'Martha Louis'
+- POR-000032 Tiffany Phillips as 'Martha Louis'
+- PER-000034 person Tyee Tilghman
+- CHR-000033 character 'Joe Louis'
+- POR-000033 Tyee Tilghman as 'Joe Louis'
+- PER-000035 person Erniel Baez
+- CHR-000034 character 'Julius Menendez'
+- POR-000034 Erniel Baez as 'Julius Menendez'
+- PER-000036 person Michael Simpson
+- CHR-000035 character 'Zbigniew 'Ziggy' Pietrzykowski'
+- POR-000035 Michael Simpson as 'Zbigniew 'Ziggy' Pietrzykowski'
+- PER-000037 person Edie Inksetter
+- CHR-000036 character 'Donna Mitchell'
+- POR-000036 Edie Inksetter as 'Donna Mitchell'
+- PER-000038 person Cliff Ware
+- CHR-000037 character 'Ancient Coal Black Man'
+- POR-000037 Cliff Ware as 'Ancient Coal Black Man'
+- PER-000039 person Will Coombs
+- CHR-000038 character 'Bobby'
+- POR-000038 Will Coombs as 'Bobby'
+- PER-000040 person Robert Reynolds
+- CHR-000039 character 'Bud'
+- POR-000039 Robert Reynolds as 'Bud'
+- PER-000041 person Michael Antwi
+- CHR-000040 character 'Lawrence'
+- POR-000040 Michael Antwi as 'Lawrence'
+- PER-000042 person Larry Davis
+- CHR-000041 character 'Radio Announcer / Arena Fight Announcer'
+- POR-000041 Larry Davis as 'Radio Announcer / Arena Fight Announcer'
+- PER-000043 person Tony Ofori
+- CHR-000042 character 'Banged Up Boxer / Elijah'
+- POR-000042 Tony Ofori as 'Banged Up Boxer / Elijah'
+- PER-000044 person Ariel Ollivierre
+- CHR-000043 character 'Frail Kid / Olive'
+- POR-000043 Ariel Ollivierre as 'Frail Kid / Olive'
+- PER-000045 person Jonathan Potts
+- CHR-000044 character 'William Reynolds'
+- POR-000044 Jonathan Potts as 'William Reynolds'
+- PER-000046 person Chrystle Anjelee
+- CHR-000045 character 'Wilma Rudolph'
+- POR-000045 Chrystle Anjelee as 'Wilma Rudolph'
+- PER-000047 person Geoff Meech
+- CHR-000046 character 'Tunney Hunsacker'
+- POR-000046 Geoff Meech as 'Tunney Hunsacker'
+- PER-000048 person Tyrone Benskin
+- CHR-000047 character 'Pastor Whidden'
+- POR-000047 Tyrone Benskin as 'Pastor Whidden'
+- PER-000049 person Tahmoh Penikett
+- PER-000050 person Matthew MacFadzean
+- CHR-000048 character 'Johnny Reneau'
+- POR-000048 Matthew MacFadzean as 'Johnny Reneau'
+- PER-000051 person Nicoye Banks
+- CHR-000049 character 'Dick Sadler'
+- POR-000049 Nicoye Banks as 'Dick Sadler'
+- PER-000052 person Kirstin Rae Hinton
+- CHR-000050 character 'Mrs. Faversham'
+- POR-000050 Kirstin Rae Hinton as 'Mrs. Faversham'
+- PER-000053 person Vieslav Krystyan
+- CHR-000051 character 'Stanislaw'
+- POR-000051 Vieslav Krystyan as 'Stanislaw'
+- PER-000054 person Gregory Thomas
+- CHR-000052 character 'DJ Danny Roach'
+- POR-000052 Gregory Thomas as 'DJ Danny Roach'
+- PER-000055 person Alexandre Cadieux
+- CHR-000053 character 'Olympic Referee'
+- POR-000053 Alexandre Cadieux as 'Olympic Referee'
+- PER-000056 person Jonelle Gunderson
+- CHR-000054 character 'Sheila Colette'
+- POR-000054 Jonelle Gunderson as 'Sheila Colette'
+- PER-000057 person Dean Redman
+- CHR-000055 character 'Archie Moore'
+- POR-000055 Dean Redman as 'Archie Moore'
+- PER-000058 person Chris Jericho
+- CHR-000056 character 'Gorgeous George'
+- POR-000056 Chris Jericho as 'Gorgeous George'
+- PER-000059 person Lennox Leacock
+- POR-000057 Lennox Leacock as 'Young Rudy' (young)
+- PER-000060 person Nicole Passmore
+- CHR-000057 character 'Betsy'
+- POR-000058 Nicole Passmore as 'Betsy'
+- PER-000061 person Tom Ukah
+- CHR-000058 character 'Tobe Liston'
+- POR-000059 Tom Ukah as 'Tobe Liston'
+- PER-000062 person Samantha Espie
+- CHR-000059 character 'Marianne'
+- POR-000060 Samantha Espie as 'Marianne'
+- PER-000063 person James McDougall
+- CHR-000060 character 'Father Stevens'
+- POR-000061 James McDougall as 'Father Stevens'
+- PER-000064 person Keda Edwards Pierre
+- CHR-000061 character 'Lady Whidden'
+- POR-000062 Keda Edwards Pierre as 'Lady Whidden'
+- PER-000065 person Juliean Secara-Lopez
+- CHR-000062 character 'Emilio'
+- POR-000063 Juliean Secara-Lopez as 'Emilio'
+- PER-000066 person Tony Nappo
+- CHR-000063 character 'Frank Mitchell'
+- POR-000064 Tony Nappo as 'Frank Mitchell'
+- PER-000067 person Louisa Martin
+- CHR-000064 character 'Vivian'
+- POR-000065 Louisa Martin as 'Vivian'
+- PER-000068 person Matt Sadowski
+- CHR-000065 character 'Arthur Katz'
+- POR-000066 Matt Sadowski as 'Arthur Katz'
+- PER-000069 person Chris Locke
+- CHR-000066 character 'Don Miller'
+- POR-000067 Chris Locke as 'Don Miller'
+- PER-000070 person Tony De Santis
+- CHR-000067 character 'Howard Sharp'
+- POR-000068 Tony De Santis as 'Howard Sharp'
+- PER-000071 person Tiara Johnny
+- CHR-000068 character 'Trudy'
+- POR-000069 Tiara Johnny as 'Trudy'
+- PER-000072 person David Jansen
+- CHR-000069 character 'Jim Wicks'
+- POR-000070 David Jansen as 'Jim Wicks'
+- PER-000073 person Jed Strathum Kirunda
+- PER-000074 person Regen Wilson
+- CHR-000070 character 'Howard Cosell'
+- POR-000071 Regen Wilson as 'Howard Cosell'
+- PER-000075 person Jason Burke
+- PER-000076 person Darnell Bartholomew
+- CHR-000071 character 'Stevie'
+- POR-000072 Darnell Bartholomew as 'Stevie'
+- PER-000077 person Naomi Ngebulana
+- CHR-000072 character 'Mildred'
+- POR-000073 Naomi Ngebulana as 'Mildred'
+- PER-000078 person Richard Botell
+- CHR-000073 character 'Member of Commission'
+- POR-000074 Richard Botell as 'Member of Commission'
+- PER-000079 person Daniel Lavigne
+- CHR-000074 character 'Kenny'
+- POR-000075 Daniel Lavigne as 'Kenny'
+- PER-000080 person Antonette Rudder
+- CHR-000075 character 'Verda'
+- POR-000076 Antonette Rudder as 'Verda'
+- PER-000081 person Christopher Marren
+- CHR-000076 character 'British Fight Announcer'
+- POR-000077 Christopher Marren as 'British Fight Announcer'
+- PER-000082 person Jamie Robinson
+- CHR-000077 character 'Percy Sutton'
+- POR-000078 Jamie Robinson as 'Percy Sutton'
+- PER-000083 person Murray Furrow
+- CHR-000078 character 'Edward Thompson'
+- POR-000079 Murray Furrow as 'Edward Thompson'
+- PER-000084 person Craig Warnock
+- CHR-000079 character 'Mr. Pierson'
+- POR-000080 Craig Warnock as 'Mr. Pierson'
+- PER-000085 person Shanna Armogan
+- CHR-000080 character 'Charlene'
+- POR-000081 Shanna Armogan as 'Charlene'
+- PER-000086 person Rodney Alexandre
+- CHR-000081 character 'Bus Driver'
+- POR-000082 Rodney Alexandre as 'Bus Driver'
+- PER-000087 person Linda Joyce Nourse
+- CHR-000082 character 'Florence'
+- POR-000083 Linda Joyce Nourse as 'Florence'
+- PER-000088 person Sean Jones
+- CHR-000083 character 'Sugar Ray Robinson'
+- POR-000084 Sean Jones as 'Sugar Ray Robinson'
+- PER-000089 person Myles-Anthony Douglas
+- PER-000090 person Rashid Akeem
+- CHR-000084 character 'Sonny Banks'
+- POR-000085 Rashid Akeem as 'Sonny Banks'
+- PER-000091 person Joshua Peace
+- CHR-000085 character 'Dr. Alexander Robbins'
+- POR-000086 Joshua Peace as 'Dr. Alexander Robbins'
+- PER-000092 person Darren Marsman
+- CHR-000086 character 'Store Owner'
+- POR-000087 Darren Marsman as 'Store Owner'
+- PER-000093 person Dan Willmott
+- CHR-000087 character 'Committee Chair'
+- POR-000088 Dan Willmott as 'Committee Chair'
+- PER-000094 person Martin Raymond
+- CHR-000088 character 'Janitor'
+- POR-000089 Martin Raymond as 'Janitor'
+- PER-000095 person Sam Osei
+- CHR-000089 character 'Rick'
+- POR-000090 Sam Osei as 'Rick'
+- PER-000096 person Hubert Boorder
+- CHR-000090 character 'Johnny Summerlin'
+- POR-000091 Hubert Boorder as 'Johnny Summerlin'
+- PER-000097 person Matthew Paul Gonzales
+- PER-000098 person Nicholas Carella
+- CHR-000091 character 'Morris Klein'
+- POR-000092 Nicholas Carella as 'Morris Klein'
+- PER-000099 person Jesse Buck
+- PER-000100 person Jordan Imray
+- CHR-000092 character 'Hampton Reporter #1'
+- POR-000093 Jordan Imray as 'Hampton Reporter #1'
+- PER-000101 person Jason Gosbee
+- CHR-000093 character 'ND Contender'
+- POR-000094 Jason Gosbee as 'ND Contender'
+- PER-000102 person Duane Keogh
+- CHR-000094 character 'Prison Guard'
+- POR-000095 Duane Keogh as 'Prison Guard'
+- PER-000103 person Tim Beresford
+- CHR-000095 character 'Hampton Reporter #2'
+- POR-000096 Tim Beresford as 'Hampton Reporter #2'
+- PER-000104 person Curtis Myers
+- CHR-000096 character 'Whit'
+- POR-000097 Curtis Myers as 'Whit'
+- PER-000105 person Thomas Patrice
+- CHR-000097 character 'Lee'
+- POR-000098 Thomas Patrice as 'Lee'
+- PER-000106 person David Gingrich
+- CHR-000098 character 'Larue'
+- POR-000099 David Gingrich as 'Larue'
+- PER-000107 person Moses Nyarko
+- CHR-000099 character 'Howard King'
+- POR-000100 Moses Nyarko as 'Howard King'
+- PER-000108 person Marty Moreau
+- CHR-000100 character 'Priest'
+- POR-000101 Marty Moreau as 'Priest'
+- PER-000109 person Vanessa Mari Evans
+- CHR-000101 character 'Belinda'
+- POR-000102 Vanessa Mari Evans as 'Belinda'
+- PER-000110 person Alastair Forbes
+- CHR-000102 character '5th St. Reporter #1'
+- POR-000103 Alastair Forbes as '5th St. Reporter #1'
+- PER-000111 person Ewa Wolniczek
+- CHR-000103 character 'Evangeline'
+- POR-000104 Ewa Wolniczek as 'Evangeline'
+- PER-000112 person Will Mackenzie
+- CHR-000104 character 'Comiskey Reporter #2'
+- POR-000105 Will Mackenzie as 'Comiskey Reporter #2'
+- PER-000113 person Angel Issa
+- CHR-000105 character 'Raymond'
+- POR-000106 Angel Issa as 'Raymond'
+- PER-000114 person Chase Egerton
+- CHR-000106 character 'Chip'
+- POR-000107 Chase Egerton as 'Chip'
+- PER-000115 person David Kaye
+- PER-000116 person Zachary Cox
+- CHR-000107 character 'Kevin'
+- POR-000108 Zachary Cox as 'Kevin'
+- PER-000117 person Pierre Simpson
+- CHR-000108 character 'Life Reporter'
+- POR-000109 Pierre Simpson as 'Life Reporter'
+- PER-000118 person Brad Austin
+- CHR-000109 character 'Teddy Greyson'
+- POR-000110 Brad Austin as 'Teddy Greyson'
+- PER-000119 person Micheal J. Hill
+- CHR-000110 character 'Howard Bingham'
+- POR-000111 Micheal J. Hill as 'Howard Bingham'
+- PER-000120 person Michael Berger
+- CHR-000111 character 'Olympic Fight Announcer'
+- POR-000112 Michael Berger as 'Olympic Fight Announcer'
+- PER-000121 person Emma Campbell
+- CHR-000112 character 'Roman Tour Guide'
+- POR-000113 Emma Campbell as 'Roman Tour Guide'
+- PER-000122 person Norm MacQueen
+- CHR-000113 character 'Correspondent'
+- POR-000114 Norm MacQueen as 'Correspondent'
+- PER-000123 person Josias Sewlal
+- CHR-000114 character 'Young Boy'
+- POR-000115 Josias Sewlal as 'Young Boy'
+- PER-000124 person Katie Layne
+- CHR-000115 character 'Blue Boar Patron #3'
+- POR-000116 Katie Layne as 'Blue Boar Patron #3'
+- PER-000125 person Andre Reiter
+- CHR-000116 character 'Ringside Boxing Reporter / Restaurant Patron / ...'
+- POR-000117 Andre Reiter as 'Ringside Boxing Reporter / Restaurant Patron / ...' (uncredited)
+- PER-000126 person Ryan Allen
+- CHR-000117 character 'Jim Brown'
+- POR-000118 Ryan Allen as 'Jim Brown' (uncredited)
+- PER-000127 person Josh Hendel
+- CHR-000118 character 'London Pub Goer #2'
+- POR-000119 Josh Hendel as 'London Pub Goer #2' (uncredited)
+- PER-000128 person Scott Kasics
+- PER-000129 person Sean Irvine
+- CHR-000119 character 'Clean Cut Reporter'
+- POR-000120 Sean Irvine as 'Clean Cut Reporter' (uncredited)
+- PER-000130 person Marcello Bezina
+- CHR-000120 character 'Barney Felix'
+- POR-000121 Marcello Bezina as 'Barney Felix' (uncredited)
+- PER-000131 person Lacey Kay Creighton
+- CHR-000121 character 'Stenographer'
+- POR-000122 Lacey Kay Creighton as 'Stenographer' (uncredited)
+- PER-000132 person Ziye Hu
+- CHR-000122 character 'International Athlete #1'
+- POR-000123 Ziye Hu as 'International Athlete #1' (uncredited)
+- PER-000133 person Randy Thomas
+- CHR-000123 character 'TV Director'
+- POR-000124 Randy Thomas as 'TV Director' (uncredited)
+- PER-000134 person Nick Biskupek
+- CHR-000124 character 'Angry British Fan'
+- POR-000125 Nick Biskupek as 'Angry British Fan' (uncredited)
+- PER-000135 person Jim Chad
+- CHR-000125 character 'Louisville Sponsoring Group Member'
+- POR-000126 Jim Chad as 'Louisville Sponsoring Group Member' (uncredited)
+- PER-000136 person Dylan Roberts
+- CHR-000126 character 'Patterson / Liston Referee'
+- POR-000127 Dylan Roberts as 'Patterson / Liston Referee' (uncredited)
+- PER-000137 person Paskal Vaklev
+- CHR-000127 character 'Mob Crony'
+- POR-000128 Paskal Vaklev as 'Mob Crony' (uncredited)
+- PER-000138 person Barbara Ryan
+- CHR-000128 character '1960's Upscale Ocean Drive Patron'
+- POR-000129 Barbara Ryan as '1960's Upscale Ocean Drive Patron' (uncredited)
+- PER-000139 person Kevin Foy
+- CHR-000129 character 'Comiskey Reporter #1'
+- POR-000130 Kevin Foy as 'Comiskey Reporter #1' (uncredited)
+- PER-000140 person Marika Simón
+- CHR-000130 character 'London Woman'
+- POR-000131 Marika Simón as 'London Woman' (uncredited)
+- PER-000141 person Samantha Adams
+- PER-000142 person Kyle James Butler
+- PER-000143 person Caroline Renee Elliott
+- PER-000144 person Jerin Forgie
+- PER-000145 person Kenton Blythe
+- PER-000146 person Rob Perreault
+- CHR-000131 character 'Ringside Cameraman'
+- POR-000132 Rob Perreault as 'Ringside Cameraman' (uncredited)
+- PER-000147 person Joseph Faludi
+- CHR-000132 character 'Ringside Photographer'
+- POR-000133 Joseph Faludi as 'Ringside Photographer' (uncredited)
+- PER-000148 person Scott Milton
+- CHR-000133 character 'Cooper Cutman'
+- POR-000134 Scott Milton as 'Cooper Cutman' (uncredited)
+- PER-000149 person Carl Hines
+- CHR-000134 character 'Boxing Referee'
+- POR-000135 Carl Hines as 'Boxing Referee' (uncredited)
+- PER-000150 person Jeremy Jacklin
+- CHR-000135 character 'Television P.A.'
+- POR-000136 Jeremy Jacklin as 'Television P.A.' (uncredited)
+
+## Matched
+- PER-000001 Jaalen Best
+- CHR-000001 'Cassius Clay / Muhammad Ali'
+- PER-000002 Omari Hardwick
+- CHR-000002 'Cassius Clay Sr.'
+- PER-000003 Dana Gourrier
+- CHR-000003 'Odessa 'Bird' Clay'
+- PER-000004 Kai Parham
+- CHR-000004 'Rudy Clay'
+- PER-000007 Giovanni Ribisi
+- CHR-000007 'Angelo Dundee'
+- PER-000005 Amin Joseph
+- CHR-000005 'Sonny Liston'
+- PER-000010 Aleks Paunovic
+- CHR-000010 'William Faversham Jr.'
+- PER-000006 Erica Tazel
+- CHR-000006 'Geraldine Liston'
+- PER-000008 Michael Ealy
+- CHR-000008 'Malcolm X'
+- PER-000009 Reno Wilson
+- CHR-000009 'Drew 'Bundini' Brown'
+- PER-000011 Hill Harper
+- CHR-000011 'Elijah Muhammad'
+- PER-000012 Jerod Haynes
+- CHR-000012 'Herbert Muhammad'
+- 'Young Rudy' → young portrayal of CHR-000004 (name rule; confirm on screen)

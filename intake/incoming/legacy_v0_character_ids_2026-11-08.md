@@ -1,0 +1,19 @@
+# legacy_v0_character_ids_2026-11-08
+
+> Source: v0 package (legacy/v0_the-greatest/Character_Sheets/TG_Character_Sheets_v01.md), built from web-search snippets 2026-11-08.
+> Imported first so legacy CHR-001..CHR-012 keep their order as CHR-000001..CHR-000012.
+
+| legacy_id | credited_name | aliases(;) | actor | counterpart_status | relationship_to_subject | verification |
+|---|---|---|---|---|---|---|
+| CHR-001 | Cassius Clay / Muhammad Ali | Cassius Clay;Muhammad Ali;Cassius Marcellus Clay Jr. | Jaalen Best | real_person | Self (series subject) | V2 |
+| CHR-002 | Cassius Clay Sr. | Cassius Marcellus Clay Sr.;Cash;Cash Clay | Omari Hardwick | real_person | Father | V2 |
+| CHR-003 | Odessa 'Bird' Clay | Odessa Grady Clay;Bird | Dana Gourrier | real_person | Mother | V2 |
+| CHR-004 | Rudy Clay | Rudolph Clay;Rahman Ali;Rahaman Ali | Kai Parham | real_person | Younger brother | V2 |
+| CHR-005 | Sonny Liston | Charles L. Liston | Amin Joseph | real_person | Opponent (1964 title fight) | V2 |
+| CHR-006 | Geraldine Liston |  | Erica Tazel | real_person | Wife of opponent Sonny Liston | V2 |
+| CHR-007 | Angelo Dundee | Angelo Mirena | Giovanni Ribisi | real_person | Trainer | V2 |
+| CHR-008 | Malcolm X |  | Michael Ealy | real_person | Friend/mentor; later estranged | V2 |
+| CHR-009 | Drew 'Bundini' Brown | Bundini | Reno Wilson | real_person | Assistant trainer / cornerman | V2 |
+| CHR-010 | William Faversham Jr. |  | Aleks Paunovic | real_person | Financial backer (Louisville Sponsoring Group) | V2 |
+| CHR-011 | Elijah Muhammad |  | Hill Harper | real_person | Nation of Islam leader | V2 |
+| CHR-012 | Herbert Muhammad |  | Jerod Haynes | real_person | Son of Elijah Muhammad; later manager | V2 |

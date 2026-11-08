@@ -1,0 +1,7 @@
+# TG Clip Candidates TEMPLATE
+
+Markdown view of `TG_Clip_Candidates_TEMPLATE.csv` (the CSV stays the import/export format).
+
+| post_id | format | scene_ids | character_ids | file_tc_in | file_tc_out | proposed_duration_s | headline | actor_character_labels | context_card | caption_draft_ref | crop_plan | commentary | why_watch_share | content_note | spoiler_level | score_hook | score_clarity | score_payoff | score_performance | score_discussion | score_spotlight_fit | score_total | unresolved_issues | rights_status | status(selected/approved/edited/checked/ready) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |

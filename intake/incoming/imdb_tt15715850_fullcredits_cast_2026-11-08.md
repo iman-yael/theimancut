@@ -1,0 +1,158 @@
+# imdb_tt15715850_fullcredits_cast_2026-11-08
+
+> Source: user-pasted text of https://www.imdb.com/title/tt15715850/fullcredits/ (pasted 2026-11-08, "Cast (150)").
+> Line-by-line transcription of the Cast section. Characters separated by " / " exactly as listed; notes keep "(as ...)" and "(uncredited)".
+> Episode counts are IMDb CREDITED episode counts — not appearances, scene counts, or screen time. No images were included in the paste.
+
+| order | imdb_nm | actor | characters | note | episodes |
+|---|---|---|---|---|---|
+| 1 | nm13955802 | Jaalen Best | Cassius Clay / Muhammad Ali |  | 8 |
+| 2 | nm1165044 | Omari Hardwick | Cassius Clay Sr. |  | 8 |
+| 3 | nm4158239 | Dana Gourrier | Odessa 'Bird' Clay |  | 8 |
+| 4 | nm9902411 | Kai Parham | Rudy Clay |  | 8 |
+| 5 | nm0000610 | Giovanni Ribisi | Angelo Dundee |  | 8 |
+| 6 | nm0445681 | Joel Keller | Chris Dundee |  | 8 |
+| 7 | nm1514763 | Amin Joseph | Sonny Liston |  | 7 |
+| 8 | nm0006820 | Aleks Paunovic | William Faversham Jr. |  | 6 |
+| 9 | nm1801624 | Erica Tazel | Geraldine Liston |  | 5 |
+| 10 | nm4504897 | Dave Davis | Marvin Geller |  | 5 |
+| 11 | nm1013003 | Michael Ealy | Malcolm X |  | 4 |
+| 12 | nm1372572 | Kelly AuCoin | Joe Martin |  | 4 |
+| 13 | nm0934008 | Reno Wilson | Drew 'Bundini' Brown |  | 4 |
+| 14 | nm0336923 | Rothaford Gray | Roger Tate |  | 4 |
+| 15 | nm6475012 | Brandon McKnight | Floyd Patterson |  | 3 |
+| 16 | nm0004991 | Hill Harper | Elijah Muhammad |  | 3 |
+| 17 | nm5452659 | Jerod Haynes | Herbert Muhammad |  | 3 |
+| 18 | nm8871347 | Mauro Castillo | Luis Sarria |  | 3 |
+| 19 | nm8846471 | Aimé Donna Kelly | Alberta Jones |  | 3 |
+| 20 | nm3436127 | Brandon Victor Dixon | Captain Sam |  | 3 |
+| 21 | nm2228605 | Kaya Coleman | Honey |  | 3 |
+| 22 | nm1209157 | Adrian Alvarado | Dr. Ferdie Pacheco |  | 3 |
+| 23 | nm1066970 | Rico E. Anderson | Willie Reddish |  | 3 |
+| 24 | nm15595701 | Nova McKay | Attallah Shabazz |  | 3 |
+| 25 | nm0634349 | Robert Nolan | Dean / Dean (Gym Assistant) |  | 3 |
+| 26 | nm0717398 | Ric Reid | Mayor Bruce Hoblitzel |  | 2 |
+| 27 | nm12083304 | Elias Leacock | Young Cassius |  | 2 |
+| 28 | nm0131117 | Mark Camacho | Cus D'Amato |  | 2 |
+| 29 | nm2819041 | Cesili Williams | Betty Shabazz |  | 2 |
+| 30 | nm9288519 | Ashley Rios | Pearl Tate |  | 2 |
+| 31 | nm0099909 | John Bourgeois | Bill MacDonald |  | 2 |
+| 32 | nm4562011 | Bridget Ori | Helen Dundee |  | 2 |
+| 33 | nm0680838 | Tiffany Phillips | Martha Louis |  | 2 |
+| 34 | nm4918802 | Tyee Tilghman | Joe Louis |  | 2 |
+| 35 | nm7181843 | Erniel Baez | Julius Menendez |  | 2 |
+| 36 | nm13467572 | Michael Simpson | Zbigniew 'Ziggy' Pietrzykowski |  | 2 |
+| 37 | nm1141621 | Edie Inksetter | Donna Mitchell |  | 2 |
+| 38 | nm4354276 | Cliff Ware | Ancient Coal Black Man |  | 2 |
+| 39 | nm10499289 | Will Coombs | Bobby |  | 2 |
+| 40 | nm1952213 | Robert Reynolds | Bud |  | 2 |
+| 41 | nm12716650 | Michael Antwi | Lawrence |  | 2 |
+| 42 | nm1423863 | Larry Davis | Radio Announcer / Arena Fight Announcer |  | 2 |
+| 43 | nm8024408 | Tony Ofori | Banged Up Boxer / Elijah |  | 2 |
+| 44 | nm15476072 | Ariel Ollivierre | Frail Kid / Olive |  | 2 |
+| 45 | nm0693436 | Jonathan Potts | William Reynolds |  | 1 |
+| 46 | nm12802639 | Chrystle Anjelee | Wilma Rudolph |  | 1 |
+| 47 | nm4724599 | Geoff Meech | Tunney Hunsacker |  | 1 |
+| 48 | nm0072419 | Tyrone Benskin | Pastor Whidden |  | 1 |
+| 49 | nm0671886 | Tahmoh Penikett |  |  | 1 |
+| 50 | nm1468295 | Matthew MacFadzean | Johnny Reneau |  | 1 |
+| 51 | nm1072565 | Nicoye Banks | Dick Sadler |  | 1 |
+| 52 | nm0385997 | Kirstin Rae Hinton | Mrs. Faversham |  | 1 |
+| 53 | nm0473034 | Vieslav Krystyan | Stanislaw |  | 1 |
+| 54 | nm2837911 | Gregory Thomas | DJ Danny Roach | (as Greg Thomas) | 1 |
+| 55 | nm0128211 | Alexandre Cadieux | Olympic Referee | (as Alex Cadieux) | 1 |
+| 56 | nm1933406 | Jonelle Gunderson | Sheila Colette |  | 1 |
+| 57 | nm1484233 | Dean Redman | Archie Moore |  | 1 |
+| 58 | nm0410171 | Chris Jericho | Gorgeous George |  | 1 |
+| 59 | nm12778005 | Lennox Leacock | Young Rudy |  | 1 |
+| 60 | nm4618718 | Nicole Passmore | Betsy |  | 1 |
+| 61 | nm6305858 | Tom Ukah | Tobe Liston |  | 1 |
+| 62 | nm0260899 | Samantha Espie | Marianne |  | 1 |
+| 63 | nm5008316 | James McDougall | Father Stevens |  | 1 |
+| 64 | nm11505721 | Keda Edwards Pierre | Lady Whidden |  | 1 |
+| 65 | nm19079097 | Juliean Secara-Lopez | Emilio |  | 1 |
+| 66 | nm0621176 | Tony Nappo | Frank Mitchell |  | 1 |
+| 67 | nm0552709 | Louisa Martin | Vivian |  | 1 |
+| 68 | nm0042468 | Matt Sadowski | Arthur Katz |  | 1 |
+| 69 | nm1542635 | Chris Locke | Don Miller |  | 1 |
+| 70 | nm0211479 | Tony De Santis | Howard Sharp | (as Tony Desantis) | 1 |
+| 71 | nm10622034 | Tiara Johnny | Trudy |  | 1 |
+| 72 | nm1053537 | David Jansen | Jim Wicks |  | 1 |
+| 73 | nm19078820 | Jed Strathum Kirunda | Young Sonny | (as Jed Stathum Kirunda) | 1 |
+| 74 | nm1625868 | Regen Wilson | Howard Cosell |  | 1 |
+| 75 | nm0121720 | Jason Burke | Howard |  | 1 |
+| 76 | nm8651172 | Darnell Bartholomew | Stevie |  | 1 |
+| 77 | nm13798062 | Naomi Ngebulana | Mildred |  | 1 |
+| 78 | nm7095211 | Richard Botell | Member of Commission |  | 1 |
+| 79 | nm3940713 | Daniel Lavigne | Kenny |  | 1 |
+| 80 | nm3320257 | Antonette Rudder | Verda |  | 1 |
+| 81 | nm0550106 | Christopher Marren | British Fight Announcer | (as Chris Marren) | 1 |
+| 82 | nm0732710 | Jamie Robinson | Percy Sutton |  | 1 |
+| 83 | nm0299082 | Murray Furrow | Edward Thompson |  | 1 |
+| 84 | nm1913375 | Craig Warnock | Mr. Pierson |  | 1 |
+| 85 | nm7651515 | Shanna Armogan | Charlene |  | 1 |
+| 86 | nm2995574 | Rodney Alexandre | Bus Driver |  | 1 |
+| 87 | nm8126110 | Linda Joyce Nourse | Florence |  | 1 |
+| 88 | nm12569428 | Sean Jones | Sugar Ray Robinson |  | 1 |
+| 89 | nm15329974 | Myles-Anthony Douglas | Morris |  | 1 |
+| 90 | nm4496273 | Rashid Akeem | Sonny Banks |  | 1 |
+| 91 | nm0668702 | Joshua Peace | Dr. Alexander Robbins | (as Josh Peace) | 1 |
+| 92 | nm0551312 | Darren Marsman | Store Owner |  | 1 |
+| 93 | nm0932548 | Dan Willmott | Committee Chair |  | 1 |
+| 94 | nm0713327 | Martin Raymond | Janitor |  | 1 |
+| 95 | nm13495221 | Sam Osei | Rick |  | 1 |
+| 96 | nm1117532 | Hubert Boorder | Johnny Summerlin |  | 1 |
+| 97 | nm3547796 | Matthew Paul Gonzales | Frank | (as Matthew Gonzales) | 1 |
+| 98 | nm0136802 | Nicholas Carella | Morris Klein |  | 1 |
+| 99 | nm0118368 | Jesse Buck | William |  | 1 |
+| 100 | nm4439012 | Jordan Imray | Hampton Reporter #1 |  | 1 |
+| 101 | nm2950396 | Jason Gosbee | ND Contender |  | 1 |
+| 102 | nm0449050 | Duane Keogh | Prison Guard |  | 1 |
+| 103 | nm2605843 | Tim Beresford | Hampton Reporter #2 |  | 1 |
+| 104 | nm15572439 | Curtis Myers | Whit |  | 1 |
+| 105 | nm0665791 | Thomas Patrice | Lee |  | 1 |
+| 106 | nm0320027 | David Gingrich | Larue |  | 1 |
+| 107 | nm0638467 | Moses Nyarko | Howard King |  | 1 |
+| 108 | nm0603417 | Marty Moreau | Priest |  | 1 |
+| 109 | nm13000183 | Vanessa Mari Evans | Belinda | (as Vanessa Evans) | 1 |
+| 110 | nm2775153 | Alastair Forbes | 5th St. Reporter #1 |  | 1 |
+| 111 | nm6150032 | Ewa Wolniczek | Evangeline |  | 1 |
+| 112 | nm11961047 | Will Mackenzie | Comiskey Reporter #2 |  | 1 |
+| 113 | nm13321489 | Angel Issa | Raymond |  | 1 |
+| 114 | nm19078736 | Chase Egerton | Chip |  | 1 |
+| 115 | nm0443286 | David Kaye | Fight Announcer |  | 1 |
+| 116 | nm14997569 | Zachary Cox | Kevin |  | 1 |
+| 117 | nm2566404 | Pierre Simpson | Life Reporter |  | 1 |
+| 118 | nm0042336 | Brad Austin | Teddy Greyson |  | 1 |
+| 119 | nm15263388 | Micheal J. Hill | Howard Bingham | (as Michael John Hill) | 1 |
+| 120 | nm6019149 | Michael Berger | Olympic Fight Announcer |  | 1 |
+| 121 | nm0132441 | Emma Campbell | Roman Tour Guide |  | 1 |
+| 122 | nm1885484 | Norm MacQueen | Correspondent |  | 1 |
+| 123 | nm14108192 | Josias Sewlal | Young Boy |  | 1 |
+| 124 | nm14094075 | Katie Layne | Blue Boar Patron #3 |  | 1 |
+| 125 | nm13752023 | Andre Reiter | Ringside Boxing Reporter / Restaurant Patron / ... | (uncredited) | 3 |
+| 126 | nm3042278 | Ryan Allen | Jim Brown | (uncredited) | 1 |
+| 127 | nm6899035 | Josh Hendel | London Pub Goer #2 | (uncredited) | 1 |
+| 128 | nm16475847 | Scott Kasics | 1960s Upscale Patron | (uncredited) | 1 |
+| 129 | nm0410222 | Sean Irvine | Clean Cut Reporter | (uncredited) | 1 |
+| 130 | nm1445056 | Marcello Bezina | Barney Felix | (uncredited) | 1 |
+| 131 | nm4544822 | Lacey Kay Creighton | Stenographer | (uncredited) | 1 |
+| 132 | nm9956342 | Ziye Hu | International Athlete #1 | (uncredited) | 1 |
+| 133 | nm0859394 | Randy Thomas | TV Director | (uncredited) | 1 |
+| 134 | nm5442794 | Nick Biskupek | Angry British Fan | (uncredited) | 1 |
+| 135 | nm1024093 | Jim Chad | Louisville Sponsoring Group Member | (uncredited) | 1 |
+| 136 | nm0731048 | Dylan Roberts | Patterson / Liston Referee | (uncredited) | 1 |
+| 137 | nm3148636 | Paskal Vaklev | Mob Crony | (uncredited) | 1 |
+| 138 | nm11255498 | Barbara Ryan | 1960's Upscale Ocean Drive Patron | (uncredited) | 1 |
+| 139 | nm5632417 | Kevin Foy | Comiskey Reporter #1 | (uncredited) | 1 |
+| 140 | nm14717063 | Marika Simón | London Woman | (uncredited) | 1 |
+| 141 | nm17838704 | Samantha Adams | Restaurant Patron | (uncredited) | 1 |
+| 142 | nm9139559 | Kyle James Butler | Louisville Sponsoring Group Member | (uncredited) | 1 |
+| 143 | nm16831103 | Caroline Renee Elliott | Ocean Drive Patron | (uncredited) | 1 |
+| 144 | nm3308117 | Jerin Forgie | Reporter | (uncredited) | 1 |
+| 145 | nm5531290 | Kenton Blythe | Young Announcer | (uncredited) | 1 |
+| 146 | nm8335787 | Rob Perreault | Ringside Cameraman | (uncredited) | 1 |
+| 147 | nm17267621 | Joseph Faludi | Ringside Photographer | (uncredited) | 1 |
+| 148 | nm7970652 | Scott Milton | Cooper Cutman | (uncredited) | 1 |
+| 149 | nm12703640 | Carl Hines | Boxing Referee | (uncredited) | 1 |
+| 150 | nm10202771 | Jeremy Jacklin | Television P.A. | (uncredited) | 1 |

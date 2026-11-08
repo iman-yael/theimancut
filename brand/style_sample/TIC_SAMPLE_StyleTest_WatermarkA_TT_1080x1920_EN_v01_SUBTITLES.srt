@@ -1,0 +1,11 @@
+1
+00:00:00,500 --> 00:00:02,600
+[SAMPLE] Original dialogue subtitle style.
+
+2
+00:00:02,800 --> 00:00:05,400
+[SAMPLE] Iman's narration subtitle style.
+
+3
+00:00:05,600 --> 00:00:07,400
+[door closes]

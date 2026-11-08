@@ -1,0 +1,15 @@
+{"provenance": "Web search result snippets read by the producer 2026-11-08 (pages themselves not opened; network blocks most fetches).",
+ "updates": [
+  {"claim": "Odessa Grady Clay was Muhammad Ali's mother", "new_status": "supported", "sources": ["wiki_odessa", "cinemaholic_odessa"], "note": "Secondary sources; Wikipedia cites a 1994 AP report and a Johnson Publishing (Jet) item. Primary obituary not read."},
+  {"claim": "Rudy Clay later took the name Rahman Ali (spelling also given as Rahaman)", "new_status": "supported", "sources": ["boxingscene_rahaman", "blackenterprise_rahaman"], "note": "He used 'Rahaman' in his own autobiography (per Wikipedia snippet); use Rahaman as preferred spelling."}],
+ "new_claims": [
+  {"subject": "CHR-003", "text": "Ali called his mother 'Bird'", "domain": "history", "class": "fact", "status": "supported_single_source", "sources": ["wiki_odessa"]},
+  {"subject": "CHR-003", "text": "Odessa Clay died in August 1994 in the Louisville area, aged 77", "domain": "history", "class": "fact", "status": "supported_single_source", "sources": ["wiki_odessa"], "note": "Birth date given as Feb 12 or Feb 17, 1917 (conflict)."},
+  {"subject": "CHR-004", "text": "Rahaman Ali (born Rudolph Clay, 1943) died on 1 August 2025 in Louisville, aged 82", "domain": "history", "class": "fact", "status": "supported", "sources": ["boxingscene_rahaman", "blackenterprise_rahaman"], "note": "Write in past tense. Middle name conflicts (Arnett vs Valentino); birth year 1943 (most) vs 1940 (IMDb FAQ)."},
+  {"subject": "CHR-004", "text": "Rudy Clay turned professional on 25 February 1964, the night his brother beat Sonny Liston", "domain": "history", "class": "fact", "status": "supported_single_source", "sources": ["wikiwand_rahman"]}],
+ "sources": {
+  "wiki_odessa": ["Odessa Grady Clay", "Wikipedia", "https://en.wikipedia.org/wiki/Odessa_Grady_Clay", "tertiary", "Cites AP 1994 and Jet; seen via snippet."],
+  "cinemaholic_odessa": ["The Greatest: Who Was Odessa Clay in Real Life?", "The Cinemaholic", "https://thecinemaholic.com/odessa-clay/", "entertainment_press", "Seen via snippet."],
+  "boxingscene_rahaman": ["Rahaman Ali, younger brother of Muhammad Ali, dies aged 82 in Louisville", "BoxingScene", "https://www.boxingscene.com/articles/rahaman-ali-younger-brother-of-muhammad-ali-dies-aged-82-in-louisville", "news", "Seen via snippet."],
+  "blackenterprise_rahaman": ["Muhammad Ali's Younger Brother, Rahaman Ali, Dies At 82", "Black Enterprise", "https://www.blackenterprise.com/rahaman-ali-dead-muhammad-ali", "news", "Seen via snippet."],
+  "wikiwand_rahman": ["Rahman Ali", "Wikipedia (Wikiwand)", "https://www.wikiwand.com/en/articles/Rahman_Ali", "tertiary", "Seen via snippet."]}}
