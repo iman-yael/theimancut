@@ -1,6 +1,7 @@
 #!/bin/bash
 # One-time setup on your Mac:  bash tools/autoexport/install.sh   (run from the theimancut repo folder)
-# Creates ~/Desktop/theimancut/the-greatest/{IMPORTS,instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved}
+# Creates ~/Desktop/theimancut/the-greatest/{instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved}
+# plus IMPORTS as a shortcut to the shared Film & TV library (~/Movies/The Iman Cut/Sources),
 # and a background agent that exports anything dropped into _drop-finished-clips-here (option B layout).
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"; REPO="$(cd "$HERE/../.." && pwd)"
@@ -9,13 +10,22 @@ SHOW="$HOME/Desktop/theimancut/the-greatest"
 PLIST="$HOME/Library/LaunchAgents/com.theimancut.autoexport.plist"
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 command -v ffmpeg >/dev/null || { echo "ffmpeg is missing. Install it first:  brew install ffmpeg"; exit 1; }
-mkdir -p "$APP" "$SHOW"/{IMPORTS,instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved} "$HOME/Library/LaunchAgents"
+mkdir -p "$APP" "$SHOW"/{instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved} "$HOME/Library/LaunchAgents"
+# IMPORTS is a shortcut to the shared Film & TV library, the same folder the Clipper lists
+# (default ~/Movies/The Iman Cut/Sources; override with TIC_SOURCES). Anything already in a real IMPORTS folder moves there.
+SOURCES="${TIC_SOURCES:-$HOME/Movies/The Iman Cut/Sources}"
+mkdir -p "$SOURCES"
+if [[ -d "$SHOW/IMPORTS" && ! -L "$SHOW/IMPORTS" ]]; then
+  find "$SHOW/IMPORTS" -mindepth 1 -maxdepth 1 -exec mv -n {} "$SOURCES/" \;
+  rmdir "$SHOW/IMPORTS" 2>/dev/null || { echo "IMPORTS still has files that clash with names in $SOURCES; left in place."; }
+fi
+[[ -e "$SHOW/IMPORTS" ]] || ln -s "$SOURCES" "$SHOW/IMPORTS"
 cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
 cp "$REPO/brand/watermark/iman-cut-watermark-trimmed.png" "$APP/"
 cp "$HERE/Export Now.command" "$SHOW/"; chmod +x "$SHOW/Export Now.command"
 cat > "$SHOW/READ ME.txt" <<TXT
 THE IMAN CUT: The Greatest exports
-0. IMPORTS = raw screen recordings / source files (storage only; nothing here is exported automatically).
+0. IMPORTS = shortcut to your Film & TV library (Movies/The Iman Cut/Sources), shared with the Clipper. Full-length sources only; nothing here is exported automatically.
 1. Drop a finished clip (and optionally a same-named .srt) into _drop-finished-clips-here
 2. Within a minute it appears in instagram / tiktok / snapchat (1080x1920, watermark)
    and youtube (Shorts 1080x1920 + landscape 1920x1080, no watermark).

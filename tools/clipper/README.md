@@ -25,6 +25,13 @@ Double-click **`Start Clipper.command`**. The first time, macOS may ask to let T
    - Switch between 9:16 and 16:9 at any time.
 4. Every clip shows its length. To change what a clip's name says it shows, edit the box on its card and press **Rename**; its files are renamed to match.
 
+## The Film & TV library (shared)
+The Clipper only lists videos in **`~/Movies/The Iman Cut/Sources`** added from Nov 8, 2026 on. Random screen recordings elsewhere never appear. The auto-export ([../autoexport](../autoexport/)) uses the same folder: its `IMPORTS` is a shortcut to it. So there is one place for full-length sources:
+
+1. Put the source in Sources (drag it onto the Clipper page, or into the folder in Finder).
+2. Cut it into clips with the Clipper.
+3. Drop the clips you choose into the auto-export's drop folder, which makes the platform versions.
+
 ## Where the clips go
 Finished clips are saved to **`~/Movies/The Iman Cut/Clips/<Show - Episode - date>/`**, already under their final names. **Open in Finder** on a run opens that folder. Removing a run from the list keeps the clips.
 

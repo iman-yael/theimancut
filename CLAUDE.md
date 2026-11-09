@@ -41,9 +41,10 @@ Standing instructions for every Claude session that opens this repo (Mac or clou
 | Latest open questions for Iman | `projects/REVIEW_PACKET_2026-11-09.md` |
 | Cast and character sheets (generated) | `works/WRK-000001_the-greatest/` (135+ characters, IDs `CHR-000001`…) |
 | Catalog (source of truth) | `catalog/catalog.sqlite`; regenerate docs with `python3 -m tic.cli docs`, tests with `python3 -m unittest tests.test_core tests.test_search_and_takes` |
+| Film & TV library (all full-length sources) | `~/Movies/The Iman Cut/Sources/`: the one folder the Clipper lists (from 2026-11-08 on) and the auto-export's `IMPORTS` points to. Random screen recordings stay out of it |
 | Clipper (split long videos into clips) | `tools/clipper/`; start with `Start Clipper.command`; output in `~/Movies/The Iman Cut/Clips/` |
 | Desktop auto-export | `tools/autoexport/` (install: `bash tools/autoexport/install.sh`) → `~/Desktop/theimancut/the-greatest/` |
-| Desktop folders | `IMPORTS/` (raw recordings, never exported; `_SOURCE_MAP.md` lists them, UNVERIFIED until matched to official uploads) · `_drop-finished-clips-here/` · `instagram/ tiktok/ snapchat/ youtube/` · `_subtitles-to-review/` · `_subtitles-approved/` · `_originals/` |
+| Desktop folders | `IMPORTS/` (shortcut to `~/Movies/The Iman Cut/Sources`; never exported; `_SOURCE_MAP.md` lists them, UNVERIFIED until matched to official uploads) · `_drop-finished-clips-here/` · `instagram/ tiktok/ snapchat/ youtube/` · `_subtitles-to-review/` · `_subtitles-approved/` · `_originals/` |
 | Bird Clay cut (Mac) | `projects/PRJ-000001_BirdClay/local_cut/` (edit list, subtitles, render scripts; no video in git) |
 | Trailer remix kit | `projects/PRJ-000002_TrailerRemix/` |
 | Policies | `policies/` (sensitivity, moderation, corrections, QC checklist) |

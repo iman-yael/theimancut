@@ -24,7 +24,16 @@ LOG="$SHOW/_export-log.txt"
 MAN="$SHOW/_export-manifest.csv"
 LOCK="$APP/.export.lock"
 REVIEW="$SHOW/_subtitles-to-review"; APPROVED="$SHOW/_subtitles-approved"
-mkdir -p "$SHOW"/{IMPORTS,instagram,tiktok,youtube,snapchat} "$DROP" "$DONE" "$APP" "$REVIEW" "$APPROVED"
+mkdir -p "$SHOW"/{instagram,tiktok,youtube,snapchat} "$DROP" "$DONE" "$APP" "$REVIEW" "$APPROVED"
+# IMPORTS is a shortcut to the shared Film & TV library, the same folder the Clipper lists
+# (default ~/Movies/The Iman Cut/Sources; override with TIC_SOURCES). Anything already in a real IMPORTS folder moves there.
+SOURCES="${TIC_SOURCES:-$HOME/Movies/The Iman Cut/Sources}"
+mkdir -p "$SOURCES"
+if [[ -d "$SHOW/IMPORTS" && ! -L "$SHOW/IMPORTS" ]]; then
+  find "$SHOW/IMPORTS" -mindepth 1 -maxdepth 1 -exec mv -n {} "$SOURCES/" \;
+  rmdir "$SHOW/IMPORTS" 2>/dev/null || { echo "IMPORTS still has files that clash with names in $SOURCES; left in place."; }
+fi
+[[ -e "$SHOW/IMPORTS" ]] || ln -s "$SOURCES" "$SHOW/IMPORTS"
 [[ -f "$MAN" ]] || echo "date,source,output,platform,size,fps,watermark,subtitles,rights_status" > "$MAN"
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S')  $*" >> "$LOG"; }
 
