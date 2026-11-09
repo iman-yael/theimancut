@@ -61,10 +61,15 @@ def duration(src):
 
 
 def active_crop(src, dur):
-    mid = max(0.0, dur / 2 - 2)
-    out = run([FF, "-hide_banner", "-ss", f"{mid}", "-t", "4", "-i", src, "-vf", "cropdetect=24:2:0", "-an", "-f", "null", "-"]).stderr
-    c = re.findall(r"crop=\d+:\d+:\d+:\d+", out)
-    return max(set(c), key=c.count) if c else None
+    # sample the whole clip: a dark scene (face on black) must not be mistaken for letterboxing,
+    # so take the LARGEST picture area that shows up in at least 10% of samples
+    out = run([FF, "-hide_banner", "-i", src, "-vf", "fps=2,cropdetect=24:2:0", "-an", "-f", "null", "-"]).stderr
+    c = re.findall(r"crop=(\d+):(\d+):(\d+):(\d+)", out)
+    if not c:
+        return None
+    common = [k for k in set(c) if c.count(k) >= 0.1 * len(c)] or list(set(c))
+    w, h, x, y = max(common, key=lambda k: int(k[0]) * int(k[1]))
+    return f"crop={w}:{h}:{x}:{y}"
 
 
 def cut_times(src):
@@ -458,8 +463,13 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None
             continue
         lines = best[2]; lh = int(size * 0.92); th = lh * len(lines)
         top = bottom_limit - th
+        above = False
         if top < text_top_min:
-            continue
+            # face sits low in the frame: put the headline ABOVE it instead (below the top UI / wordmark band)
+            top = max(V_GRID_34[1] + 40, 420)
+            if not main or top + th > main[1] - 30:
+                continue
+            above = True
         cxt = (W / 2) if not ui_safe else (W / 2 - 40)        # nudge left of TikTok/Snap buttons
         box = (cxt - best[1] / 2, top, cxt + best[1] / 2, top + th)
         if any(overlap(box, fb) for fb in fboxes) or any(overlap(box, tb) for tb in tboxes):
@@ -470,7 +480,11 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None
         fade_from = int(max(text_top_min - 120, H * 0.45))
         a = Image.new("L", (1, H), 0)
         for y in range(H):
-            a.putpixel((0, y), int((252 if (tboxes or buried) else 215) * max(0.0, min(1.0, (y - fade_from) / max(1, (top + th * 0.25) - fade_from)))))
+            if above:   # dark from the top, clearing just above the face
+                v = 215 * max(0.0, min(1.0, ((main[1] - 10) - y) / max(1, (main[1] - 10) - (top + th * 0.75))))
+            else:
+                v = (252 if (tboxes or buried) else 215) * max(0.0, min(1.0, (y - fade_from) / max(1, (top + th * 0.25) - fade_from)))
+            a.putpixel((0, y), int(v))
         img.alpha_composite(Image.merge("RGBA", (Image.new("L", (W, H), 0),) * 3 + (a.resize((W, H)),)))
         d = ImageDraw.Draw(img)
         for i, l in enumerate(lines):

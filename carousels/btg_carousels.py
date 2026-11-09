@@ -99,6 +99,25 @@ DECKS["carousel-clip02"] = dict(clip=2, title="He Is the Part", slides=[
   ("text", "ON EVERY WALL", "Today Ali's face is painted on murals, and the Muhammad Ali Center opened in his hometown of Louisville in 2005. Have you seen an Ali mural in person?", "THE HISTORY", 27.0, 0.5),
 ])
 
+B2 = os.path.expanduser("~/Movies/The Iman Cut/Clips/The Greatest - Becoming the Greatest - batch 2 (45 short clips)")
+SRC["b2_02"] = f"{B2}/_covers_clip02/TIC_BTG2_02.mov"; SRC["b2_05"] = f"{B2}/_covers_clip05/TIC_BTG2_05.mov"
+DECKS["carousel-b2-02"] = dict(clip="b2_02", title="We Think We Know Ali", slides=[
+  ("cover", "WE THINK WE KNOW ALI", 13.6, 0.5),
+  ("quote", "We hear Muhammad Ali and we think we know the story.", "From the production", "Becoming the Greatest (Prime Video featurette)", 10.6, 0.5),
+  ("text", "WHAT WE KNOW", "Three-time heavyweight champion of the world. \"The Greatest.\" One of the most recognised people of the 20th century.", "THE HISTORY", 19.4, 0.5),
+  ("text", "WHAT WE FORGET", "Before the titles, he was a kid from Louisville named Cassius Clay, who started boxing at 12 after his bike was stolen.", "THE HISTORY", 1.5, 0.5),
+  ("text", "THE YEARS BEFORE", "Prime Video's The Greatest starts with Clay, played by Jaalen Best, before he was Ali: Louisville, Rome, Liston.", "THE FILM", 9.8, 0.5),
+  ("text", "YOUR TURN", "What part of Ali's story do you know the least about?", "COMMENT BELOW", 23.8, 0.5),
+])
+DECKS["carousel-b2-05"] = dict(clip="b2_05", title="What's the Backup Plan?", slides=[
+  ("cover", "WHAT'S THE BACKUP PLAN?", 9.1, 0.5),
+  ("quote", "As a mom, I was like, okay, so what's our backup plan, you know?", "Vanessa Canady, Jaalen's mother", "Becoming the Greatest (Prime Video featurette)", 1.3, 0.5),
+  ("quote", "I don't need no backup plan, I got this.", "Jaalen Best, as remembered by his mother", "Becoming the Greatest (Prime Video featurette)", 2.3, 0.5),
+  ("quote", "When he wants something, he goes hard for it.", "Vanessa Canady, Jaalen's mother", "Becoming the Greatest (Prime Video featurette)", 11.5, 0.5),
+  ("quote", "Cassius Jr.'s life to me was an unusual one from other Children, and he is still Unusual to day", "Odessa Clay, Ali's mother", "handwritten sketch, quoted in Sports Illustrated, 1966", 0.5, 0.5),
+  ("text", "MOMS KNOW", "Two mothers, two sons, the same belief. Did your parents ask you for a backup plan?", "COMMENT BELOW", 13.5, 0.5),
+])
+
 def caption(d):
     return (f"{d['title']}. Swipe for the film and the history behind it.\n\n"
             "🎬 The Greatest (Prime Video), from the featurette Becoming the Greatest\n"
@@ -114,7 +133,7 @@ for deck, d in DECKS.items():
     for i, s in enumerate(d["slides"], 1):
         if s[0] == "cover":
             st = T.grab_still(src, s[2], FF)
-            if d["clip"] == 1: st = st.crop((0, 0, st.width, int(st.height * 0.76)))   # drop the burned-in name strap
+            if d["clip"] == 1 and st is not None: st = st.crop((0, 0, st.width, int(st.height * 0.76)))   # drop the burned-in name strap
             im = T.slide_cover(W, H, s[1], KICK, st, s[3])
             fn = "01_cover.png"
         elif s[0] == "text":
