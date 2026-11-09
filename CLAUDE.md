@@ -49,6 +49,10 @@ Standing instructions for every Claude session that opens this repo (Mac or clou
 | Trailer remix kit | `projects/PRJ-000002_TrailerRemix/` |
 | Policies | `policies/` (sensitivity, moderation, corrections, QC checklist) |
 
+## Covers and quote carousels
+- For every finished clip, use the existing `tools/autoexport/tic_cover.py` workflow and apply [the thumbnail selection and review rules](docs/THUMBNAIL_WORKFLOW.md).
+- When finished clips are available, update the clip-derived knowledge base and prepare platform carousel packages using [the quote carousel workflow](carousels/README.md). Start with Bird Clay. Use the existing catalog IDs and verify every real-life quote before export.
+
 ## Repo hygiene
 - No video, audio or images from the show in git (`.gitignore`). Brand assets are the exception.
 - Large media stays on the Mac, referenced by checksum.
