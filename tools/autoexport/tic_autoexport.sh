@@ -38,6 +38,17 @@ fi
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S')  $*" >> "$LOG"; }
 
 command -v ffmpeg >/dev/null || { log "ERROR: ffmpeg not found (install with: brew install ffmpeg)"; exit 1; }
+# Homebrew's standard ffmpeg has no `subtitles`/`drawtext` filters (libass/freetype), so captioned exports
+# would fail. Render with an ffmpeg that has them: $TIC_FFMPEG, PATH's ffmpeg if capable, else the
+# full-featured build pip's imageio-ffmpeg installs (the one the Clipper uses). ffprobe still comes from PATH.
+has_subs() { "$1" -hide_banner -filters 2>/dev/null | grep -q ' subtitles '; }
+FFMPEG="${TIC_FFMPEG:-ffmpeg}"
+if ! has_subs "$FFMPEG"; then
+  for c in "$HOME"/Library/Python/*/lib/python/site-packages/imageio_ffmpeg/binaries/ffmpeg-*; do
+    if [[ -x "$c" ]] && has_subs "$c"; then FFMPEG="$c"; break; fi
+  done
+fi
+has_subs "$FFMPEG" || log "WARNING: no ffmpeg with the subtitles filter; captioned (_CAPTIONED) exports will fail. Fix: python3 -m pip install --user imageio-ffmpeg"
 # one run at a time (launchd can fire again while we render)
 if ! mkdir "$LOCK" 2>/dev/null; then
   if [[ -n "$(find "$LOCK" -maxdepth 0 -mmin +120 2>/dev/null)" ]]; then rmdir "$LOCK"; mkdir "$LOCK" || exit 0; else exit 0; fi
@@ -77,7 +88,7 @@ render() {  # src out W H watermark(0/1) srt fps
   local has_audio; has_audio=$(ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "$src" | head -1)
   local amap=() aenc=()
   if [[ -n "$has_audio" ]]; then amap=(-map 0:a:0); aenc=(-af "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000" -c:a aac -b:a 256k -ar 48000 -ac 2); fi
-  ffmpeg -nostdin -v error -y "${inputs[@]}" -filter_complex "$g" -map "[vout]" "${amap[@]}" \
+  "$FFMPEG" -nostdin -v error -y "${inputs[@]}" -filter_complex "$g" -map "[vout]" "${amap[@]}" \
     -c:v libx264 -preset medium -crf 16 -maxrate 20M -bufsize 40M -profile:v high -level 4.2 -pix_fmt yuv420p \
     -colorspace bt709 -color_primaries bt709 -color_trc bt709 -r "$fps" -fps_mode cfr "${aenc[@]}" -movflags +faststart "$tmp" \
     && mv "$tmp" "$out"

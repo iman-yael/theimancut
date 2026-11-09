@@ -15,16 +15,23 @@ WM = f"{REPO}/brand/watermark/iman-cut-watermark-trimmed.png"
 
 
 def find_ffmpeg():
-    """ffmpeg with libx264 + libass: $FFMPEG, then PATH (e.g. brew install ffmpeg), then pip's imageio-ffmpeg."""
+    """An ffmpeg that can burn subtitles (libass): $FFMPEG, PATH's ffmpeg if it has the `ass` filter, else pip's
+    imageio-ffmpeg. Homebrew's standard ffmpeg lacks libass, so on a Homebrew Mac the imageio build is used."""
     import shutil
-    p = os.environ.get("FFMPEG") or shutil.which("ffmpeg")
-    if p:
-        return p
+    def has_ass(exe):
+        out = subprocess.run([exe, "-hide_banner", "-filters"], capture_output=True, text=True).stdout
+        return " ass " in out
+    for exe in (os.environ.get("FFMPEG"), shutil.which("ffmpeg")):
+        if exe and has_ass(exe):
+            return exe
     try:
         import imageio_ffmpeg
-        return imageio_ffmpeg.get_ffmpeg_exe()
+        exe = imageio_ffmpeg.get_ffmpeg_exe()
+        if has_ass(exe):
+            return exe
     except ImportError:
-        raise SystemExit("ffmpeg not found: brew install ffmpeg, or python3 -m pip install --user imageio-ffmpeg")
+        pass
+    raise SystemExit("No ffmpeg with subtitle support. Run: python3 -m pip install --user imageio-ffmpeg")
 
 
 FF = find_ffmpeg()
