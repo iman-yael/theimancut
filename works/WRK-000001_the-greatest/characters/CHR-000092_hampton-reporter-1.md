@@ -1,6 +1,6 @@
 # CHR-000092 · Hampton Reporter #1
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: CHR-000092 r1
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: CHR-000092 r1
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 ## 1. Identity
@@ -38,6 +38,3 @@ Not yet researched. The credit alone does not establish a historical counterpart
 
 ## Sources, claims and confidence
 Only the casting credit (see ingestion records) is on file.
-
-## Open review items touching this character
-- **ambiguous_match**: Reporter — name is a less specific form of another credited name

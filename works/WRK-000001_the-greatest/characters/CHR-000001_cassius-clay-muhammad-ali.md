@@ -1,6 +1,6 @@
 # CHR-000001 · Cassius Clay / Muhammad Ali
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: CHR-000001 r2
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: CHR-000001 r2
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 ## 1. Identity
@@ -8,7 +8,7 @@
 |---|---|
 | Character ID | **CHR-000001** (legacy CHR-001) · uuid `5a9a3e30-15ad-407c-8ca5-134dc7b7af27` |
 | Exact credited name | `Cassius Clay / Muhammad Ali` |
-| Names / aliases on file | Cassius Clay *(alias_or_historical, v0_search_snippets)*; Cassius Marcellus Clay Jr. *(alias_or_historical, v0_search_snippets)*; Muhammad Ali *(alias_or_historical, v0_search_snippets)* |
+| Names / aliases on file | Cassius Clay *(alias_or_historical, v0_search_snippets)*; Cassius Marcellus Clay Jr. *(alias_or_historical, v0_search_snippets)*; Muhammad Ali *(alias_or_historical, v0_search_snippets)*; Young Cassius *(credited_young_portrayal, proposed)* |
 | Historical counterpart status | real_person (a credit is not evidence of a real-person link) |
 | Relationship to Muhammad Ali | Self (series subject) — see claims table for sourcing |
 
@@ -16,6 +16,7 @@
 | Portrayal | Actor | Age portrayal | Credit | Credit verification | IMDb credited episodes* | Credited names | Actor IMDb page (pointer, not an image) |
 |---|---|---|---|---|---|---|---|
 | POR-000001 | Jaalen Best (PER-000001) | primary | credited | V2 | 8 | Jaalen Best as Cassius Clay / Muhammad Ali; Jaalen Best as Cassius Clay/Muhammad Ali | https://www.imdb.com/name/nm13955802/ |
+| POR-000137 | Elias Leacock (PER-000027) | young | credited | V1-IMDb | 2 | Elias Leacock as Young Cassius | https://www.imdb.com/name/nm12083304/ |
 
 \*IMDb episode totals are credited counts only. They do not establish appearances, scene counts or screen time.
 
@@ -58,6 +59,3 @@ Scene count / shot count / visible screen time / voice-only / mentions: **Pendin
 | Claim | Text | Domain | Class | Status | Sources | Notes |
 |---|---|---|---|---|---|---|
 | CLM-000002 | Jaalen Best is credited as Cassius Clay / Muhammad Ali | casting | fact | **supported** | [IMDb full credits, The Greatest (tt15715850), as pasted by user](https://www.imdb.com/title/tt15715850/fullcredits/) (supports); [The Greatest review](https://www.rogerebert.com/reviews/the-greatest-muhammad-ali-prime-video-tv-review-2026) (supports) |  |
-
-## Open review items touching this character
-- **ambiguous_match**: Young Cassius — young portrayal matches several characters

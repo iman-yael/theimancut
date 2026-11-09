@@ -23,7 +23,8 @@ WM="$APP/iman-cut-watermark-trimmed.png"
 LOG="$SHOW/_export-log.txt"
 MAN="$SHOW/_export-manifest.csv"
 LOCK="$APP/.export.lock"
-mkdir -p "$SHOW"/{IMPORTS,instagram,tiktok,youtube,snapchat} "$DROP" "$DONE" "$APP"
+REVIEW="$SHOW/_subtitles-to-review"; APPROVED="$SHOW/_subtitles-approved"
+mkdir -p "$SHOW"/{IMPORTS,instagram,tiktok,youtube,snapchat} "$DROP" "$DONE" "$APP" "$REVIEW" "$APPROVED"
 [[ -f "$MAN" ]] || echo "date,source,output,platform,size,fps,watermark,subtitles,rights_status" > "$MAN"
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S')  $*" >> "$LOG"; }
 
@@ -73,6 +74,68 @@ stable() {  # wait until the file stops growing (a copy or export may still be i
 }
 
 shopt -s nullglob nocaseglob
+
+draft_subs() {  # local Whisper transcript → DRAFT .srt + REVIEW.md (never burned in automatically)
+  local src="$1" name="$2" py; py="$(command -v python3)"
+  if ! "$py" -c "import whisper" 2>/dev/null; then
+    printf '# Subtitle review: %s\n\nNo draft made: the local transcription tool is not installed.\nInstall once in Terminal:  pip3 install -U openai-whisper\nThen drop the clip again, or write NAME.srt yourself and put it in _subtitles-approved/.\n' "$name" > "$REVIEW/$name.REVIEW.md"
+    log "  subtitles: Whisper not installed, wrote instructions to _subtitles-to-review"; return
+  fi
+  local wd="$APP/whisper/$name"; mkdir -p "$wd"
+  "$py" -m whisper "$src" --model "${TIC_WHISPER_MODEL:-small}" --language en --task transcribe --word_timestamps True \
+     --output_format json --output_dir "$wd" --fp16 False >>"$LOG" 2>&1 \
+  && "$py" "$APP/tic_subdraft.py" "$wd/$(basename "${src%.*}").json" "$REVIEW" "$name" "$APP/cast_names.txt" >>"$LOG" 2>&1 \
+  && log "  subtitles: draft ready for review → _subtitles-to-review/$name.DRAFT.srt" \
+  || log "  subtitles: transcription FAILED for $name (see log)"
+}
+
+captioned_from_approved() {  # NAME.srt approved by Iman → captioned versions, from the original in _originals
+  local srt name src
+  for srt in "$APPROVED"/*.srt; do
+    name="$(basename "${srt%.srt}")"; src=""
+    for e in mp4 mov m4v MP4 MOV M4V; do [[ -f "$DONE/$name.$e" ]] && src="$DONE/$name.$e" && break; done
+    [[ -z "$src" ]] && { log "approved subtitles waiting: no original found for $name in _originals"; continue; }
+    if grep -q '^\[?\]' "$srt"; then log "approved subtitles NOT used: $name.srt still contains [?] markers"; continue; fi
+    local fps; fps="$(pick_fps "$src")"; local ok=1
+    while IFS='|' read -r dir tag W H wmk; do
+      out="$SHOW/$dir/${name}_${tag}_${W}x${H}_CAPTIONED.mp4"; [[ -f "$out" ]] && continue
+      if render "$src" "$out" "$W" "$H" "$wmk" "$srt" "$fps" 2>>"$LOG"; then
+        cp "$srt" "$SHOW/$dir/${name}_${tag}_${W}x${H}.srt"
+        echo "$(date '+%F %T'),\"$(basename "$src")\",\"$dir/$(basename "$out")\",$dir,${W}x${H},$fps,$([[ $wmk == 1 ]] && echo on || echo off),burned-approved,UNKNOWN-check-before-posting" >> "$MAN"
+        log "  captioned: $dir/$(basename "$out")"
+      else ok=0; log "  FAILED captioned: $dir/$(basename "$out")"; fi
+    done <<EOT
+instagram|IG|1080|1920|1
+tiktok|TT|1080|1920|1
+snapchat|SC|1080|1920|${TIC_SNAP_WATERMARK:-1}
+youtube|YT-Shorts|1080|1920|0
+youtube|YT|1920|1080|0
+EOT
+    [[ $ok == 1 ]] && mv "$srt" "$DONE/$name.APPROVED.srt" && log "finished captioned versions: $name"
+  done
+}
+
+map_imports() {  # inventory of raw recordings in IMPORTS; matching to official uploads is filled in by hand
+  local map="$SHOW/IMPORTS/_SOURCE_MAP.md" f
+  [[ -f "$map" ]] || printf '# IMPORTS source map\n\nMatch each recording to its OFFICIAL upload. Leave Match = UNVERIFIED until the URL, uploader and title are confirmed on the page itself.\nKnown official releases (from press coverage): teaser, July 2026, on Prime Video'"'"'s YouTube channel · official trailer, 14 Oct 2026. "Becoming the Greatest": no official release found yet; do not use that label until a source supports it.\n\n| File | Length | Picture | fps | Recorded | SHA-256 (first 12) | Official URL | Uploader | Video title | Source in–out | Match | Notes |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n' > "$map"
+  mkdir -p "$SHOW/IMPORTS/_thumbs"
+  for f in "$SHOW"/IMPORTS/*.mov "$SHOW"/IMPORTS/*.mp4 "$SHOW"/IMPORTS/*.m4v; do
+    local b; b="$(basename "$f")"; grep -qF "| $b |" "$map" && continue
+    local d wh fr sha made
+    d=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$f" | awk '{printf "%d:%02d", $1/60, $1%60}')
+    wh=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$f")
+    fr=$(ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=nw=1:nk=1 "$f" | awk -F/ '{if($2>0) printf "%.2f",$1/$2; else print $1}')
+    sha=$(shasum -a 256 "$f" 2>/dev/null || sha256sum "$f"); sha=${sha:0:12}
+    made=$(date -r "$f" '+%Y-%m-%d %H:%M' 2>/dev/null)
+    ffmpeg -nostdin -v error -y -ss 2 -i "$f" -frames:v 1 -vf scale=480:-2 "$SHOW/IMPORTS/_thumbs/${b%.*}_start.jpg" 2>/dev/null
+    ffmpeg -nostdin -v error -y -sseof -3 -i "$f" -frames:v 1 -vf scale=480:-2 "$SHOW/IMPORTS/_thumbs/${b%.*}_end.jpg" 2>/dev/null
+    echo "| $b | $d | $wh | $fr | $made | $sha |  |  |  |  | UNVERIFIED | thumbs: _thumbs/${b%.*}_start.jpg, _end.jpg |" >> "$map"
+    log "IMPORTS: added $b to _SOURCE_MAP.md (UNVERIFIED)"
+  done
+}
+
+map_imports
+captioned_from_approved
 for src in "$DROP"/*.mp4 "$DROP"/*.mov "$DROP"/*.m4v; do
   stable "$src" || { log "waiting: $(basename "$src") is still being copied"; continue; }
   name="$(basename "${src%.*}")"; srt="${src%.*}.srt"; [[ -f "$srt" ]] || srt=""
@@ -98,6 +161,7 @@ youtube|YT|1920|1080|0
 EOF
   if [[ $ok == 1 ]]; then
     mv "$src" "$DONE/"; [[ -n "$srt" ]] && mv "$srt" "$DONE/"
+    [[ -z "$srt" && "${TIC_TRANSCRIBE:-1}" == 1 ]] && draft_subs "$DONE/$(basename "$src")" "$name"
     log "finished: $(basename "$src") → moved to _originals"
     command -v osascript >/dev/null && osascript -e "display notification \"$name exported to Instagram, TikTok, Snapchat, YouTube\" with title \"The Iman Cut\"" 2>/dev/null || true
   else

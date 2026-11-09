@@ -1,6 +1,6 @@
 # CHR-000115 · Blue Boar Patron #3
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: CHR-000115 r1
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: CHR-000115 r1
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 ## 1. Identity

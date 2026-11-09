@@ -1,6 +1,6 @@
 # CHR-000028 · Betty Shabazz
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: CHR-000028 r2
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: CHR-000028 r2
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 ## 1. Identity

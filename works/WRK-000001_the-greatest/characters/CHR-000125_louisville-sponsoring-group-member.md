@@ -1,6 +1,6 @@
 # CHR-000125 · Louisville Sponsoring Group Member
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: CHR-000125 r1
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: CHR-000125 r1
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 ## 1. Identity
@@ -38,6 +38,3 @@ Not yet researched. The credit alone does not establish a historical counterpart
 
 ## Sources, claims and confidence
 Only the casting credit (see ingestion records) is on file.
-
-## Open review items touching this character
-- **conflict**: Louisville Sponsoring Group Member — CHR-000125 already credited to Jim Chad; likely a distinct role with the same generic name

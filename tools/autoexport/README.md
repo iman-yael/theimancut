@@ -20,8 +20,17 @@ If macOS asks whether this may access your Desktop, click **Allow**.
   youtube/     NAME_YT-Shorts_1080x1920.mp4   9:16 · no watermark (YouTube adds its own branding)
                NAME_YT_1920x1080.mp4          16:9 · no watermark
   _originals/  sources move here after a successful export
+  _subtitles-to-review/  NAME.DRAFT.srt + NAME.REVIEW.md (machine draft, never burned in)
+  _subtitles-approved/   put your corrected NAME.srt here → *_CAPTIONED.mp4 versions are made
+  IMPORTS/_SOURCE_MAP.md  inventory of raw recordings to match to official uploads (UNVERIFIED until filled in)
   _export-log.txt · _export-manifest.csv · Export Now.command · READ ME.txt
 ```
+
+## Subtitles (draft → your review → captioned)
+1. Once per Mac: `pip3 install -U openai-whisper`. It runs locally; nothing is uploaded.
+2. Each finished clip gets `_subtitles-to-review/NAME.DRAFT.srt` and `NAME.REVIEW.md`. Flagged lines start with `[?]`: uncertain wording, cast and character names to check against the IMDb list, capitalised words, very short cues. **Songs are never transcribed.** They appear as `♪ [music]` and are flagged so you can identify the track and check its rights.
+3. Fix the wording and timing, remove every `[?]`, and save the file as `NAME.srt` in `_subtitles-approved/`. Files that still contain `[?]` are refused.
+4. Captioned versions (`…_CAPTIONED.mp4`) are rendered from the original. The clean exports stay untouched.
 
 ## Encoding
 - **Video:** H.264 High, CRF 16 (max 20 Mbps), the source frame rate snapped to a standard rate (film stays 23.976; no interpolation), Rec.709, faststart.

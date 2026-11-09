@@ -1,11 +1,11 @@
 # Rights register
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: 
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: 
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 | RGT | Asset | Class | Holder | Permission/licence evidence | Platforms | Monetization | Restrictions / conditions | Status |
 |---|---|---|---|---|---|---|---|---|
-| RGT-000001 | Episode footage, The Greatest S1 (any source) | footage | Unknown | None on file | — | Unknown | No permission document. A Prime subscription or offline download is not a licence. | **Unknown** |
+| RGT-000001 | Episode footage, The Greatest S1 (any source) | footage | Amazon MGM Studios (Media Licensing) | Written request sent by Iman Yael to Amazon MGM Media Licensing (clipstill@mgm.com) for complimentary editorial assets and permission to use excerpts on YouTube, Instagram, TikTok and Facebook. Response pending. | YT, IG, TT, FB | Unknown | PENDING. Screen recordings stay review-only. In-app remixes are separate versions and need per-source verification that the remix option exists. | **Under review** |
 | RGT-000002 | Actor headshots (IMDb-linked) | photo | Unknown | None on file | — | Unknown | Not supplied. Internal reference only, even once obtained. | **Unknown** |
 | RGT-000003 | Iman Yael recorded voice / authorized digital voice | voice | Iman Yael | None on file | — | Unknown | No sample or service connection supplied; consent document needed. | **Unknown** |
 | RGT-000004 | Iman Yael likeness (digital presenter) | likeness | Iman Yael | None on file | — | Unknown | Not supplied. | **Unknown** |

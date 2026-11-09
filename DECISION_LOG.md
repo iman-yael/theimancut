@@ -20,3 +20,9 @@
 | 2026-11-08 | No narration, music or generated voice for now; original audio only | Iman (local session) | Simplicity; avoids voice/music clearance |
 | 2026-11-08 | Mac screen-recording cuts kept review-only until clearance is documented | Producer | Screen recording ≠ authorized source |
 | 2026-11-09 | Watermark ON for Instagram, TikTok and Snapchat; OFF for YouTube (Shorts + landscape); option B layout for all | Iman | Confirmed after auto-export setup |
+| 2026-11-09 | Licence request sent to Amazon MGM Media Licensing; screen recordings stay review-only until permission arrives | Iman | Rights pending |
+| 2026-11-09 | In-app remixes = separate versions; propose one for a platform only after verifying that the specific source offers remix there | Iman | Avoid assuming remix availability |
+| 2026-11-09 | IMPORTS files mapped to official uploads (URL, uploader, title, timestamps); unmatched = UNVERIFIED; "Becoming the Greatest" label only with supporting evidence | Iman | Provenance |
+| 2026-11-09 | Draft subtitles generated locally, never burned in until Iman approves; songs never transcribed, flagged instead | Iman | Accuracy + rights |
+| 2026-11-09 | Bird Clay cut: original scene audio, continuous footage, no narration cards; credit only actors actually visible | Iman | Editorial |
+| 2026-11-09 | "Young Cassius" (Elias Leacock) = proposed younger portrayal of CHR-000001, pending episode credits; 9 generic credits split into distinct characters | Iman / Producer | Cast queue |

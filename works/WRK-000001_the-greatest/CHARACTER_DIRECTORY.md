@@ -1,6 +1,6 @@
 # Character directory: The Greatest
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: WRK-000001 r1
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: WRK-000001 r1
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 Identification of who appears on screen: **Unresolved for every character** until authorized footage is reviewed. "Credit verification" describes the casting credit only.
@@ -8,6 +8,7 @@ Identification of who appears on screen: **Unresolved for every character** unti
 | CHR | Exact credited name | Performer (POR) | Age | Credit | Credit verif. | IMDb ep. credits | Counterpart status | Sheet |
 |---|---|---|---|---|---|---|---|---|
 | CHR-000001 | Cassius Clay / Muhammad Ali | Jaalen Best (POR-000001) | primary | credited | V2 | 8 | real_person | [sheet](characters/CHR-000001_cassius-clay-muhammad-ali.md) |
+| ↳ |  | Elias Leacock (POR-000137) | young | credited | V1-IMDb | 2 |  |  |
 | CHR-000002 | Cassius Clay Sr. | Omari Hardwick (POR-000002) | primary | credited | V2 | 8 | real_person | [sheet](characters/CHR-000002_cassius-clay-sr.md) |
 | CHR-000003 | Odessa 'Bird' Clay | Dana Gourrier (POR-000003) | primary | credited | V2 | 8 | real_person | [sheet](characters/CHR-000003_odessa-bird-clay.md) |
 | CHR-000004 | Rudy Clay | Kai Parham (POR-000004) | primary | credited | V2 | 8 | real_person | [sheet](characters/CHR-000004_rudy-clay.md) |
@@ -143,3 +144,12 @@ Identification of who appears on screen: **Unresolved for every character** unti
 | CHR-000133 | Cooper Cutman | Scott Milton (POR-000134) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000133_cooper-cutman.md) |
 | CHR-000134 | Boxing Referee | Carl Hines (POR-000135) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000134_boxing-referee.md) |
 | CHR-000135 | Television P.A. | Jeremy Jacklin (POR-000136) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000135_television-p-a.md) |
+| CHR-000136 | Howard | Jason Burke (POR-000138) | primary | credited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000136_howard.md) |
+| CHR-000137 | Morris | Myles-Anthony Douglas (POR-000139) | primary | credited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000137_morris.md) |
+| CHR-000138 | Frank | Matthew Paul Gonzales (POR-000140) | primary | credited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000138_frank.md) |
+| CHR-000139 | William | Jesse Buck (POR-000141) | primary | credited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000139_william.md) |
+| CHR-000140 | 1960s Upscale Patron | Scott Kasics (POR-000142) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000140_1960s-upscale-patron.md) |
+| CHR-000141 | Restaurant Patron (Samantha Adams) | Samantha Adams (POR-000143) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000141_restaurant-patron-samantha-adams.md) |
+| CHR-000142 | Louisville Sponsoring Group Member (Kyle James Butler) | Kyle James Butler (POR-000144) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000142_louisville-sponsoring-group-member-kyle-james-bu.md) |
+| CHR-000143 | Ocean Drive Patron | Caroline Renee Elliott (POR-000145) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000143_ocean-drive-patron.md) |
+| CHR-000144 | Reporter | Jerin Forgie (POR-000146) | primary | uncredited | V1-IMDb | 1 | unconfirmed | [sheet](characters/CHR-000144_reporter.md) |

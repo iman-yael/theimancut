@@ -1,6 +1,6 @@
 # CHR-000002 · Cassius Clay Sr.
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: CHR-000002 r2
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: CHR-000002 r2
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 ## 1. Identity
@@ -62,6 +62,3 @@ The historical abuse allegation (CLM, unchecked) must not be stated as fact unti
 | CLM-000003 | Omari Hardwick is credited as Cassius Clay Sr. | casting | fact | **supported** | [IMDb full credits, The Greatest (tt15715850), as pasted by user](https://www.imdb.com/title/tt15715850/fullcredits/) (supports); [Muhammad Ali series casts Omari Hardwick, Dana Gourrier](https://deadline.com/2025/02/the-greatest-omari-hardwick-dana-gourrier-muhammad-ali-series-1236279151) (supports) |  |
 | CLM-000013 | The historical Cassius Clay Sr. was taken to court by Odessa for physical abuse and arrested for assault and battery | history | allegation | **unchecked** | [Fresh Air: Jonathan Eig on Ali: A Life](https://www.npr.org/transcripts/555301222) (context); Ali: A Life (2017) (context); [Cassius Marcellus Clay Sr. (Wikipedia mirror)](https://en.wikipedia-on-ipfs.org/wiki/Cassius_Marcellus_Clay_Sr.) (context) | DO NOT PUBLISH until checked against Eig and, ideally, Louisville court records. |
 | CLM-000012 | Reviews describe the series' Cash Clay as a hard-drinking, unfaithful, abusive father who also loves his family | series | dramatization | **supported_single_source** | [First opponent yourself: Omari Hardwick as Cassius Clay Sr.](https://www.revolt.tv/article/first-opponent-yourself-omari-hardwick-as-cassius-clay-sr-the-greatest) (context); [The Greatest season 1 review](https://wherever-i-look.com/tv-shows/season-review/the-greatest-season-1-review-muhammad-ali-as-a-trojan-horse) (supports) | Describes the dramatization only. |
-
-## Open review items touching this character
-- **ambiguous_match**: Young Cassius — young portrayal matches several characters

@@ -1,6 +1,6 @@
 # CHR-000116 · Ringside Boxing Reporter / Restaurant Patron / ...
 
-> Generated 2026-11-08T19:35:13Z from catalog `catalog.sqlite` · records: CHR-000116 r1
+> Generated 2026-11-09T00:58:13Z from catalog `catalog.sqlite` · records: CHR-000116 r1
 > Do not edit by hand. Route corrections through intake; regenerate.
 
 ## 1. Identity
@@ -41,5 +41,3 @@ Only the casting credit (see ingestion records) is on file.
 
 ## Open review items touching this character
 - **multi_name_credit**: Ringside Boxing Reporter / Restaurant Patron / ... — aliases of one character, or separate roles? (list truncated with '...')
-- **conflict**: Restaurant Patron — CHR-000116 already credited to Andre Reiter; likely a distinct role with the same generic name
-- **ambiguous_match**: Reporter — name is a less specific form of another credited name

@@ -1,6 +1,6 @@
 # Data dictionary
 
-> Generated 2026-11-08T19:35:13Z from the live schema (migrations: 001_init, 002_crew_credit, 003_counting_method_cm1, 004_controlled_tags).
+> Generated 2026-11-09T00:58:13Z from the live schema (migrations: 001_init, 002_crew_credit, 003_counting_method_cm1, 004_controlled_tags).
 
 
 ## `account`
