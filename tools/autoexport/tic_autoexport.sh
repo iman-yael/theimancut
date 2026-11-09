@@ -223,4 +223,7 @@ EOF
     log "kept in drop folder because an export failed: $(basename "$src")"
   fi
 done
+if [[ -f "$APP/tic_carousel.py" ]]; then
+  python3 "$APP/tic_carousel.py" "$SHOW" >>"$LOG" 2>&1 || log "  carousels: check carousels/run-status.json and the clip review records"
+fi
 true

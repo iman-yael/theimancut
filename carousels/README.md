@@ -32,3 +32,40 @@ Use 1080 × 1350 as the Instagram design default and 1080 × 1920 for vertical a
 Each package includes numbered slides beginning with `01_cover.png`, `caption.txt`, `alt-text.txt` where supported, `sources.md`, and `manifest.json` with clip and quote IDs, dimensions, format, slide order, and review status. Include an editable layout or reproducible design instructions when supported. Keep media local according to repo rules.
 
 Start with the Bird Clay pilot. Report clips reviewed, characters indexed, quotes verified, decks exported, and evidence gaps. Track previously used quotes and themes. Prepare packages for Iman's review under the repo's publication rules.
+
+## Automatic Mac workflow
+
+After pulling this update, rerun `bash tools/autoexport/install.sh` on the Mac. The agent scans completed clips in `_originals/` on each export run. It stores the live knowledge base and rendered decks in `~/Desktop/theimancut/the-greatest/carousels/`. Run `Export Now.command` after updating research inputs to rebuild immediately. Check `run-status.json` for counts and `knowledge-base/clips/` for the action needed per clip. The Mac workflow uses individual JSON records as inputs and writes the CSV indexes and character profiles from them.
+
+Create `inputs/<clip-basename>.json` using the finished clip's filename stem:
+```json
+{
+  "character": "Odessa ‘Bird’ Clay",
+  "performer": "Dana Gourrier",
+  "person_id": "REPLACE_WITH_CATALOG_PERSON_ID",
+  "real_person": "Odessa Clay",
+  "clip_source": "Episode or promo, direct source link, and time range",
+  "scene_context": "Describe what the clip shows.",
+  "clip_connection": "Explain how it relates to the documented quote.",
+  "quote_id": "REPLACE_WITH_QUOTE_ID"
+}
+```
+
+Claude researches the primary source during a session and records the evidence in `knowledge-base/quotes/<quote-id>.json`. The renderer trusts these review fields, so set them only after the underlying checks are complete:
+```json
+{
+  "person_id": "SAME_CATALOG_PERSON_ID",
+  "speaker": "Odessa Clay",
+  "text": "REPLACE_WITH_THE_EXACT_VERIFIED_QUOTE",
+  "source_title": "REPLACE_WITH_SOURCE_TITLE",
+  "source_url": "https://example.org/replace-with-original-source",
+  "source_location": "Timestamp or page",
+  "context": "Brief historical context.",
+  "attribution_type": "FIRST_PERSON",
+  "status": "NEEDS_VERIFICATION",
+  "reuse_status": "PENDING",
+  "verified_by": ""
+}
+```
+
+Use `VERIFIED` after checking the source and `APPROVED` after reviewing reuse. Record the reviewer in `verified_by`. The renderer holds missing or mismatched evidence and makes no network requests. Output packages use a content-derived deck ID, so reruns reuse existing renders and changed inputs create a new deck. Follow the active package links in the clip record. Treat older packages as archived drafts. Every package is for review, including confirmation of the destination's upload format.

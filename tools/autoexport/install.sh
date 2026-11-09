@@ -20,7 +20,7 @@ if [[ -d "$SHOW/IMPORTS" && ! -L "$SHOW/IMPORTS" ]]; then
   rmdir "$SHOW/IMPORTS" 2>/dev/null || { echo "IMPORTS still has files that clash with names in $SOURCES; left in place."; }
 fi
 [[ -e "$SHOW/IMPORTS" ]] || ln -s "$SOURCES" "$SHOW/IMPORTS"
-cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/tic_cover.py" "$HERE/characters.json" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
+cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/tic_cover.py" "$HERE/tic_carousel.py" "$HERE/characters.json" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
 # covers: on-device face/eye/saliency helper (macOS Vision) + Pillow for drawing
 command -v swiftc >/dev/null && swiftc -O "$HERE/ticvision.swift" -o "$APP/ticvision" 2>/dev/null || echo "Note: couldn't build the cover helper (needs Xcode command line tools); covers will be flagged for review."
 python3 -c "import PIL" 2>/dev/null || python3 -m pip install --user -q Pillow
@@ -34,6 +34,7 @@ THE IMAN CUT: The Greatest exports
    and youtube (Shorts 1080x1920 + landscape 1920x1080, no watermark).
 3. Draft subtitles appear in _subtitles-to-review (NAME.DRAFT.srt + NAME.REVIEW.md). Fix them, remove [?] markers, save as NAME.srt in _subtitles-approved → captioned versions (_CAPTIONED) are made.
 4. The original moves to _originals. Progress: _export-log.txt. List of exports: _export-manifest.csv
+5. Quote carousels and their review status appear under carousels/. See carousels/README.md in the repo for source inputs.
 Nothing is uploaded or posted. Check rights and cast labels before posting.
 If nothing happens, double-click "Export Now.command".
 TXT

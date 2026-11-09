@@ -51,7 +51,7 @@ Standing instructions for every Claude session that opens this repo (Mac or clou
 
 ## Covers and quote carousels
 - For every finished clip, use the existing `tools/autoexport/tic_cover.py` workflow and apply [the thumbnail selection and review rules](docs/THUMBNAIL_WORKFLOW.md).
-- When finished clips are available, update the clip-derived knowledge base and prepare platform carousel packages using [the quote carousel workflow](carousels/README.md). Start with Bird Clay. Use the existing catalog IDs and verify every real-life quote before export.
+- When finished clips are available, update the clip-derived knowledge base and prepare platform carousel packages using [the quote carousel workflow](carousels/README.md). Start with Bird Clay. Use the existing catalog IDs and verify every real-life quote before export. Write reviewed clip and quote JSON into the Desktop carousel workspace documented there. The Mac auto-export agent renders the platform packages and records missing evidence.
 
 ## Repo hygiene
 - No video, audio or images from the show in git (`.gitignore`). Brand assets are the exception.
