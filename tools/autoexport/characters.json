@@ -1,0 +1,13 @@
+{
+  "_about": "Facts used for cover headlines. Relationship and pronouns come from credits and the historical record, never from faces. Source of truth: carousels/knowledge-base/character-profiles/.",
+  "characters": [
+    {"id": "CHR-ODESSA-CLAY", "credited": "Odessa 'Bird' Clay", "short": "BIRD CLAY", "match": ["odessa 'bird' clay", "bird clay", "birdclay", "odessa clay"],
+     "relation": "ALI'S MOTHER", "obj": "HER", "poss": "HER", "real_person": "Odessa Grady Clay (1917–1994)", "performer": "Dana Gourrier"},
+    {"id": "CHR-000001", "credited": "Cassius Clay / Muhammad Ali", "short": "CASSIUS CLAY", "match": ["cassius clay / muhammad ali", "muhammad ali", "cassiusclay", "cassius clay"],
+     "relation": "THE GREATEST", "obj": "HIM", "poss": "HIS", "real_person": "Muhammad Ali (1942–2016)", "performer": "Jaalen Best"},
+    {"id": "CHR-CASSIUS-SR", "credited": "Cassius Clay Sr.", "short": "CASSIUS CLAY SR.", "match": ["cassius clay sr.", "cassius clay sr", "clay sr"],
+     "relation": "ALI'S FATHER", "obj": "HIM", "poss": "HIS", "real_person": "Cassius Marcellus Clay Sr. (1912–1990)", "performer": "Omari Hardwick"},
+    {"id": "CHR-RUDY-CLAY", "credited": "Rudy Clay", "short": "RUDY CLAY", "match": ["rudy clay", "rudyclay", "rahman ali"],
+     "relation": "ALI'S BROTHER", "obj": "HIM", "poss": "HIS", "real_person": "Rudolph Arnett Clay, later Rahman Ali (dates to verify)", "performer": "Kai Parham"}
+  ]
+}

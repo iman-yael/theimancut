@@ -24,7 +24,7 @@ LOG="$SHOW/_export-log.txt"
 MAN="$SHOW/_export-manifest.csv"
 LOCK="$APP/.export.lock"
 REVIEW="$SHOW/_subtitles-to-review"; APPROVED="$SHOW/_subtitles-approved"
-mkdir -p "$SHOW"/{instagram,tiktok,youtube,snapchat} "$DROP" "$DONE" "$APP" "$REVIEW" "$APPROVED"
+mkdir -p "$SHOW"/{instagram,tiktok,youtube,snapchat,_covers} "$DROP" "$DONE" "$APP" "$REVIEW" "$APPROVED"
 # IMPORTS is a shortcut to the shared Film & TV library, the same folder the Clipper lists
 # (default ~/Movies/The Iman Cut/Sources; override with TIC_SOURCES). Anything already in a real IMPORTS folder moves there.
 SOURCES="${TIC_SOURCES:-$HOME/Movies/The Iman Cut/Sources}"
@@ -84,6 +84,10 @@ render() {  # src out W H watermark(0/1) srt fps
   elif [[ "$wmk" == 1 ]]; then
     g+=";[$last]drawtext=text='THE IMAN CUT':fontsize=30:fontcolor=white@0.8:shadowcolor=black@0.5:shadowx=2:shadowy=2:x=w-text_w-64:y=250[vw]"; last="vw"
   fi
+  if [[ -n "${TITLE_PNG:-}" && -f "${TITLE_PNG:-}" ]]; then   # cover title over moving footage (frame-select-only platforms)
+    local ti=$(( ${#inputs[@]} / 2 )); inputs+=(-i "$TITLE_PNG")
+    g+=";[$last][$ti:v]overlay=0:0:format=auto:enable='between(t,${TITLE_A},${TITLE_B})'[vt]"; last="vt"
+  fi
   g+=";[$last]format=yuv420p[vout]"
   local has_audio; has_audio=$(ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "$src" | head -1)
   local amap=() aenc=()
@@ -112,6 +116,31 @@ draft_subs() {  # local Whisper transcript → DRAFT .srt + REVIEW.md (never bur
   && "$py" "$APP/tic_subdraft.py" "$wd/$(basename "${src%.*}").json" "$REVIEW" "$name" "$APP/cast_names.txt" >>"$LOG" 2>&1 \
   && log "  subtitles: draft ready for review → _subtitles-to-review/$name.DRAFT.srt" \
   || log "  subtitles: transcription FAILED for $name (see log)"
+}
+
+make_covers() {  # src name transcript fps snap-watermark → covers per platform + _TITLED exports (see tic_cover.py)
+  local src="$1" name="$2" text="$3" fps="$4" snapwm="$5" res j
+  [[ "${TIC_COVERS:-1}" == 1 && -f "$APP/tic_cover.py" ]] || return 0
+  if [[ -z "$text" ]]; then j=("$APP/whisper/$name/"*.json); [[ -f "${j[0]:-}" ]] && text="${j[0]}"; fi
+  res=$(python3 "$APP/tic_cover.py" "$src" "$name" "$SHOW" "$APP" --cast "$APP/cast_names.txt" ${text:+--text "$text"} 2>>"$LOG" | tail -1)
+  log "  covers: ${res:-FAILED (see log)} → _covers/$name""_COVERS.md"
+  local envf="$SHOW/_covers/$name.title.env"
+  [[ -f "$envf" ]] || return 0
+  (
+    TITLE_SC=""; TITLE_YT_Shorts=""; TITLE_TIME=""
+    # shellcheck disable=SC1090
+    source "$envf"
+    [[ -n "$TITLE_TIME" ]] || exit 0
+    TITLE_A=$(awk -v t="$TITLE_TIME" 'BEGIN{a=t-0.6; if(a<0)a=0; printf "%.3f", a}'); TITLE_B=$(awk -v t="$TITLE_TIME" 'BEGIN{printf "%.3f", t+1.0}')
+    export TITLE_A TITLE_B
+    probe_source "$src"
+    [[ -n "$TITLE_SC" ]] && TITLE_PNG="$TITLE_SC" render "$src" "$SHOW/snapchat/${name}_SC_1080x1920_TITLED.mp4" 1080 1920 "$snapwm" "" "$fps" 2>>"$LOG" \
+      && log "  titled: snapchat/${name}_SC_1080x1920_TITLED.mp4 (title at ${TITLE_TIME}s)"
+    [[ -n "$TITLE_YT_Shorts" ]] && TITLE_PNG="$TITLE_YT_Shorts" render "$src" "$SHOW/youtube/${name}_YT-Shorts_1080x1920_TITLED.mp4" 1080 1920 0 "" "$fps" 2>>"$LOG" \
+      && log "  titled: youtube/${name}_YT-Shorts_1080x1920_TITLED.mp4 (title at ${TITLE_TIME}s)"
+  )
+  [[ "$res" == REVIEW* ]] && command -v osascript >/dev/null && osascript -e "display notification \"$name: cover needs a quick check (see _covers)\" with title \"The Iman Cut\"" 2>/dev/null
+  return 0
 }
 
 captioned_from_approved() {  # NAME.srt approved by Iman → captioned versions, from the original in _originals
@@ -187,6 +216,7 @@ EOF
   if [[ $ok == 1 ]]; then
     mv "$src" "$DONE/"; [[ -n "$srt" ]] && mv "$srt" "$DONE/"
     [[ -z "$srt" && "${TIC_TRANSCRIBE:-1}" == 1 ]] && draft_subs "$DONE/$(basename "$src")" "$name"
+    make_covers "$DONE/$(basename "$src")" "$name" "${srt:+$DONE/$(basename "$srt")}" "$fps" "$snapwm"
     log "finished: $(basename "$src") → moved to _originals"
     command -v osascript >/dev/null && osascript -e "display notification \"$name exported to Instagram, TikTok, Snapchat, YouTube\" with title \"The Iman Cut\"" 2>/dev/null || true
   else

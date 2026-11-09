@@ -10,7 +10,7 @@ SHOW="$HOME/Desktop/theimancut/the-greatest"
 PLIST="$HOME/Library/LaunchAgents/com.theimancut.autoexport.plist"
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 command -v ffmpeg >/dev/null || { echo "ffmpeg is missing. Install it first:  brew install ffmpeg"; exit 1; }
-mkdir -p "$APP" "$SHOW"/{instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved} "$HOME/Library/LaunchAgents"
+mkdir -p "$APP" "$SHOW"/{_covers,instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved} "$HOME/Library/LaunchAgents"
 # IMPORTS is a shortcut to the shared Film & TV library, the same folder the Clipper lists
 # (default ~/Movies/The Iman Cut/Sources; override with TIC_SOURCES). Anything already in a real IMPORTS folder moves there.
 SOURCES="${TIC_SOURCES:-$HOME/Movies/The Iman Cut/Sources}"
@@ -20,7 +20,10 @@ if [[ -d "$SHOW/IMPORTS" && ! -L "$SHOW/IMPORTS" ]]; then
   rmdir "$SHOW/IMPORTS" 2>/dev/null || { echo "IMPORTS still has files that clash with names in $SOURCES; left in place."; }
 fi
 [[ -e "$SHOW/IMPORTS" ]] || ln -s "$SOURCES" "$SHOW/IMPORTS"
-cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
+cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/tic_cover.py" "$HERE/characters.json" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
+# covers: on-device face/eye/saliency helper (macOS Vision) + Pillow for drawing
+command -v swiftc >/dev/null && swiftc -O "$HERE/ticvision.swift" -o "$APP/ticvision" 2>/dev/null || echo "Note: couldn't build the cover helper (needs Xcode command line tools); covers will be flagged for review."
+python3 -c "import PIL" 2>/dev/null || python3 -m pip install --user -q Pillow
 cp "$REPO/brand/watermark/iman-cut-watermark-trimmed.png" "$APP/"
 cp "$HERE/Export Now.command" "$SHOW/"; chmod +x "$SHOW/Export Now.command"
 cat > "$SHOW/READ ME.txt" <<TXT
