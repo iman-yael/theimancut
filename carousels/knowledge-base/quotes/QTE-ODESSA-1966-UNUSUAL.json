@@ -10,8 +10,10 @@
   "source_type": "Her own handwritten sketch, as published in a contemporaneous magazine article",
   "also_spoken_1966": "Oh, he was a unusual child all his life. So if people will read his early life they'll understand why he is like he is, I guess. (same article, page 1)",
   "status": "VERIFIED",
-  "reuse_status": "PENDING",
-  "reuse_note": "Sports Illustrated text (copyright Time Inc./SI). Brief excerpt in commentary only; needs Iman's approval.",
+  "reuse_status": "APPROVED",
+  "reuse_note": "Sports Illustrated text (copyright Time Inc./SI). Brief excerpt in commentary only; needs Iman's approval. Approved by Iman Yael 2026-11-08 for this deck.",
   "verified_by": "Claude, Mac session, read archived SI page 2026-11-08",
-  "clip_ids": ["TIC_BirdClay"]
+  "clip_ids": [
+    "TIC_BirdClay"
+  ]
 }
