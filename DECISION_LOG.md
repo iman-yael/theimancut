@@ -19,3 +19,4 @@
 | 2026-11-08 | Vertical = no-crop blurred-background layout | Iman (local session) | Keep the whole frame |
 | 2026-11-08 | No narration, music or generated voice for now; original audio only | Iman (local session) | Simplicity; avoids voice/music clearance |
 | 2026-11-08 | Mac screen-recording cuts kept review-only until clearance is documented | Producer | Screen recording ≠ authorized source |
+| 2026-11-09 | Watermark ON for Instagram, TikTok and Snapchat; OFF for YouTube (Shorts + landscape); option B layout for all | Iman | Confirmed after auto-export setup |
