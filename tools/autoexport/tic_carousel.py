@@ -216,12 +216,19 @@ def packages(root, clip_id, profile, quote_id, quote):
     slides.append(("text", (profile.get("close_heading", "YOUR TAKE"), profile.get("close_question", "What did you notice in her face when the news came?"),
                             f"Source: {quote['source_title']} · {quote['source_location']}", None)))
     slug = re.sub(r"[^a-z0-9]+", "-", character.lower()).strip("-") or "character"
-    key = json.dumps([clip_id, profile, quote, PLATFORMS, 4, headline], sort_keys=True)
+    key = json.dumps([clip_id, profile, quote, PLATFORMS, 5, headline], sort_keys=True)
     deck_id = hashlib.sha256(key.encode()).hexdigest()[:16]
+    # human-friendly, stable folder names: carousel-1, carousel-2, … (one number per deck, kept forever)
+    numbers_path = root / "deck-numbers.json"
+    numbers = read_json(numbers_path)
+    if deck_id not in numbers:
+        numbers[deck_id] = f"carousel-{len(numbers) + 1}"
+        write_json(numbers_path, numbers)
+    deck_name = numbers[deck_id]
     outputs = []
     for platform, (height, kind) in PLATFORMS.items():
         H = 1350 if platform in ("instagram", "youtube") else 1920
-        directory = root / platform / slug / deck_id
+        directory = root / platform / slug / deck_name
         names = ["01_cover.png"] + [f"{n:02d}_slide.png" for n in range(2, len(slides) + 1)]
         directory.mkdir(parents=True, exist_ok=True)
         total = len(slides)
@@ -253,7 +260,7 @@ def packages(root, clip_id, profile, quote_id, quote):
             f'- Verified by: {quote["verified_by"]} · reuse: {quote.get("reuse_status")}\n- Clip: {clip_id} · {profile.get("clip_source", "")}\n'
             f'- Performer credit: {profile["performer"]} as {character} (The Greatest, Prime Video)\n', encoding="utf-8")
         write_json(directory / "manifest.json", {
-            "clip_id": clip_id, "quote_id": quote_id, "deck_id": deck_id, "design": "tic-design-v1",
+            "clip_id": clip_id, "quote_id": quote_id, "deck": deck_name, "deck_id": deck_id, "design": "tic-design-v1",
             "format": kind, "dimensions": [1080, H], "slides": names, "alt_cover": "01_cover_alt-typographic.png",
             "cover_treatment": "image-led" if still is not None else "typographic", "cover_time": t,
             "headline": headline, "fonts": TD.fonts_used(), "status": "READY_FOR_REVIEW", "platform": platform,
