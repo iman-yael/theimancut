@@ -186,6 +186,23 @@ def packages(root, clip_id, profile, quote_id, quote):
                 f = max(faces, key=lambda f: f["w"] * f["h"]); focus = f["x"] + f["w"] / 2
         except Exception:
             pass
+    scene = []          # (still, focus_x) for slide backgrounds
+    if clip_path:
+        try:
+            import subprocess as sp, tic_cover
+            dur = float(sp.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", str(clip_path)],
+                               capture_output=True, text=True).stdout.strip() or 0)
+            for k, frac in enumerate((0.12, 0.3, 0.48, 0.66, 0.84, 0.95)):
+                im_k = TD.grab_still(clip_path, dur * frac, os.environ.get("TIC_FFMPEG", "ffmpeg"))
+                if im_k is None:
+                    continue
+                pth = f"/tmp/_tic_bg_{k}.jpg"; im_k.save(pth)
+                fs = tic_cover.vision([pth], str(Path(__file__).parent)).get(pth, {}).get("faces", [])
+                fx = (max(fs, key=lambda f: f["w"] * f["h"])["x"] + max(fs, key=lambda f: f["w"] * f["h"])["w"] / 2) if fs else 0.5
+                scene.append((im_k, fx, bool(fs)))
+            scene.sort(key=lambda x: not x[2])           # frames with faces first
+        except Exception:
+            scene = []
     who_body = real_full + (f". {relation[0] + relation[1:].lower()}." if relation else ".")
     slides = [
         ("cover", None),
@@ -199,7 +216,7 @@ def packages(root, clip_id, profile, quote_id, quote):
     slides.append(("text", (profile.get("close_heading", "YOUR TAKE"), profile.get("close_question", "What did you notice in her face when the news came?"),
                             f"Source: {quote['source_title']} · {quote['source_location']}", None)))
     slug = re.sub(r"[^a-z0-9]+", "-", character.lower()).strip("-") or "character"
-    key = json.dumps([clip_id, profile, quote, PLATFORMS, 2, headline], sort_keys=True)
+    key = json.dumps([clip_id, profile, quote, PLATFORMS, 4, headline], sort_keys=True)
     deck_id = hashlib.sha256(key.encode()).hexdigest()[:16]
     outputs = []
     for platform, (height, kind) in PLATFORMS.items():
@@ -213,10 +230,12 @@ def packages(root, clip_id, profile, quote_id, quote):
                 im = TD.slide_cover(1080, H, headline, kicker, still, focus, "image" if still is not None else "type")
                 TD.slide_cover(1080, H, headline, kicker, None, focus, "type").save(directory / "01_cover_alt-typographic.png")
             elif kind_s == "quote":
-                im = TD.slide_quote(1080, H, quote["text"], quote["speaker"], credit, n, total)
+                bgi = scene[(n - 2) % len(scene)] if scene else (None, 0.5, False)
+                im = TD.slide_quote(1080, H, quote["text"], quote["speaker"], credit, n, total, bgi[0], bgi[1])
             else:
                 heading, body, sub, img = data
-                im = TD.slide_text(1080, H, heading, body, n, total, sub, img, focus)
+                bgi = scene[(n - 2) % len(scene)] if (scene and img is None) else (None, 0.5, False)
+                im = TD.slide_text(1080, H, heading, body, n, total, sub, img, focus, bgi[0], bgi[1])
             im.save(directory / filename)
         TD.phone_preview([directory / "01_cover.png", directory / "01_cover_alt-typographic.png"],
                          directory / "_cover_comparison_phone.jpg", "Cover A: image-led (display)   ·   Cover B: typography-led (serif)")

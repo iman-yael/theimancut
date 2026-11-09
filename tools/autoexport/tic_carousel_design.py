@@ -151,8 +151,21 @@ def slide_cover(W, H, headline, kicker, still=None, focus_x=0.5, treatment="imag
     return im
 
 
-def slide_text(W, H, heading, body, n, total, sub=None, still=None, focus_x=0.5):
-    im = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(im); safe = safe_area(W, H)
+def backdrop(W, H, bg=None, focus_x=0.5, dark=0.58):
+    """Full-bleed scene still, darkened (and lightly softened) so ivory text stays readable."""
+    if bg is None:
+        return Image.new("RGB", (W, H), BG)
+    sw, sh = bg.size; tw = sh * W / H
+    if tw <= sw:
+        x0 = int(min(max(0, focus_x * sw - tw / 2), sw - tw)); im = bg.crop((x0, 0, int(x0 + tw), sh))
+    else:
+        th = sw * H / W; y0 = int(max(0, (sh - th) / 2)); im = bg.crop((0, y0, sw, int(y0 + th)))
+    im = im.resize((W, H), Image.LANCZOS).filter(ImageFilter.GaussianBlur(3)).convert("RGB")
+    return Image.blend(im, Image.new("RGB", (W, H), BG), dark)
+
+
+def slide_text(W, H, heading, body, n, total, sub=None, still=None, focus_x=0.5, bg=None, bg_focus=0.5):
+    im = backdrop(W, H, bg, bg_focus); d = ImageDraw.Draw(im); safe = safe_area(W, H)
     width = safe[2] - safe[0]; y = safe[1] + 110
     if still is not None:
         ph = int((safe[3] - safe[1]) * 0.42)
@@ -170,8 +183,8 @@ def slide_text(W, H, heading, body, n, total, sub=None, still=None, focus_x=0.5)
     return im
 
 
-def slide_quote(W, H, quote, speaker, credit, n, total):
-    im = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(im); safe = safe_area(W, H)
+def slide_quote(W, H, quote, speaker, credit, n, total, bg=None, bg_focus=0.5):
+    im = backdrop(W, H, bg, bg_focus, dark=0.66); d = ImageDraw.Draw(im); safe = safe_area(W, H)
     width = safe[2] - safe[0]
     qf, ql = fit(d, f"“{quote}”", "quote", 72, 44, width, int((safe[3] - safe[1]) * 0.62), natural=True)
     af, al = fit(d, f"— {speaker}\n{credit}", "attrib", 34, 26, width, 160)
