@@ -1,23 +1,19 @@
-# Task board
+# Task board (2026-11-09)
 
-Updated 2026-11-08. Statuses: Researching → Indexed → Proposed → Approved for edit → Rendered → Checked → Approved for publication.
+Statuses: Researching → Indexed → Proposed → Approved for edit → Rendered → Checked → Approved for publication
 
 | Task | Status | Blocker / next action |
 |---|---|---|
-| Catalog system (schema, intake, timing, approvals, propagation, backups) | ✅ Built · 12/12 tests pass | — |
-| Cast directory from IMDb paste (135 characters) | ✅ Researching | 20 review-queue items await Iman (`docs/generated/REVIEW_QUEUE.md`) |
-| Priority sheets: CHR-000003/4/1/2/5/6 | 🟡 Researching | All footage fields pending; historical claims mostly unchecked |
-| Visual reference sheets | ⛔ Blocked | No headshots (paste had none; IMDb 403); no footage frames |
-| Footage index | ⛔ Blocked | No authorized, editable source |
-| PRJ-000001 Bird Clay portrait | 🟡 **Proposed** | Iman: approve premise, approach and watermark; then footage + voice |
-| Brand style sample (watermark A/B, text layers) | ✅ Rendered on synthetic pattern | Iman chooses A or B |
-| Historical claims for Bird (CLM-000010) | ⏳ Unchecked | Needs Eig *Ali: A Life* or another citable source |
-| Support resources | ⏳ Not verified | Verify at publication time on official sites |
-| Experiment batch v1 (6 edits, 3 breakdowns, 1 intro) | 🟡 Proposed as CON records + intro script | Iman approves order; footage for E1–E6 |
-| Search/retrieval queries (§16), controlled tags, narration takes | ✅ Built · tests pass | — |
-| Worked example (known vs placeholder) | ✅ `docs/WORKED_EXAMPLE.md` | — |
-| Pilot cover template | ✅ Synthetic sample + crop previews | Decide the cover watermark position |
-| Hook library | ✅ `analytics/TIC_HOOK_LIBRARY.csv` (proposed, untested) | — |
+| Footage licence (Amazon MGM Media Licensing) | ⏳ Requested | Waiting for reply |
+| Catalog + cast directory (144 characters) | ✅ Built, 12/12 tests pass | 10 open queue items (announcer credits affect the Bird Clay cut) |
+| Desktop auto-export + IMPORTS map + subtitle review | ✅ Built (Linux-tested) | Install and test on the Mac |
+| Clipper | ✅ Built (Mac) | — |
+| PRJ-000001 Bird Clay cut v05 | 🟡 Rendered (review-only) | Confirm the 2 identities (stills); licence; subtitle line check |
+| PRJ-000002 R1 "Meet the Clay family" | 🟡 Proposed | Verify the official source and remix option per platform |
+| PRJ-000002 R2 | 🟡 Proposed | Iman picks a / b / c |
+| IMPORTS → official upload matching | ⏳ | Fill in `IMPORTS/_SOURCE_MAP.md` (URL, uploader, title, timestamps) |
+| Experiment batch v1 (6 edits, 3 breakdowns, 1 intro) | 🟡 Proposed | After licence / first post |
+| Historical claims for breakdowns | 🟡 Partly supported | Alberta Jones contract needs a second independent source |
+| Support resources (DV content) | ⏳ Not verified | Verify on official sites at publication time |
 | Analytics | Template only | No integration; no monitoring active |
-
-**Next executable task:** once you reply, resolve the review queue (`Young Cassius` → CHR-000001 recommended), record the approvals as `review` rows, and re-time the VO from your phone read.
+| GitHub branch cleanup | ⏳ Iman | Delete the 2 extra branches in the GitHub UI |

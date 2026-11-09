@@ -1,5 +1,7 @@
 # PROJECT_BRIEF: The Iman Cut
 
+> **Current rules are summarised in `CLAUDE.md`. Latest status: `HANDOFF.md`.** Where this brief and the update table at the bottom disagree, the update table wins.
+
 *Single consolidated brief. Updated 2026-11-08. Supersedes `legacy/v0_the-greatest/README.md`.*
 
 ## Identity (definitive)
@@ -10,7 +12,7 @@
 | Creator | Iman Yael · credit line "By Iman Yael" |
 | Positioning | Film, character, performance and history through Iman's perspective |
 | Optional intro | "I'm Iman Yael, and this is The Iman Cut." Only in the channel intro or longer pieces, never as a preamble to every short. |
-| Channel handles | **Not supplied / not verified.** No handle appears anywhere until confirmed. |
+| Channel handles | IG `theimancut` · TikTok `@beeiman` · YouTube `@ImanYael` (reported by Iman; verify before @-mentions) |
 | Founder content | Later and gradual, labelled "Building with Iman". One relevant CTA at most. |
 
 ## Audience and editorial voice
@@ -55,7 +57,7 @@
 | 3 | `.srt` vs `_SUBTITLES.srt` | `_SUBTITLES.srt` | No |
 | 4 | "Clean export" content: no subtitles only, or also no labels/watermark? | Clean = no burned subtitles; ID labels and watermark kept | **Yes** |
 | 5 | "No third-party watermark" vs a brand watermark | Not a real conflict: only the THE IMAN CUT mark, and it never implies ownership or affiliation | No |
-| 6 | Narrated vs. performance-led first render | Narrated recommended (perspective from day one), but it is blocked on voice | **Yes** (approve, or render performance-led first) |
+| 6 | Narrated vs. performance-led first render | **Decided:** original scene audio only for now; optional commentary is drafted separately | No |
 
 ## Unresolved questions
 1. "Connie lesson": possible matches CHR-000005 Sonny Liston or CHR-000084 Sonny Banks. **Awaiting your confirmation.**

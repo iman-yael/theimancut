@@ -9,6 +9,8 @@ This repository holds the research, editorial plans, policies and the small prod
 ## Start here
 | File | What it is |
 |---|---|
+| [CLAUDE.md](CLAUDE.md) | **Standing rules for every Claude session** (brand, rights, accuracy, where things live) |
+| [projects/REVIEW_PACKET_2026-11-09.md](projects/REVIEW_PACKET_2026-11-09.md) | Latest open questions for Iman |
 | [PROJECT_BRIEF.md](PROJECT_BRIEF.md) | Current decisions, assets, settings, conflicts, open questions |
 | [HANDOFF.md](HANDOFF.md) · [TASK_BOARD.md](TASK_BOARD.md) | What's done, what's blocked, next executable task |
 | [DECISION_LOG.md](DECISION_LOG.md) · [CORRECTIONS_LOG.md](CORRECTIONS_LOG.md) | Why things are the way they are |
@@ -24,6 +26,10 @@ This repository holds the research, editorial plans, policies and the small prod
 - [Character directory](works/WRK-000001_the-greatest/CHARACTER_DIRECTORY.md): 135 credited characters with a sheet each in [characters/](works/WRK-000001_the-greatest/characters/); priority sheets are CHR-000001 to CHR-000006.
 - [Installment docs](works/WRK-000001_the-greatest/installments/) for the 8 episodes (footage review pending).
 - Projects: [PRJ-000001 Bird Clay portrait](projects/PRJ-000001_BirdClay/) · [PRJ-000002 official-trailer in-app remixes](projects/PRJ-000002_TrailerRemix/) · [Experiment batch v1](projects/EXPERIMENT_BATCH_v1.md)
+
+## Tools
+- [Desktop auto-export](tools/autoexport/README.md): drop a finished clip, get Instagram, TikTok, Snapchat and YouTube versions (option B), plus draft subtitles for review.
+- [Clipper](tools/clipper/README.md): splits long recordings into clips (runs on the Mac).
 
 ## Policies
 [Editorial, sensitivity, moderation and corrections](policies/EDITORIAL_SENSITIVITY_MODERATION.md) · [QC checklist](policies/QC_CHECKLIST.md)
