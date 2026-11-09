@@ -1,6 +1,6 @@
 # Handoff from the local Mac session ("File and folder organization"), 2026-11-08
 
-> Merged into this project at Iman's request. **Reported state.** The files live on Iman's Mac under `~/Projects/personal/iman-cut/` and have **not** been seen or checked by the cloud session. Items marked ⚠️ are flagged by the cloud session.
+> Merged into this project at Iman's request. **Update:** the code, docs and brand assets from the Mac are now in this repo: [`projects/PRJ-000001_BirdClay/local_cut/`](../projects/PRJ-000001_BirdClay/local_cut/), [`projects/PRJ-000001_BirdClay/research/`](../projects/PRJ-000001_BirdClay/research/), [`tools/clipper/`](../tools/clipper/) and [`brand/watermark/`](../brand/watermark/). Video files (the source recordings and rendered cuts) stay on the Mac and are **not** in the repo. Items marked ⚠️ are flagged by the cloud session.
 
 ## Decisions Iman made in that session
 - **Watermark:** exact text `THE IMAN CUT`, small, **top-right** (placement A). Master asset: `watermark/iman-cut-watermark-trimmed-PROPOSED.png`, a crop-only trim of the transparent "editorial watermark-1". "The Iman Cut Editorial Logo.png" has no transparency and is **not** usable as a watermark.

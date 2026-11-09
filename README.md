@@ -14,6 +14,9 @@ This repository holds the research, editorial plans, policies and the small prod
 | [DECISION_LOG.md](DECISION_LOG.md) · [CORRECTIONS_LOG.md](CORRECTIONS_LOG.md) | Why things are the way they are |
 | [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) | Consolidated brief: everything Iman asked for |
 | [docs/LOCAL_SESSION_HANDOFF_2026-11-08.md](docs/LOCAL_SESSION_HANDOFF_2026-11-08.md) | State of the work done on Iman's Mac (Bird Clay cut v03/v05, Clipper app) |
+| [projects/PRJ-000001_BirdClay/local_cut/](projects/PRJ-000001_BirdClay/local_cut/) | The Mac-made Bird Clay cut: edit list, rights log, post draft, subtitles, render scripts (review only, no video) |
+| [tools/clipper/](tools/clipper/) | Clipper: local web app that splits a long video into draft 9:16 / 16:9 clips |
+| [brand/watermark/](brand/watermark/) | THE IMAN CUT watermark (working + original) and its audit |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/WORKED_EXAMPLE.md](docs/WORKED_EXAMPLE.md) | Data model, ID/versioning policy, intake workflow |
 | [docs/generated/](docs/generated/) | Review queue, rights register, data dictionary (generated from the DB) |
 

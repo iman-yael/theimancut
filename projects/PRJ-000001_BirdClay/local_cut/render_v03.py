@@ -32,9 +32,10 @@ layout, variant = sys.argv[1], sys.argv[2]
 
 edl = json.load(open(f"{HERE}/edl_v03.json"))
 import glob
-# Source video is NOT in the repo. Point BIRDCLAY_SOURCE at it, or keep it on the Desktop under its original name
+# Source video is NOT in the repo. Point BIRDCLAY_SOURCE at it; by default it's looked up in the Film & TV library
+# (~/Movies/The Iman Cut/Sources, renamed 2026-11-08), then at its original Desktop name
 # (the macOS name contains a narrow no-break space before "AM", hence the glob).
-_cands = [os.environ["BIRDCLAY_SOURCE"]] if os.environ.get("BIRDCLAY_SOURCE") else glob.glob(os.path.expanduser("~/Desktop/Screen Recording 2026-11-08 at 11.44.17*.mov"))
+_cands = [os.environ["BIRDCLAY_SOURCE"]] if os.environ.get("BIRDCLAY_SOURCE") else (glob.glob(os.path.expanduser("~/Movies/The Iman Cut/Sources/The Greatest - Promo - Rome Olympic Final*.mov")) or glob.glob(os.path.expanduser("~/Desktop/Screen Recording 2026-11-08 at 11.44.17*.mov")))
 if not _cands or not os.path.exists(_cands[0]):
     raise SystemExit("Source not found. Set BIRDCLAY_SOURCE=/path/to/source.mov")
 src = _cands[0]

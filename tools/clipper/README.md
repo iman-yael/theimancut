@@ -9,20 +9,37 @@ Double-click **`Start Clipper.command`**. The first time, macOS may ask to let T
 1. Choose a video in one of three ways:
    - drop it onto the page,
    - paste its path (for example `~/Desktop/long video.mov`), or
-   - pick it from the list of videos in Desktop, Movies, Documents, Downloads and earlier uploads.
+   - pick it from the list of videos in Desktop, Movies, Documents, Downloads and earlier uploads. Each video shows its length.
 2. Set options:
-   - clip length (minimum and maximum seconds)
+   - **Show** and **Episode** (for example `The Greatest`, `S01E01`). They go into every file name
+   - clip length: minimum and maximum seconds (default 8–30)
    - vertical 9:16 and/or landscape 16:9
    - vertical shows the **whole picture on a blurred background**; tick "Crop vertical to fill" only if you want face-tracked cropping
    - THE IMAN CUT watermark on vertical (off by default; YouTube adds its own branding)
-   - transcription (slower, and a machine draft)
+   - transcription (on by default; it names clips by what's said, and is a machine draft)
    - high-quality encoding
-3. Press **Make clips**. Each clip appears in the gallery as soon as it's rendered, and you can switch between 9:16 and 16:9.
+3. Press **Make clips**. Runs wait in line and are made **one at a time**, so they don't slow each other down. You can cancel a run.
+   - The progress bar shows each step live: finding shot cuts, finding pauses, transcribing, then rendering each clip.
+   - The clip list appears as soon as the cuts are found. Each card shows its thumbnail, then a progress bar while it renders, then a player.
+   - Refreshing the page keeps your place (the run is in the address), and a video you're playing is never reset.
+   - Switch between 9:16 and 16:9 at any time.
+4. Every clip shows its length. To change what a clip's name says it shows, edit the box on its card and press **Rename**; its files are renamed to match.
+
+## Where the clips go
+Finished clips are saved to **`~/Movies/The Iman Cut/Clips/<Show - Episode - date>/`**, already under their final names. **Open in Finder** on a run opens that folder. Removing a run from the list keeps the clips.
+
+Output is high quality by default (H.264 CRF 17). Tick *Draft quality* for faster previews.
+
+## File names
+`<show>_<episode>_clipNNN_<seconds>s_<what-happens>_<9x16|16x9>.mp4`, for example
+`the-greatest_s01e01_clip004_9s_winner-unanimous-decision-cassius-clay_9x16.mp4`.
+
+*What happens* comes from the clip's dialogue when transcription is on. Otherwise it comes from macOS scene recognition plus a face count (close-up / two people / group). These are machine guesses, so rename anything that's off.
 
 ## How it decides clips
 1. Finds every shot cut.
 2. Finds pauses in the audio.
-3. Groups shots into clips of your target length, ending each clip at a cut that falls in a pause, so dialogue isn't chopped.
+3. Makes **as many clips as possible**: each clip ends at the first shot cut after the minimum length that falls in a pause, so dialogue isn't chopped. If none falls in a pause, it uses the first cut after the minimum.
 4. For vertical, resizes the whole frame onto a blurred copy of itself (no cropping). If you turn on cropping, it frames each shot on the largest face, or the most eye-catching area, or the center.
 5. Converts screen recordings to their real frame rate, which removes duplicate frames.
 

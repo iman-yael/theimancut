@@ -12,3 +12,12 @@ catalog/backups/
 __pycache__/
 *.pyc
 .restore_check.sqlite
+
+# brand watermark assets are our own and belong in the repo
+!brand/watermark/*.png
+# local Clipper runtime data (uploads, renders) never goes in git
+tools/clipper/jobs/
+tools/clipper/uploads/
+tools/clipper/facecx
+tools/clipper/scenelabel
+tools/clipper/hidden_videos.json
