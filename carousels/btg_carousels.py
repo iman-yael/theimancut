@@ -90,6 +90,15 @@ DECKS.update({
 })
 ONLY = [a for a in sys.argv[1:]]
 
+DECKS["carousel-clip02"] = dict(clip=2, title="He Is the Part", slides=[
+  ("cover", "HE IS THE PART", 6.5, 0.5),
+  ("quote", "It would be somebody who is the part.", "From the production", "Becoming the Greatest (Prime Video featurette)", 2.0, 0.5),
+  ("quote", "If you didn't know better, you would feel like you were watching Cassius Clay.", "From the production", "Becoming the Greatest (Prime Video featurette)", 10.5, 0.5),
+  ("text", "KING OF THE WORLD", "After beating Sonny Liston in 1964, Clay shouted \"I'm the king of the world!\" The crown and robe in this scene read like a nod to that swagger.", "THE HISTORY + OUR READ", 4.5, 0.5),
+  ("text", "FROM LA BACK HOME", "Before landing the role, Jaalen Best had just moved home from LA to North Carolina and was living with his mom. \"Growing up, I never thought I'd be an actor.\"", "THE FILM", 15.5, 0.5),
+  ("text", "ON EVERY WALL", "Today Ali's face is painted on murals, and the Muhammad Ali Center opened in his hometown of Louisville in 2005. Have you seen an Ali mural in person?", "THE HISTORY", 27.0, 0.5),
+])
+
 def caption(d):
     return (f"{d['title']}. Swipe for the film and the history behind it.\n\n"
             "🎬 The Greatest (Prime Video), from the featurette Becoming the Greatest\n"
