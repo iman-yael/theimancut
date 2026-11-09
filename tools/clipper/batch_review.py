@@ -13,7 +13,7 @@ SRC, OUT, PREFIX = sys.argv[1], sys.argv[2], sys.argv[3]
 N = int(sys.argv[4]) if len(sys.argv) > 4 else 30
 PUNCH = 1.0           # no zoom: the WHOLE frame, resized into option B (brand rule)
 # archival material spotted when indexing this source (black-and-white Ali stills / footage): separate rights review
-ARCHIVAL = [(410, 425), (655, 665), (775, 785), (778, 790)]
+ARCHIVAL = [(410, 425), (655, 665), (775, 785), (778, 790)] if "Making-of" in SRC else []
 os.makedirs(OUT, exist_ok=True)
 work = os.path.join(OUT, "_work"); os.makedirs(work, exist_ok=True)
 log = lambda *a: print(*a, flush=True)

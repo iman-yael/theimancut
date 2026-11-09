@@ -397,7 +397,7 @@ def platform_headline(key, entry, chosen):
     }.get(key, chosen)
 
 
-def vertical_cover_v2(frame, faces, headline, out, key="instagram"):
+def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None):
     """Full-bleed 9:16 crop around the subject; huge ivory headline in the lower half (never on the face);
     dark fade behind it; wordmark at the top. Checks: face and headline inside Instagram's 3:4 grid,
     headline clear of the app's buttons for TikTok/Snapchat/Shorts."""
@@ -414,6 +414,8 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram"):
             if hi - lo > cw * 0.92:
                 return False, "important faces don't fit a vertical crop"
             cx = (lo + hi) / 2
+        elif salient:                                   # no face found: aim at the most eye-catching region
+            cx = (salient["x"] + salient["w"] / 2) * fw
         else:
             cx = fw / 2
         x0 = int(min(max(0, cx - cw / 2), fw - cw)); src = frame.crop((x0, 0, x0 + cw, fh)); y0 = 0
@@ -421,6 +423,9 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram"):
     img = src.resize((W, int(src.height * s)), Image.LANCZOS).crop((0, 0, W, H)).convert("RGBA")
     fboxes = [((f["x"] * fw - x0) * s, (f["y"] * fh - y0) * s, ((f["x"] + f["w"]) * fw - x0) * s, ((f["y"] + f["h"]) * fh - y0) * s)
               for f in faces if ((f["x"] + f["w"]) * fw - x0) > 0 and (f["x"] * fw - x0) < cw]
+    if not fboxes and salient:          # no face found: protect the main subject region the same way
+        sb = (salient["x"] * fw, salient["y"] * fh, (salient["x"] + salient["w"]) * fw, (salient["y"] + salient["h"] * 0.6) * fh)
+        fboxes = [((sb[0] - x0) * s, (sb[1] - y0) * s, (sb[2] - x0) * s, (sb[3] - y0) * s)]
     main = max(fboxes, key=lambda b: (b[2] - b[0]) * (b[3] - b[1])) if fboxes else None
     if main and not (main[1] >= V_GRID_34[1] - 0.2 * (main[3] - main[1]) and main[3] <= V_GRID_34[3]):
         return False, "face falls outside the Instagram profile-grid crop"
@@ -690,7 +695,9 @@ def main():
             pth = os.path.join(tmp, f"pin{i}.jpg")
             if grab(src, t, crop, pth, 960):
                 v = vision([pth], app).get(pth, {"faces": []})
-                pin.append(dict(t=t, path=pth, faces=[f for f in v.get("faces", []) if f.get("conf", 1) > 0.5], sharp=1, clarity=1, bright=0.5, salient=None))
+                pin.append(dict(t=t, path=pth, faces=[f for f in v.get("faces", []) if f.get("conf", 1) > 0.5], sharp=1, clarity=1, bright=0.5,
+                                salient=v.get("salient")))
+        pin.sort(key=lambda c: not c["faces"])          # pinned moments with a detected face first, otherwise your order
         ranked = pin or ranked
         subject_note = "frame pinned by you (NAME.cover.txt)"
     elif subject:
@@ -716,7 +723,7 @@ def main():
             alts = sorted({v for v in clip_heads.values() if v != ph}, key=len) if clip_heads else \
                    ([headline] if headline != ph else []) + [o for o in options if o not in (headline, ph) and len(o) < len(ph)]
             for h in [ph] + alts:
-                ok, info = (vertical_cover_v2(frame, c["faces"], h, out, key) if kind == "vertical" else wide_cover(frame, c["faces"], h, out))
+                ok, info = (vertical_cover_v2(frame, c["faces"], h, out, key, c.get("salient")) if kind == "vertical" else wide_cover(frame, c["faces"], h, out))
                 if ok:
                     result = (c, h, info); break
                 why.append(f"{c['t']:.2f}s: {info}")
