@@ -11,7 +11,7 @@ import pipeline as P
 
 SRC, OUT, PREFIX = sys.argv[1], sys.argv[2], sys.argv[3]
 N = int(sys.argv[4]) if len(sys.argv) > 4 else 30
-PUNCH = 0.80          # keep 80% of the width (a modest 1.25x punch-in), centred on the face
+PUNCH = 1.0           # no zoom: the WHOLE frame, resized into option B (brand rule)
 # archival material spotted when indexing this source (black-and-white Ali stills / footage): separate rights review
 ARCHIVAL = [(410, 425), (655, 665), (775, 785), (778, 790)]
 os.makedirs(OUT, exist_ok=True)
@@ -20,8 +20,13 @@ log = lambda *a: print(*a, flush=True)
 
 info = P.probe(SRC); D = info["duration"]; act = info["active"]
 log("probe", info)
-cuts = P.shot_cuts(SRC, D)
-quiet = P.pauses(SRC, True, D)
+cache = os.path.join(work, "analysis.json")
+if os.path.exists(cache):
+    cuts, quiet = json.load(open(cache))
+else:
+    cuts = P.shot_cuts(SRC, D)
+    quiet = P.pauses(SRC, True, D)
+    json.dump([cuts, quiet], open(cache, "w"))
 tj = os.path.join(work, "transcript.json")
 if not os.path.exists(tj):
     segs = P.transcribe(SRC, work, D)
@@ -76,6 +81,10 @@ for _ in range(30):
 parts = parts[:N]
 parts = [(snap(a) if abs(snap(a) - a) < 0.6 else a, snap(b)) for a, b in parts]
 log("clips", len(parts), "target length", round(L, 1))
+
+json.dump(parts, open(os.path.join(work, "parts.json"), "w"))
+if "--plan" in sys.argv:
+    log("plan written", os.path.join(work, "parts.json")); sys.exit(0)
 
 # framing: face centre per shot
 shot_bounds = [0.0] + cuts + [D]
@@ -135,7 +144,7 @@ def tc(t):
     return f"{int(t // 60)}:{t % 60:05.2f}"
 with open(os.path.join(OUT, "INDEX.csv"), "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
-md = [f"# Review batch: {os.path.basename(SRC)}", "", f"{len(rows)} clips · 1080×1920 · original audio · option B layout with a 1.25× punch-in on each shot's face. "
+md = [f"# Review batch: {os.path.basename(SRC)}", "", f"{len(rows)} clips · 1080×1920 · original audio · option B layout, whole frame (no zoom). "
       "Review only; footage licence pending.", "", "| # | Title | Source in–out | Dur | Subjects (confirmed) | Thumb @ | Flags | File |", "|---|---|---|---|---|---|---|---|"]
 for r in rows:
     md.append(f"| {r['n']} | {r['title']} | {tc(r['source_in'])}–{tc(r['source_out'])} | {r['duration']:.0f}s | {r['confirmed_subjects'] or 'to confirm'} | "

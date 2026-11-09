@@ -150,52 +150,96 @@ def build(clip, root):
 
 
 def packages(root, clip_id, profile, quote_id, quote):
-    person = profile["real_person"]
-    character = profile["character"]
-    source = f'{quote["source_title"]} · {quote["source_location"]}'
+    """Design-system decks (tic_carousel_design.py). Same evidence rules; one job per slide."""
+    import os, sys
+    sys.path.insert(0, str(Path(__file__).parent))
+    import tic_carousel_design as TD
+    person, character = profile["real_person"], profile["character"]
+    show_dir = root.parent
+    # who the deck is about: pronoun + relationship from the character file (credits/history, never faces)
+    poss, relation, real_full = "THEIR", "", person
+    try:
+        for ch in json.loads((Path(__file__).parent / "characters.json").read_text())["characters"]:
+            if ch["credited"].lower() == character.lower() or character.lower() in ch["match"]:
+                poss, relation, real_full = ch.get("poss", poss), ch.get("relation", ""), ch.get("real_person", person)
+    except (OSError, ValueError, KeyError):
+        pass
+    headline = profile.get("deck_headline") or f"IN {poss} OWN WORDS"
+    kicker = person.upper()
+    credit = quote.get("short_credit") or re.sub(r"^.*?,\s*", "", quote["source_title"]).split(",")[0] + \
+        (f", {m.group(0)}" if (m := re.search(r"\b(1[89]\d\d|20\d\d)\b", quote["source_title"])) else "")
+    # cover still: the approved cover moment of the finished clip, framed on the largest face
+    clip_path = next((p for p in (show_dir / "_originals").glob(f"{clip_id}.*")), None)
+    t = profile.get("cover_time")
+    envf = show_dir / "_covers" / f"{clip_id}.title.env"
+    if t is None and envf.exists():
+        m = re.search(r'TITLE_TIME="([\d.]+)"', envf.read_text())
+        t = float(m.group(1)) if m else None
+    still, focus = None, 0.5
+    if clip_path and t is not None:
+        still = TD.grab_still(clip_path, float(t), os.environ.get("TIC_FFMPEG", "ffmpeg"))
+        try:
+            import tic_cover
+            still.save("/tmp/_tic_still_v.jpg")
+            faces = tic_cover.vision(["/tmp/_tic_still_v.jpg"], str(Path(__file__).parent)).get("/tmp/_tic_still_v.jpg", {}).get("faces", [])
+            if faces:
+                f = max(faces, key=lambda f: f["w"] * f["h"]); focus = f["x"] + f["w"] / 2
+        except Exception:
+            pass
+    who_body = real_full + (f". {relation[0] + relation[1:].lower()}." if relation else ".")
     slides = [
-        (f"{person}\nIN THEIR OWN WORDS", ""),
-        ("THE PERSON AND THE ROLE",
-         f'{person} is the historical subject.\n{profile["performer"]} plays {character} in The Greatest.'),
-        ("IN THEIR OWN WORDS", f'“{quote["text"]}”\n{quote["speaker"]}\n{source}'),
-        ("THE CONTEXT", quote["context"]),
-        ("THE SCENE", f'{profile["scene_context"]}\n{profile["clip_connection"]}'),
+        ("cover", None),
+        ("text", (person.upper(), who_body, f"In The Greatest: {profile['performer']} plays {character}.", None)),
+        ("quote", None),
+        ("text", ("WHAT WAS HAPPENING", quote["context"], None, None)),
+        ("text", ("IN THE CLIP", f'{profile["scene_context"]} {profile["clip_connection"]}', "The series dramatizes this scene; the quote is from the historical record.", still)),
     ]
     if profile.get("approved_take"):
-        slides.append(("THE IMAN CUT'S TAKE", profile["approved_take"]))
-    slides.append(("THE SOURCE", f"{source}\nWhat detail stood out to you?"))
+        slides.append(("text", ("THE IMAN CUT'S TAKE", profile["approved_take"], None, None)))
+    slides.append(("text", (profile.get("close_heading", "YOUR TAKE"), profile.get("close_question", "What did you notice in her face when the news came?"),
+                            f"Source: {quote['source_title']} · {quote['source_location']}", None)))
     slug = re.sub(r"[^a-z0-9]+", "-", character.lower()).strip("-") or "character"
-    key = json.dumps([clip_id, profile, quote, PLATFORMS, 1], sort_keys=True)
+    key = json.dumps([clip_id, profile, quote, PLATFORMS, 2, headline], sort_keys=True)
     deck_id = hashlib.sha256(key.encode()).hexdigest()[:16]
     outputs = []
     for platform, (height, kind) in PLATFORMS.items():
+        H = 1350 if platform in ("instagram", "youtube") else 1920
         directory = root / platform / slug / deck_id
         names = ["01_cover.png"] + [f"{n:02d}_slide.png" for n in range(2, len(slides) + 1)]
-        sidecars = ("caption.txt", "alt-text.txt", "sources.md", "manifest.json")
-        if not all((directory / name).is_file() for name in [*names, *sidecars]):
-            directory.mkdir(parents=True, exist_ok=True)
-            for i, ((title, body), filename) in enumerate(zip(slides, names), 1):
-                render(directory / filename, height, title, body, i, len(slides))
-            caption = (f"{person} in their own words. Swipe for the context and how it connects "
-                       f"to The Greatest.\n{profile['performer']} as {character}.\n"
-                       f"Quote source: {source} — {quote['source_url']}\nWhat detail stood out to you?")
-            (directory / "caption.txt").write_text(caption + "\n", encoding="utf-8")
-            (directory / "alt-text.txt").write_text(
-                "\n".join(f"{i}. {title} — {body}".replace("\n", " ")
-                          for i, (title, body) in enumerate(slides, 1)) + "\n", encoding="utf-8"
-            )
-            (directory / "sources.md").write_text(
-                f'# Sources\n\n- Quote: {source}\n- URL: {quote["source_url"]}\n'
-                f'- Speaker: {person}\n- Verified by: {quote["verified_by"]}\n'
-                f'- Clip: {clip_id}\n- Cast and clip references: '
-                f'{profile.get("clip_source", "See clip record")}\n', encoding="utf-8"
-            )
-            write_json(directory / "manifest.json", {
-                "clip_id": clip_id, "quote_id": quote_id, "deck_id": deck_id,
-                "format": kind, "dimensions": [1080, height], "slides": names,
-                "status": "READY_FOR_REVIEW", "platform": platform,
-                "layout": [{"title": title, "body": body} for title, body in slides],
-            })
+        directory.mkdir(parents=True, exist_ok=True)
+        total = len(slides)
+        for n, ((kind_s, data), filename) in enumerate(zip(slides, names), 1):
+            if kind_s == "cover":
+                im = TD.slide_cover(1080, H, headline, kicker, still, focus, "image" if still is not None else "type")
+                TD.slide_cover(1080, H, headline, kicker, None, focus, "type").save(directory / "01_cover_alt-typographic.png")
+            elif kind_s == "quote":
+                im = TD.slide_quote(1080, H, quote["text"], quote["speaker"], credit, n, total)
+            else:
+                heading, body, sub, img = data
+                im = TD.slide_text(1080, H, heading, body, n, total, sub, img, focus)
+            im.save(directory / filename)
+        TD.phone_preview([directory / "01_cover.png", directory / "01_cover_alt-typographic.png"],
+                         directory / "_cover_comparison_phone.jpg", "Cover A: image-led (display)   ·   Cover B: typography-led (serif)")
+        TD.phone_preview([directory / n for n in names], directory / "_deck_phone_preview.jpg", f"{platform} · {kind} · 1080x{H}")
+        caption = (f"{headline.title()}: {person}, in a handwritten sketch about her son, quoted in {credit}.\n"
+                   f"{profile['performer']} plays {character} in The Greatest. Swipe for the context and the clip.\n"
+                   f"Source: {quote['source_url']}\n{profile.get('close_question', 'What did you notice in her face when the news came?')}")
+        (directory / "caption.txt").write_text(caption + "\n", encoding="utf-8")
+        alts = ["Cover: " + (f"still from The Greatest of {character}, " if still is not None else "") + f"headline '{headline}', name {person}."] + \
+               [f"Slide {i}: " + (f"quote from {person}: “{quote['text']}” — {credit}." if k == "quote" else f"{d[0].title()}. {d[1]}") for i, (k, d) in enumerate(slides[1:], 2)]
+        (directory / "alt-text.txt").write_text("\n".join(alts) + "\n", encoding="utf-8")
+        (directory / "sources.md").write_text(
+            f'# Sources\n\n- Quote ({quote.get("attribution_type", "")}): “{quote["text"]}”\n- Speaker: {quote["speaker"]}\n'
+            f'- Source: {quote["source_title"]}\n- Location: {quote["source_location"]}\n- URL: {quote["source_url"]}\n'
+            f'- Verified by: {quote["verified_by"]} · reuse: {quote.get("reuse_status")}\n- Clip: {clip_id} · {profile.get("clip_source", "")}\n'
+            f'- Performer credit: {profile["performer"]} as {character} (The Greatest, Prime Video)\n', encoding="utf-8")
+        write_json(directory / "manifest.json", {
+            "clip_id": clip_id, "quote_id": quote_id, "deck_id": deck_id, "design": "tic-design-v1",
+            "format": kind, "dimensions": [1080, H], "slides": names, "alt_cover": "01_cover_alt-typographic.png",
+            "cover_treatment": "image-led" if still is not None else "typographic", "cover_time": t,
+            "headline": headline, "fonts": TD.fonts_used(), "status": "READY_FOR_REVIEW", "platform": platform,
+            "upload_route_check": "confirm the destination's current format and crop before posting",
+        })
         outputs.append(str(directory.relative_to(root)))
     return outputs
 

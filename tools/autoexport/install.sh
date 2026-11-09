@@ -30,7 +30,7 @@ if [[ -d "$SHOW/IMPORTS" && ! -L "$SHOW/IMPORTS" ]]; then
   rmdir "$SHOW/IMPORTS" 2>/dev/null || { echo "IMPORTS still has files that clash with names in $SOURCES; left in place."; }
 fi
 [[ -e "$SHOW/IMPORTS" ]] || ln -s "$SOURCES" "$SHOW/IMPORTS"
-cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/tic_cover.py" "$HERE/tic_carousel.py" "$HERE/characters.json" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
+cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/tic_cover.py" "$HERE/tic_carousel.py" "$HERE/tic_carousel_design.py" "$HERE/characters.json" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
 # covers: on-device face/eye/saliency helper (macOS Vision) + Pillow for drawing
 command -v swiftc >/dev/null && swiftc -O "$HERE/ticvision.swift" -o "$APP/ticvision" 2>/dev/null || echo "Note: couldn't build the cover helper (needs Xcode command line tools); covers will be flagged for review."
 # Keep Pillow separate from Homebrew's managed Python packages.
