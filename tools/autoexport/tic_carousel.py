@@ -247,7 +247,7 @@ def packages(root, clip_id, profile, quote_id, quote):
         TD.phone_preview([directory / "01_cover.png", directory / "01_cover_alt-typographic.png"],
                          directory / "_cover_comparison_phone.jpg", "Cover A: image-led (display)   ·   Cover B: typography-led (serif)")
         TD.phone_preview([directory / n for n in names], directory / "_deck_phone_preview.jpg", f"{platform} · {kind} · 1080x{H}")
-        caption = (f"{headline.title()}: {person}, in a handwritten sketch about her son, quoted in {credit}.\n"
+        caption = (f"{headline.title()}: {person} — {credit}.\n"
                    f"{profile['performer']} plays {character} in The Greatest. Swipe for the context and the clip.\n"
                    f"Source: {quote['source_url']}\n{profile.get('close_question', 'What did you notice in her face when the news came?')}")
         (directory / "caption.txt").write_text(caption + "\n", encoding="utf-8")
