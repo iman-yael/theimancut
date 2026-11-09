@@ -478,7 +478,10 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None
             d.text((cxt - w / 2 + 3, top + i * lh - size * 0.1 + 5), l, font=f, fill=(0, 0, 0, 150))
             d.text((cxt - w / 2, top + i * lh - size * 0.1), l, font=f, fill=IVORY + (255,))
         wm = wordmark(470)
-        img.alpha_composite(wm, (int(W / 2 - wm.width / 2), 255))
+        wx = int(W / 2 - wm.width / 2); wy = 255
+        if any(overlap((wx, wy, wx + wm.width, wy + wm.height), fb) for fb in fboxes):
+            wy = int(top - size * 0.1 - wm.height - 28)     # on a face: sit just above the headline instead
+        img.alpha_composite(wm, (wx, wy))
         img.convert("RGB").save(out, quality=92)
         return True, dict(size=size, lines=lines, text_box=[int(v) for v in box], face_box=[int(v) for v in main] if main else None, crop_x=x0)
     return False, "headline can't be large (≥140 px) without covering the face"
