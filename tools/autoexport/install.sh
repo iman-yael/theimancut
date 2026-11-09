@@ -23,7 +23,13 @@ fi
 cp "$HERE/tic_autoexport.sh" "$HERE/tic_subdraft.py" "$HERE/tic_cover.py" "$HERE/tic_carousel.py" "$HERE/characters.json" "$HERE/cast_names.txt" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
 # covers: on-device face/eye/saliency helper (macOS Vision) + Pillow for drawing
 command -v swiftc >/dev/null && swiftc -O "$HERE/ticvision.swift" -o "$APP/ticvision" 2>/dev/null || echo "Note: couldn't build the cover helper (needs Xcode command line tools); covers will be flagged for review."
-python3 -c "import PIL" 2>/dev/null || python3 -m pip install --user -q Pillow
+# Keep Pillow separate from Homebrew's managed Python packages.
+command -v python3 >/dev/null || { echo "Python 3 is required. Install it first: brew install python"; exit 1; }
+if [[ ! -x "$APP/.render-venv/bin/python3" ]]; then
+  python3 -m venv "$APP/.render-venv"
+fi
+"$APP/.render-venv/bin/python3" -c "import PIL" 2>/dev/null ||
+  "$APP/.render-venv/bin/python3" -m pip install -q Pillow
 cp "$REPO/brand/watermark/iman-cut-watermark-trimmed.png" "$APP/"
 cp "$HERE/Export Now.command" "$SHOW/"; chmod +x "$SHOW/Export Now.command"
 cat > "$SHOW/READ ME.txt" <<TXT

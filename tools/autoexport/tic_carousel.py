@@ -113,6 +113,8 @@ def build(clip, root):
     if clip_id.endswith("."):
         raise ValueError("Clip name cannot end with a dot")
     profile = read_json(root / "inputs" / f"{clip_id}.json")
+    if "approved_take" in profile and not isinstance(profile["approved_take"], str):
+        raise ValueError("approved_take must be text")
     quote_id = profile.get("quote_id")
     quote = {}
     if isinstance(quote_id, str) and re.fullmatch(r"[A-Za-z0-9_-]+", quote_id):
@@ -239,16 +241,22 @@ def main():
     counts = {}
     records = []
     failed = False
-    for clip in sorted(originals.iterdir()) if originals.is_dir() else []:
-        if not clip.is_file() or clip.suffix.lower() not in {".mp4", ".mov", ".m4v"}:
-            continue
+    clips = {}
+    for path in sorted(originals.iterdir()) if originals.is_dir() else []:
+        if path.is_file() and path.suffix.lower() in {".mp4", ".mov", ".m4v"}:
+            clips.setdefault(path.stem, []).append(path)
+    for matching in clips.values():
+        clip = matching[0]
         try:
+            if len(matching) > 1:
+                raise ValueError("Multiple originals share this filename stem. Rename to unique stems.")
             status = build(clip, root)
         except (OSError, ValueError, TypeError) as error:
             status = "INVALID_INPUT"
             failed = True
             write_json(root / "knowledge-base" / "clips" / f"{clip.stem}.json",
-                       {"filename": clip.name, "status": status, "action": str(error)})
+                       {"clip_id": clip.stem, "filename": clip.name, "status": status,
+                        "action": str(error), "packages": []})
         counts[status] = counts.get(status, 0) + 1
         records.append(read_json(root / "knowledge-base" / "clips" / f"{clip.stem}.json"))
     publish_indexes(root / "knowledge-base", records)

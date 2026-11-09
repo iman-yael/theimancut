@@ -20,6 +20,8 @@ DROP="$SHOW/_drop-finished-clips-here"
 DONE="$SHOW/_originals"
 APP="${TIC_APP:-$HOME/Library/Application Support/theimancut}"
 WM="$APP/iman-cut-watermark-trimmed.png"
+RENDER_PYTHON="$APP/.render-venv/bin/python3"
+[[ -x "$RENDER_PYTHON" ]] || RENDER_PYTHON=python3
 LOG="$SHOW/_export-log.txt"
 MAN="$SHOW/_export-manifest.csv"
 LOCK="$APP/.export.lock"
@@ -122,7 +124,7 @@ make_covers() {  # src name transcript fps snap-watermark → covers per platfor
   local src="$1" name="$2" text="$3" fps="$4" snapwm="$5" res j
   [[ "${TIC_COVERS:-1}" == 1 && -f "$APP/tic_cover.py" ]] || return 0
   if [[ -z "$text" ]]; then j=("$APP/whisper/$name/"*.json); [[ -f "${j[0]:-}" ]] && text="${j[0]}"; fi
-  res=$(python3 "$APP/tic_cover.py" "$src" "$name" "$SHOW" "$APP" --cast "$APP/cast_names.txt" ${text:+--text "$text"} 2>>"$LOG" | tail -1)
+  res=$("$RENDER_PYTHON" "$APP/tic_cover.py" "$src" "$name" "$SHOW" "$APP" --cast "$APP/cast_names.txt" ${text:+--text "$text"} 2>>"$LOG" | tail -1)
   log "  covers: ${res:-FAILED (see log)} → _covers/$name""_COVERS.md"
   local envf="$SHOW/_covers/$name.title.env"
   [[ -f "$envf" ]] || return 0
@@ -193,6 +195,15 @@ captioned_from_approved
 for src in "$DROP"/*.mp4 "$DROP"/*.mov "$DROP"/*.m4v; do
   stable "$src" || { log "waiting: $(basename "$src") is still being copied"; continue; }
   name="$(basename "${src%.*}")"; srt="${src%.*}.srt"; [[ -f "$srt" ]] || srt=""
+  # Export and research filenames are keyed by stem.
+  collision=0
+  for prior in "$DONE/$name".{mp4,mov,m4v}; do
+    [[ -f "$prior" ]] && collision=1
+  done
+  if [[ $collision == 1 ]]; then
+    log "  name already exported: $(basename "$src"); rename it to a unique stem before retrying"
+    continue
+  fi
   probe_source "$src"; fps="$OUT_FPS"; snapwm="${TIC_SNAP_WATERMARK:-1}"
   log "start: $(basename "$src") (fps $fps, picture ${ACTIVE_CROP:-full frame}, subtitles: ${srt:+yes}${srt:-no})"
   ok=1
@@ -224,6 +235,6 @@ EOF
   fi
 done
 if [[ -f "$APP/tic_carousel.py" ]]; then
-  python3 "$APP/tic_carousel.py" "$SHOW" >>"$LOG" 2>&1 || log "  carousels: check carousels/run-status.json and the clip review records"
+  "$RENDER_PYTHON" "$APP/tic_carousel.py" "$SHOW" >>"$LOG" 2>&1 || log "  carousels: check carousels/run-status.json and the clip review records"
 fi
 true
