@@ -1,7 +1,9 @@
 #!/bin/bash
 # The Iman Cut: automatic platform export ("option B": whole frame, no crop, on a blurred, darkened copy of itself).
 #
-# Drop a finished clip into   ~/Desktop/theimancut/the-greatest/_drop-finished-clips-here/
+# Drop a finished clip into   ~/Movies/The Iman Cut/Export/the-greatest/_drop-finished-clips-here/
+# (also reachable from the Desktop shortcut ~/Desktop/theimancut). Movies, not Desktop: macOS blocks
+# background helpers from reading the Desktop, so a Desktop folder would never be processed.
 # and it is rendered to:
 #   instagram/  NAME_IG_1080x1920.mp4          9:16, watermark ON
 #   tiktok/     NAME_TT_1080x1920.mp4          9:16, watermark ON
@@ -14,7 +16,7 @@
 # Settings can be overridden with env vars: TIC_ROOT, TIC_FPS (e.g. 24000/1001), TIC_SNAP_WATERMARK=0.
 set -u
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
-ROOT="${TIC_ROOT:-$HOME/Desktop/theimancut}"
+ROOT="${TIC_ROOT:-$HOME/Movies/The Iman Cut/Export}"
 SHOW="$ROOT/the-greatest"
 DROP="$SHOW/_drop-finished-clips-here"
 DONE="$SHOW/_originals"

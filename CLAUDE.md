@@ -43,7 +43,7 @@ Standing instructions for every Claude session that opens this repo (Mac or clou
 | Catalog (source of truth) | `catalog/catalog.sqlite`; regenerate docs with `python3 -m tic.cli docs`, tests with `python3 -m unittest tests.test_core tests.test_search_and_takes` |
 | Film & TV library (all full-length sources) | `~/Movies/The Iman Cut/Sources/`: the one folder the Clipper lists (from 2026-11-08 on) and the auto-export's `IMPORTS` points to. Random screen recordings stay out of it |
 | Clipper (split long videos into clips) | `tools/clipper/`; start with `Start Clipper.command`; output in `~/Movies/The Iman Cut/Clips/` |
-| Desktop auto-export | `tools/autoexport/` (install: `bash tools/autoexport/install.sh`) → `~/Desktop/theimancut/the-greatest/` |
+| Desktop auto-export | `tools/autoexport/` (install: `bash tools/autoexport/install.sh`) → `~/Movies/The Iman Cut/Export/the-greatest/` (Desktop shortcut `theimancut`; background helpers can't read the Desktop) |
 | Desktop folders | `IMPORTS/` (shortcut to `~/Movies/The Iman Cut/Sources`; never exported; `_SOURCE_MAP.md` lists them, UNVERIFIED until matched to official uploads) · `_drop-finished-clips-here/` · `instagram/ tiktok/ snapchat/ youtube/` · `_subtitles-to-review/` · `_subtitles-approved/` · `_originals/` |
 | Bird Clay cut (Mac) | `projects/PRJ-000001_BirdClay/local_cut/` (edit list, subtitles, render scripts; no video in git) |
 | Trailer remix kit | `projects/PRJ-000002_TrailerRemix/` |
@@ -51,7 +51,7 @@ Standing instructions for every Claude session that opens this repo (Mac or clou
 
 ## Covers and quote carousels
 - For every finished clip, use the existing `tools/autoexport/tic_cover.py` workflow and apply [the thumbnail selection and review rules](docs/THUMBNAIL_WORKFLOW.md).
-- When finished clips are available, update the clip-derived knowledge base and prepare platform carousel packages using [the quote carousel workflow](carousels/README.md). Start with Bird Clay. Use the existing catalog IDs and verify every real-life quote before export. Write reviewed clip and quote JSON into the Desktop carousel workspace documented there. The Mac auto-export agent renders the platform packages and records missing evidence.
+- When finished clips are available, update the clip-derived knowledge base and prepare platform carousel packages using [the quote carousel workflow](carousels/README.md). Start with Bird Clay. Use the existing catalog IDs and verify every real-life quote before export. Write reviewed clip and quote JSON into the carousel workspace (`~/Movies/The Iman Cut/Export/the-greatest/carousels/`, copies in `carousels/knowledge-base/`) documented there. The Mac auto-export agent renders the platform packages and records missing evidence.
 
 ## Repo hygiene
 - No video, audio or images from the show in git (`.gitignore`). Brand assets are the exception.

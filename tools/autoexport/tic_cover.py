@@ -659,6 +659,11 @@ def main():
             entry = ch; break
     if override:
         entry = None                                   # your own headline wins on every platform
+    # headlines written for THIS clip (what actually happens in it) win over templates
+    try:
+        clip_heads = {k: v.upper() for k, v in json.load(open(os.path.join(show, "carousels", "inputs", name + ".json"))).get("cover_headlines", {}).items()}
+    except (OSError, ValueError):
+        clip_heads = {}
     lowname = name.lower(); group = "family" in lowname or "cast" in lowname or "FAMILY" in headline or "CAST" in headline
     reaction = "REACTION" in headline
 
@@ -707,7 +712,7 @@ def main():
             if not os.path.exists(full):
                 grab(src, c["t"], crop, full)
             frame = Image.open(full).convert("RGB")
-            ph = platform_headline(key, entry, headline)
+            ph = clip_heads.get(key) or platform_headline(key, entry, headline)
             for h in [ph] + ([headline] if headline != ph else []) + [o for o in options if o not in (headline, ph) and len(o) < len(ph)]:
                 ok, info = (vertical_cover_v2(frame, c["faces"], h, out, key) if kind == "vertical" else wide_cover(frame, c["faces"], h, out))
                 if ok:

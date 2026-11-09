@@ -1,12 +1,22 @@
 #!/bin/bash
 # One-time setup on your Mac:  bash tools/autoexport/install.sh   (run from the theimancut repo folder)
-# Creates ~/Desktop/theimancut/the-greatest/{instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved}
+# Creates ~/Movies/The Iman Cut/Export/the-greatest/{instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals,_subtitles-to-review,_subtitles-approved}
 # plus IMPORTS as a shortcut to the shared Film & TV library (~/Movies/The Iman Cut/Sources),
 # and a background agent that exports anything dropped into _drop-finished-clips-here (option B layout).
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"; REPO="$(cd "$HERE/../.." && pwd)"
 APP="$HOME/Library/Application Support/theimancut"
-SHOW="$HOME/Desktop/theimancut/the-greatest"
+ROOT="$HOME/Movies/The Iman Cut/Export"        # not the Desktop: background helpers can't read it (macOS privacy)
+SHOW="$ROOT/the-greatest"
+DESK="$HOME/Desktop/theimancut"
+# move an older Desktop install into place, then leave a Desktop shortcut to the new location
+if [[ -d "$DESK" && ! -L "$DESK" ]]; then
+  mkdir -p "$ROOT"
+  if [[ -d "$DESK/the-greatest" && ! -e "$SHOW" ]]; then mv "$DESK/the-greatest" "$SHOW"; fi
+  rmdir "$DESK" 2>/dev/null || echo "Note: $DESK still has other files; left in place (no Desktop shortcut made)."
+fi
+mkdir -p "$ROOT"
+[[ -e "$DESK" ]] || ln -s "$ROOT" "$DESK"
 PLIST="$HOME/Library/LaunchAgents/com.theimancut.autoexport.plist"
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 command -v ffmpeg >/dev/null || { echo "ffmpeg is missing. Install it first:  brew install ffmpeg"; exit 1; }
@@ -48,4 +58,4 @@ sed -e "s#__SCRIPT__#$APP/tic_autoexport.sh#" -e "s#__DROP__#$SHOW/_drop-finishe
 launchctl bootout "gui/$(id -u)" "$PLIST" 2>/dev/null || true
 launchctl bootstrap "gui/$(id -u)" "$PLIST"
 echo "Installed. Folders: $SHOW"
-echo "Test: drop a clip into _drop-finished-clips-here. If macOS asks for access to the Desktop, click Allow."
+echo "Test: drop a clip into _drop-finished-clips-here (Desktop shortcut: theimancut). Output appears within a minute."
