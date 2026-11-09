@@ -397,7 +397,7 @@ def platform_headline(key, entry, chosen):
     }.get(key, chosen)
 
 
-def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None):
+def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None, text=()):
     """Full-bleed 9:16 crop around the subject; huge ivory headline in the lower half (never on the face);
     dark fade behind it; wordmark at the top. Checks: face and headline inside Instagram's 3:4 grid,
     headline clear of the app's buttons for TikTok/Snapchat/Shorts."""
@@ -427,6 +427,12 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None
         sb = (salient["x"] * fw, salient["y"] * fh, (salient["x"] + salient["w"]) * fw, (salient["y"] + salient["h"] * 0.6) * fh)
         fboxes = [((sb[0] - x0) * s, (sb[1] - y0) * s, (sb[2] - x0) * s, (sb[3] - y0) * s)]
     main = max(fboxes, key=lambda b: (b[2] - b[0]) * (b[3] - b[1])) if fboxes else None
+    # on-screen text in the frame (name captions, signs): never put the headline over it
+    tboxes = [((t["x"] * fw - x0) * s - 20, (t["y"] * fh - y0) * s - 20, ((t["x"] + t["w"]) * fw - x0) * s + 20, ((t["y"] + t["h"]) * fh - y0) * s + 20)
+              for t in text if ((t["x"] + t["w"]) * fw - x0) > 0 and (t["x"] * fw - x0) < cw]
+    # a caption BELOW the face (e.g. a name strap) gets buried under the dark fade behind the headline instead
+    buried = [tb for tb in tboxes if main and tb[1] > main[3] - 10]
+    tboxes = [tb for tb in tboxes if tb not in buried]
     if main and not (main[1] >= V_GRID_34[1] - 0.2 * (main[3] - main[1]) and main[3] <= V_GRID_34[3]):
         return False, "face falls outside the Instagram profile-grid crop"
     ui_safe = key in ("tiktok", "snapchat", "shorts")
@@ -456,15 +462,15 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None
             continue
         cxt = (W / 2) if not ui_safe else (W / 2 - 40)        # nudge left of TikTok/Snap buttons
         box = (cxt - best[1] / 2, top, cxt + best[1] / 2, top + th)
-        if any(overlap(box, fb) for fb in fboxes):
+        if any(overlap(box, fb) for fb in fboxes) or any(overlap(box, tb) for tb in tboxes):
             continue
         if ui_safe and any(overlap(box, z) for z in V_UI):
             continue
-        # dark fade from just below the face to the bottom
+        # dark fade from just below the face to the bottom (strong enough to bury any caption burned into the frame)
         fade_from = int(max(text_top_min - 120, H * 0.45))
         a = Image.new("L", (1, H), 0)
         for y in range(H):
-            a.putpixel((0, y), int(215 * max(0.0, min(1.0, (y - fade_from) / max(1, (top + th * 0.5) - fade_from)))))
+            a.putpixel((0, y), int((252 if (tboxes or buried) else 215) * max(0.0, min(1.0, (y - fade_from) / max(1, (top + th * 0.25) - fade_from)))))
         img.alpha_composite(Image.merge("RGBA", (Image.new("L", (W, H), 0),) * 3 + (a.resize((W, H)),)))
         d = ImageDraw.Draw(img)
         for i, l in enumerate(lines):
@@ -478,7 +484,7 @@ def vertical_cover_v2(frame, faces, headline, out, key="instagram", salient=None
     return False, "headline can't be large (≥140 px) without covering the face"
 
 
-def wide_cover(frame, faces, headline, out):
+def wide_cover(frame, faces, headline, out, text=()):
     W, H = 1280, 720
     fw, fh = frame.size
     if fw / fh > W / H:                               # wider than 16:9 (e.g. scope): crop sides around the subject
@@ -488,7 +494,9 @@ def wide_cover(frame, faces, headline, out):
         faces = [dict(f, x=(f["x"] * fw - x0) / cw, w=f["w"] * fw / cw) for f in faces]
     img = frame.resize((W, H), Image.LANCZOS).convert("RGBA")
     fboxes = [(f["x"] * W, f["y"] * H, (f["x"] + f["w"]) * W, (f["y"] + f["h"]) * H) for f in faces]
-    main = max(fboxes, key=lambda b: (b[2] - b[0]) * (b[3] - b[1])) if fboxes else None
+    faces_only = list(fboxes)
+    fboxes += [(t["x"] * W - 15, t["y"] * H - 15, (t["x"] + t["w"]) * W + 15, (t["y"] + t["h"]) * H + 15) for t in text]
+    main = max(faces_only, key=lambda b: (b[2] - b[0]) * (b[3] - b[1])) if fboxes else None
     mcx = ((main[0] + main[2]) / 2 / W) if main else 0.5
     side = "right" if mcx < 0.45 else ("left" if mcx > 0.55 else None)
     if side is None:
@@ -632,7 +640,8 @@ def main():
             continue
         v = vis.get(p, {"faces": [], "salient": None})
         faces = [f for f in v.get("faces", []) if f.get("conf", 1) > 0.5 and f["w"] > 0.04]
-        cands.append(dict(t=t, path=p, sharp=sharpness(im), bright=st.mean[0] / 255, faces=faces, salient=v.get("salient")))
+        cands.append(dict(t=t, path=p, sharp=sharpness(im), bright=st.mean[0] / 255, faces=faces, salient=v.get("salient"),
+                          text=v.get("text", [])))
     if not cands:
         print("REVIEW: no usable frame (all blank or unreadable)"); return 2
     sharp_sorted = sorted(c["sharp"] for c in cands)
@@ -696,7 +705,7 @@ def main():
             if grab(src, t, crop, pth, 960):
                 v = vision([pth], app).get(pth, {"faces": []})
                 pin.append(dict(t=t, path=pth, faces=[f for f in v.get("faces", []) if f.get("conf", 1) > 0.5], sharp=1, clarity=1, bright=0.5,
-                                salient=v.get("salient")))
+                                salient=v.get("salient"), text=v.get("text", [])))
         pin.sort(key=lambda c: not c["faces"])          # pinned moments with a detected face first, otherwise your order
         ranked = pin or ranked
         subject_note = "frame pinned by you (NAME.cover.txt)"
@@ -723,7 +732,7 @@ def main():
             alts = sorted({v for v in clip_heads.values() if v != ph}, key=len) if clip_heads else \
                    ([headline] if headline != ph else []) + [o for o in options if o not in (headline, ph) and len(o) < len(ph)]
             for h in [ph] + alts:
-                ok, info = (vertical_cover_v2(frame, c["faces"], h, out, key, c.get("salient")) if kind == "vertical" else wide_cover(frame, c["faces"], h, out))
+                ok, info = (vertical_cover_v2(frame, c["faces"], h, out, key, c.get("salient"), c.get("text", [])) if kind == "vertical" else wide_cover(frame, c["faces"], h, out, c.get("text", [])))
                 if ok:
                     result = (c, h, info); break
                 why.append(f"{c['t']:.2f}s: {info}")

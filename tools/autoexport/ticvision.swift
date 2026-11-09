@@ -18,7 +18,10 @@ for path in CommandLine.arguments.dropFirst() {
     if let img = NSImage(contentsOfFile: path), let cg = img.cgImage(forProposedRect: nil, context: nil, hints: nil) {
         let lm = VNDetectFaceLandmarksRequest()
         let sal = VNGenerateAttentionBasedSaliencyImageRequest()
-        try? VNImageRequestHandler(cgImage: cg).perform([lm, sal])
+        let txt = VNDetectTextRectanglesRequest()
+        try? VNImageRequestHandler(cgImage: cg).perform([lm, sal, txt])
+        out["text"] = (txt.results ?? []).map { b -> [String: Double] in
+            let r = b.boundingBox; return ["x": Double(r.minX), "y": Double(1 - r.maxY), "w": Double(r.width), "h": Double(r.height)] }
         var faces: [[String: Any]] = []
         for f in lm.results ?? [] {
             let b = f.boundingBox
