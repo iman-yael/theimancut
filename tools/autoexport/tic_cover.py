@@ -713,7 +713,9 @@ def main():
                 grab(src, c["t"], crop, full)
             frame = Image.open(full).convert("RGB")
             ph = clip_heads.get(key) or platform_headline(key, entry, headline)
-            for h in [ph] + ([headline] if headline != ph else []) + [o for o in options if o not in (headline, ph) and len(o) < len(ph)]:
+            alts = sorted({v for v in clip_heads.values() if v != ph}, key=len) if clip_heads else \
+                   ([headline] if headline != ph else []) + [o for o in options if o not in (headline, ph) and len(o) < len(ph)]
+            for h in [ph] + alts:
                 ok, info = (vertical_cover_v2(frame, c["faces"], h, out, key) if kind == "vertical" else wide_cover(frame, c["faces"], h, out))
                 if ok:
                     result = (c, h, info); break
