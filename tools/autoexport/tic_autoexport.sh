@@ -23,7 +23,7 @@ WM="$APP/iman-cut-watermark-trimmed.png"
 LOG="$SHOW/_export-log.txt"
 MAN="$SHOW/_export-manifest.csv"
 LOCK="$APP/.export.lock"
-mkdir -p "$SHOW"/{instagram,tiktok,youtube,snapchat} "$DROP" "$DONE" "$APP"
+mkdir -p "$SHOW"/{IMPORTS,instagram,tiktok,youtube,snapchat} "$DROP" "$DONE" "$APP"
 [[ -f "$MAN" ]] || echo "date,source,output,platform,size,fps,watermark,subtitles,rights_status" > "$MAN"
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S')  $*" >> "$LOG"; }
 

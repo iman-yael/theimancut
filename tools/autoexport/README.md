@@ -12,6 +12,7 @@ If macOS asks whether this may access your Desktop, click **Allow**.
 ## Folders it creates
 ```
 ~/Desktop/theimancut/the-greatest/
+  IMPORTS/                     ← raw screen recordings / source files (storage only, never auto-exported)
   _drop-finished-clips-here/   ← put finished clips here (+ optional same-name .srt)
   instagram/   NAME_IG_1080x1920.mp4          9:16 · THE IMAN CUT watermark
   tiktok/      NAME_TT_1080x1920.mp4          9:16 · watermark
@@ -28,6 +29,7 @@ If macOS asks whether this may access your Desktop, click **Allow**.
 - **Watermark:** the approved PNG, 230 px wide, 64 px from the right edge, 250 px from the top. These are the v05 settings.
 
 ## Notes
+- **IMPORTS:** where long source recordings live. Cut clips from them (e.g. with Clipper), then drop only the finished clips into the drop folder. Recordings in IMPORTS are not cleared for posting by being there; log their source and permission first.
 - **Trigger:** the agent runs when the drop folder changes, and every 60 s as a backstop. It waits until a file has stopped growing, so half-copied exports are skipped until complete. It never overwrites an existing export.
 - **Snapchat watermark:** on by default. To turn it off, run with `TIC_SNAP_WATERMARK=0`.
 - **Nothing is uploaded or posted.** Every export is logged with rights status `UNKNOWN-check-before-posting`.

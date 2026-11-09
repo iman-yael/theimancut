@@ -1,6 +1,6 @@
 #!/bin/bash
 # One-time setup on your Mac:  bash tools/autoexport/install.sh   (run from the theimancut repo folder)
-# Creates ~/Desktop/theimancut/the-greatest/{instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals}
+# Creates ~/Desktop/theimancut/the-greatest/{IMPORTS,instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals}
 # and a background agent that exports anything dropped into _drop-finished-clips-here (option B layout).
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"; REPO="$(cd "$HERE/../.." && pwd)"
@@ -9,12 +9,13 @@ SHOW="$HOME/Desktop/theimancut/the-greatest"
 PLIST="$HOME/Library/LaunchAgents/com.theimancut.autoexport.plist"
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 command -v ffmpeg >/dev/null || { echo "ffmpeg is missing. Install it first:  brew install ffmpeg"; exit 1; }
-mkdir -p "$APP" "$SHOW"/{instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals} "$HOME/Library/LaunchAgents"
+mkdir -p "$APP" "$SHOW"/{IMPORTS,instagram,tiktok,youtube,snapchat,_drop-finished-clips-here,_originals} "$HOME/Library/LaunchAgents"
 cp "$HERE/tic_autoexport.sh" "$APP/"; chmod +x "$APP/tic_autoexport.sh"
 cp "$REPO/brand/watermark/iman-cut-watermark-trimmed.png" "$APP/"
 cp "$HERE/Export Now.command" "$SHOW/"; chmod +x "$SHOW/Export Now.command"
 cat > "$SHOW/READ ME.txt" <<TXT
 THE IMAN CUT: The Greatest exports
+0. IMPORTS = raw screen recordings / source files (storage only; nothing here is exported automatically).
 1. Drop a finished clip (and optionally a same-named .srt) into _drop-finished-clips-here
 2. Within a minute it appears in instagram / tiktok / snapchat (1080x1920, watermark)
    and youtube (Shorts 1080x1920 + landscape 1920x1080, no watermark).
