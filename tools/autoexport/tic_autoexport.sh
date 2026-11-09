@@ -5,7 +5,7 @@
 # (also reachable from the Desktop shortcut ~/Desktop/theimancut). Movies, not Desktop: macOS blocks
 # background helpers from reading the Desktop, so a Desktop folder would never be processed.
 # and it is rendered to:
-#   instagram/  NAME_IG_1080x1920.mp4          9:16, watermark ON
+#   instagram/  NAME_IG_1080x1920.mp4          9:16, NO watermark (Iman, 2026-11-09)
 #   tiktok/     NAME_TT_1080x1920.mp4          9:16, watermark ON
 #   snapchat/   NAME_SC_1080x1920.mp4          9:16, watermark ON
 #   youtube/    NAME_YT-Shorts_1080x1920.mp4   9:16, NO watermark (YouTube adds its own branding)
@@ -163,7 +163,7 @@ captioned_from_approved() {  # NAME.srt approved by Iman → captioned versions,
         log "  captioned: $dir/$(basename "$out")"
       else ok=0; log "  FAILED captioned: $dir/$(basename "$out")"; fi
     done <<EOT
-instagram|IG|1080|1920|1
+instagram|IG|1080|1920|0
 tiktok|TT|1080|1920|1
 snapchat|SC|1080|1920|${TIC_SNAP_WATERMARK:-1}
 youtube|YT-Shorts|1080|1920|0
@@ -220,7 +220,7 @@ for src in "$DROP"/*.mp4 "$DROP"/*.mov "$DROP"/*.m4v; do
       ok=0; log "  FAILED: $dir/${name}_${tag}_${W}x${H}.mp4"; rm -f "${out%.mp4}.part.mp4"
     fi
   done <<EOF
-instagram|IG|1080|1920|1
+instagram|IG|1080|1920|0
 tiktok|TT|1080|1920|1
 snapchat|SC|1080|1920|$snapwm
 youtube|YT-Shorts|1080|1920|0

@@ -14,7 +14,7 @@ Standing instructions for every Claude session that opens this repo (Mac or clou
 
 ## Brand rules (decided; don't re-ask)
 - Watermark text: exactly **THE IMAN CUT**, never "The Yael Cut". Asset: `brand/watermark/iman-cut-watermark-trimmed.png`, 230 px wide, 64 px from the right edge, 250 px from the top on 1080×1920.
-- Watermark **ON** for Instagram, TikTok and Snapchat; **OFF** for all YouTube (Shorts and landscape).
+- Watermark **ON** for TikTok and Snapchat; **OFF** for Instagram (Iman, 2026-11-09) and all YouTube (Shorts and landscape).
 - Vertical layout is **option B (fit-blurred)**: the whole frame, no crop, centred on a blurred, darkened copy of itself (270×480 boxblur 12:2, brightness −0.10, saturation 0.85). No black bars, no stretching.
 - Sizes: 1080×1920 for IG, TikTok, Snapchat and YouTube Shorts; 1920×1080 for YouTube landscape.
 - Current cuts: **original scene audio only**. No narration cards, placeholders, added music, or generated voices unless Iman asks.
