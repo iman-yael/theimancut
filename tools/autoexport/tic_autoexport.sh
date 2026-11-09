@@ -35,17 +35,22 @@ if ! mkdir "$LOCK" 2>/dev/null; then
 fi
 trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 
-pick_fps() {  # source rate snapped to the nearest standard rate (keeps film at 23.976; no interpolation)
-  [[ -n "${TIC_FPS:-}" ]] && { echo "$TIC_FPS"; return; }
-  local r; r=$(ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=nw=1:nk=1 "$1")
-  awk -v r="$r" 'BEGIN{ split(r,a,"/"); f=(a[2]>0)?a[1]/a[2]:24; n=split("24000/1001 24 25 30000/1001 30 50 60000/1001 60",s," ");
-    best=s[1]; bd=1e9; for(i=1;i<=n;i++){ split(s[i],b,"/"); v=(b[2]>0)?b[1]/b[2]:b[1]; d=(v>f)?v-f:f-v; if(d<bd){bd=d;best=s[i]} } print best }'
+probe_source() {  # same method as Clipper: active picture (strip black bars) + real frame cadence, sampled mid-clip
+  local src="$1" dur mid cd
+  dur=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$src" | awk '{print int($1)}')
+  mid=$(( dur > 12 ? dur/2 - 5 : 0 )); local span=$(( dur < 10 ? (dur>0?dur:1) : 10 ))
+  cd=$(ffmpeg -nostdin -hide_banner -ss "$mid" -t "$span" -i "$src" -vf cropdetect=24:2:0 -an -f null - 2>&1 | grep -o 'crop=[0-9:]*' | sort | uniq -c | sort -rn | head -1 | awk '{print $2}')
+  ACTIVE_CROP="${cd:-}"
+  if [[ -n "${TIC_FPS:-}" ]]; then OUT_FPS="$TIC_FPS"; return; fi
+  local frames; frames=$(ffmpeg -nostdin -hide_banner -ss "$mid" -t "$span" -i "$src" -vf "mpdecimate=hi=256:lo=128:frac=0.1,showinfo" -an -f null - 2>&1 | grep -c pts_time)
+  OUT_FPS=$(awk -v n="$frames" -v t="$span" 'BEGIN{u=n/t; if(u>=20 && u<=25.5) print "24000/1001"; else if(u<=26.5 && u>25.5) print "25"; else if(u<=31 && u>26.5) print "30000/1001"; else if(u<20) print "24000/1001"; else print "30"}')
 }
+pick_fps() { probe_source "$1"; echo "$OUT_FPS"; }   # kept for callers; also sets ACTIVE_CROP
 
 render() {  # src out W H watermark(0/1) srt fps
   local src="$1" out="$2" W="$3" H="$4" wmk="$5" srt="$6" fps="$7" bw bh tmp
   bw=$((W/4)); bh=$((H/4)); tmp="${out%.mp4}.part.mp4"
-  local g="[0:v]fps=$fps,split[a][b];[a]scale=$bw:$bh:force_original_aspect_ratio=increase,crop=$bw:$bh,boxblur=12:2,eq=brightness=-0.10:saturation=0.85,scale=$W:$H[bg];"
+  local g="[0:v]${ACTIVE_CROP:+$ACTIVE_CROP,}fps=$fps,split[a][b];[a]scale=$bw:$bh:force_original_aspect_ratio=increase,crop=$bw:$bh,boxblur=12:2,eq=brightness=-0.10:saturation=0.85,scale=$W:$H[bg];"
   g+="[b]scale=$W:$H:force_original_aspect_ratio=decrease:flags=lanczos,setsar=1[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2[v0]"
   local last="v0"
   if [[ -n "$srt" ]]; then
@@ -96,7 +101,7 @@ captioned_from_approved() {  # NAME.srt approved by Iman → captioned versions,
     for e in mp4 mov m4v MP4 MOV M4V; do [[ -f "$DONE/$name.$e" ]] && src="$DONE/$name.$e" && break; done
     [[ -z "$src" ]] && { log "approved subtitles waiting: no original found for $name in _originals"; continue; }
     if grep -q '^\[?\]' "$srt"; then log "approved subtitles NOT used: $name.srt still contains [?] markers"; continue; fi
-    local fps; fps="$(pick_fps "$src")"; local ok=1
+    probe_source "$src"; local fps="$OUT_FPS"; local ok=1
     while IFS='|' read -r dir tag W H wmk; do
       out="$SHOW/$dir/${name}_${tag}_${W}x${H}_CAPTIONED.mp4"; [[ -f "$out" ]] && continue
       if render "$src" "$out" "$W" "$H" "$wmk" "$srt" "$fps" 2>>"$LOG"; then
@@ -139,8 +144,8 @@ captioned_from_approved
 for src in "$DROP"/*.mp4 "$DROP"/*.mov "$DROP"/*.m4v; do
   stable "$src" || { log "waiting: $(basename "$src") is still being copied"; continue; }
   name="$(basename "${src%.*}")"; srt="${src%.*}.srt"; [[ -f "$srt" ]] || srt=""
-  fps="$(pick_fps "$src")"; snapwm="${TIC_SNAP_WATERMARK:-1}"
-  log "start: $(basename "$src") (fps $fps, subtitles: ${srt:+yes}${srt:-no})"
+  probe_source "$src"; fps="$OUT_FPS"; snapwm="${TIC_SNAP_WATERMARK:-1}"
+  log "start: $(basename "$src") (fps $fps, picture ${ACTIVE_CROP:-full frame}, subtitles: ${srt:+yes}${srt:-no})"
   ok=1
   while IFS='|' read -r dir tag W H wmk; do
     out="$SHOW/$dir/${name}_${tag}_${W}x${H}.mp4"

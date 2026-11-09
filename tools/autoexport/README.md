@@ -33,7 +33,8 @@ If macOS asks whether this may access your Desktop, click **Allow**.
 4. Captioned versions (`…_CAPTIONED.mp4`) are rendered from the original. The clean exports stay untouched.
 
 ## Encoding
-- **Video:** H.264 High, CRF 16 (max 20 Mbps), the source frame rate snapped to a standard rate (film stays 23.976; no interpolation), Rec.709, faststart.
+- **Video:** H.264 High, CRF 16 (max 20 Mbps), Rec.709, faststart. Uses the **same detection as Clipper**: black bars are trimmed (cropdetect on a mid-clip sample), and the output frame rate comes from how many frames actually change, so a film-cadence screen recording stays 23.976 and nothing is interpolated.
+- **Matches Clipper and Bird Clay v05:** the option B background (270×480 blur, −10% brightness, 85% saturation), 1080×1920 / 1920×1080, and the watermark (230 px, 64 px from the right, 250 px from the top). One intentional difference: audio is 256 kbps, as your brief asks, where Clipper uses 192.
 - **Audio:** AAC 256 kbps, 48 kHz, normalised to −14 LUFS.
 - **Watermark:** the approved PNG, 230 px wide, 64 px from the right edge, 250 px from the top. These are the v05 settings.
 
