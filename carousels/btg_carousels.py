@@ -118,6 +118,67 @@ DECKS["carousel-b2-05"] = dict(clip="b2_05", title="What's the Backup Plan?", sl
   ("text", "MOMS KNOW", "Two mothers, two sons, the same belief. Did your parents ask you for a backup plan?", "COMMENT BELOW", 13.5, 0.5),
 ])
 
+PR = os.path.expanduser("~/Movies/The Iman Cut/Clips/The Greatest - Promo Rome Final - 12-clip review batch")
+for k in ("01","06","08","09","10","11"): SRC["p"+k] = f"{PR}/_covers_clip{k}/TIC_PROMO_{k}.mov"
+_gs = T.grab_still
+def _grab_unbar(path, t, ff="ffmpeg"):
+    im = _gs(path, t, ff)
+    if im is not None and "Promo" in path:
+        g = im.convert("L").point(lambda v: 255 if v > 18 else 0); b = g.getbbox()
+        if b: im = im.crop(b)
+    return im
+T.grab_still = _grab_unbar
+DECKS.update({
+ "carousel-13": dict(clip="p01", title="I'm the Greatest", slides=[
+  ("cover", "I'M THE GREATEST", 5.0, 0.5),
+  ("quote", "What have you been saying since the time you could talk?", "In the film", "The Greatest (Prime Video), Rome 1960 scene", 9.3, 0.5),
+  ("quote", "I'm the greatest.", "Cassius Clay, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 14.0, 0.5),
+  ("quote", "Now make it true.", "In the film", "The Greatest (Prime Video), Rome 1960 scene", 23.5, 0.5),
+  ("text", "HE SAID IT FIRST", "Clay was calling himself the greatest long before he'd won anything big. In Rome in 1960, at 18, he started making it true.", "THE HISTORY", 4.5, 0.5),
+  ("text", "YOUR TURN", "What did you say about yourself before anyone else believed it?", "COMMENT BELOW", 20.0, 0.5),
+ ]),
+ "carousel-14": dict(clip="p06", title="You Better Find Some", slides=[
+  ("cover", "YOU BETTER FIND SOME", 5.0, 0.42),
+  ("quote", "I don't have any more.", "Cassius Clay, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 4.5, 0.4),
+  ("quote", "Well, you better find some.", "His cornerman, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 8.0, 0.5),
+  ("quote", "They're not going to hand you that gold medal out there, Cash.", "His cornerman, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 9.5, 0.5),
+  ("text", "THREE ROUNDS", "Olympic bouts in 1960 were three rounds. In the final, the 18-year-old Clay faced an older, more experienced fighter from Poland.", "THE HISTORY", 6.5, 0.5),
+  ("text", "FIND SOME", "Ever had to find more when you thought you had nothing left?", "COMMENT BELOW", 11.0, 0.5),
+ ]),
+ "carousel-15": dict(clip="p08", title="Gold Medal Round", slides=[
+  ("cover", "GOLD MEDAL ROUND", 0.2, 0.33),
+  ("text", "THE FINAL ROUND", "\"Gold medal round, Cash!\" The bell rings for the third and final round in Rome.", "THE FILM", 7.0, 0.5),
+  ("text", "BACK HOME", "The film cuts between the ring in Rome and the family at home, listening.", "THE FILM", 3.5, 0.5),
+  ("text", "THE OPPONENT", "Clay's opponent in the real final was Zbigniew Pietrzykowski of Poland, an older fighter who had won Olympic bronze in 1956.", "THE HISTORY", 12.5, 0.5),
+  ("text", "ROME, 1960", "The light-heavyweight final was fought at the Rome Olympics in September 1960. Clay was 18.", "THE HISTORY", 9.0, 0.5),
+  ("text", "YOUR TURN", "When was the last time you felt this much pressure?", "COMMENT BELOW", 15.5, 0.5),
+ ]),
+ "carousel-16": dict(clip="p09", title="His Famous Shuffle", slides=[
+  ("cover", "HIS FAMOUS SHUFFLE", 6.5, 0.5),
+  ("quote", "He's the entertainer.", "Ringside commentary, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 6.2, 0.5),
+  ("quote", "And there's his famous shuffle.", "Ringside commentary, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 14.0, 0.5),
+  ("text", "THE ALI SHUFFLE", "The quick-feet move later known as the \"Ali Shuffle\" became one of his trademarks as a pro.", "THE HISTORY", 16.0, 0.5),
+  ("text", "PLAYING TO THE CROWD", "The film shows Clay toying with his opponent in the last round, performing as much as fighting.", "THE FILM + OUR READ", 22.5, 0.5),
+  ("text", "YOUR CALL", "Showboating or strategy?", "COMMENT BELOW", 24.4, 0.5),
+ ]),
+ "carousel-17": dict(clip="p10", title="One Second Left", slides=[
+  ("cover", "ONE SECOND LEFT", 8.4, 0.5),
+  ("quote", "One second left in the final round.", "Ringside commentary, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 1.0, 0.5),
+  ("quote", "Keep walking. Keep walking.", "His corner, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 6.5, 0.5),
+  ("text", "THE BELL", "The fight is over. Now it's up to the judges.", "THE FILM", 13.5, 0.5),
+  ("text", "SCORED BY JUDGES", "Amateur bouts were decided on points by a panel of judges, round by round. No knockout, no certainty.", "THE HISTORY", 11.5, 0.5),
+  ("text", "YOUR CALL", "Did he do enough? What's your score?", "COMMENT BELOW", 16.5, 0.5),
+ ]),
+ "carousel-18": dict(clip="p11", title="The Decision", slides=[
+  ("cover", "THE DECISION", 31.5, 0.5),
+  ("quote", "The winner will receive amateur boxing's highest award: the Olympic gold medal.", "Ringside commentary, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 13.0, 0.5),
+  ("text", "THE WAIT", "The film holds on the wait: the judges' cards, the ring, and the family listening at home.", "THE FILM", 6.5, 0.5),
+  ("quote", "The winner, by unanimous decision.", "Ringside announcement, in The Greatest", "The Greatest (Prime Video), Rome 1960 scene", 30.5, 0.5),
+  ("text", "UNANIMOUS", "In real life, Clay won the 1960 Olympic light-heavyweight final by unanimous decision. He was 18.", "THE HISTORY", 21.0, 0.5),
+  ("text", "THE MEDAL", "Clay wore his gold medal everywhere back home. The story that he later threw it into the Ohio River is famous, but disputed.", "THE HISTORY (DISPUTED STORY)", 33.0, 0.5),
+ ]),
+})
+
 def caption(d):
     return (f"{d['title']}. Swipe for the film and the history behind it.\n\n"
             "🎬 The Greatest (Prime Video), from the featurette Becoming the Greatest\n"

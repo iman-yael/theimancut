@@ -7,6 +7,7 @@ M = os.path.expanduser("~/Movies/The Iman Cut")
 IG = f"{M}/Instagram Posts"
 B1 = f"{M}/Clips/The Greatest - Becoming the Greatest - 30-clip review batch"
 B2 = f"{M}/Clips/The Greatest - Becoming the Greatest - batch 2 (45 short clips)"
+PR = f"{M}/Clips/The Greatest - Promo Rome Final - 12-clip review batch"
 WM = os.path.expanduser("~/Projects/personal/theimancut-repo/brand/watermark/iman-cut-watermark-trimmed.png")
 SC, YT = f"{M}/Snapchat Posts", f"{M}/YouTube Shorts Posts"
 
@@ -14,8 +15,11 @@ def cover_dir(num):
     n = int(num)
     if n <= 10:
         return f"{B1}/_covers_clip{n:02d}", f"TIC_BTG_{n:02d}"
-    k = {11: "02", 12: "05"}[n]
-    return f"{B2}/_covers_clip{k}", f"TIC_BTG2_{k}"
+    if n in (11, 12):
+        k = {11: "02", 12: "05"}[n]
+        return f"{B2}/_covers_clip{k}", f"TIC_BTG2_{k}"
+    k = {13: "01", 14: "06", 15: "08", 16: "09", 17: "10", 18: "11"}[n]
+    return f"{PR}/_covers_clip{k}", f"TIC_PROMO_{k}"
 
 def render(src, out, title_png, t, wm):
     a, b = max(0, t - 0.6), t + 1.0
@@ -66,6 +70,7 @@ def job(post):
     return name
 
 posts = sorted(glob.glob(f"{IG}/Post *"))
+if sys.argv[1:]: posts = [p for p in posts if os.path.basename(p)[5:7] in sys.argv[1:]]
 with ThreadPoolExecutor(3) as ex:
     for n in ex.map(job, posts):
         print("ok", n)
